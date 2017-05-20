@@ -2,9 +2,10 @@
 /*jshint esversion: 6*/
 
 const initialState = {
+  loggedIn: false,
 };
 
-const AppReducers = (state = initialState, action) => {
+const UserReducers = (state = initialState, action) => {
   switch (action.type) {
 
     default:
@@ -12,4 +13,4 @@ const AppReducers = (state = initialState, action) => {
   }
 };
 
-export default appReducers;
+export default UserReducers;

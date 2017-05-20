@@ -4,10 +4,10 @@ import {
 } from 'react-native';
 import { NativeRouter, Route, Link } from 'react-router-native';
 
-class SignupPage extends Component {
+class ListPage extends Component {
   render() {
     <TextInput />
   }
 }
 
-export default SignupPage;
+export default ListPage;

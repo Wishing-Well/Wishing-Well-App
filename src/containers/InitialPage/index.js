@@ -9,3 +9,5 @@ class InitialPage extends Component {
     <TextInput />
   }
 }
+
+export default InitialPage;

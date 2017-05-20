@@ -58,3 +58,5 @@ typings/
 .env
 
 node_module
+android/.gradle
+android/local.properties

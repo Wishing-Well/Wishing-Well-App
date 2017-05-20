@@ -1,9 +1,10 @@
 /*jshint esversion: 6*/
 import { combineReducers } from 'redux';
-import app from './AppReducers';
+import users from './UserReducers';
+import nav from './navReducer';
 
 const reducers = combineReducers({
-  app
+  users
 });
 
 export default reducers;

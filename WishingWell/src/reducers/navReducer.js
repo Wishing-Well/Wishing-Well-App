@@ -1,10 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 import Routes from "../routeConfig.js";
 
-const initialNavState = AppNavigator.router.getStateForAction(
-  secondAction,
-  tempNavState
-);
+const initialNavState = Routes.router.getStateForAction(Routes.router.getActionForPathAndParams('Home'));
 
 const navReducer = (state = initialNavState, action) => {
   let nextState;
@@ -12,4 +9,7 @@ const navReducer = (state = initialNavState, action) => {
     default:
       nextState = Routes.router.getStateForAction(action, state);
       break;
-}
+  }
+
+  return nextState || state;
+};

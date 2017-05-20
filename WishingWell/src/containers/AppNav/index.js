@@ -8,6 +8,7 @@ const AppNav = ({ dispatch, nav }) => (
   <Routes navigation={addNavigationHelpers({ dispatch, state: nav })} />
 );
 
+
 AppNav.propTypes = {
   dispatch: PropTypes.func.isRequired,
   nav: PropTypes.object.isRequired,

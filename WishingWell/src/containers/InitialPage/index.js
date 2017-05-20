@@ -22,17 +22,16 @@ class InitialPage extends Component {
   }
 
   handleSignup() {
-
+    console.log('heyyyyy');
   }
 
   render() {
-    const {navigate} = this.props.navigation;
     return (
       <View>
         <TextInput style={styles.input} onChangeText={(username) => this.setState({username})}/>
         <TextInput />
         <Button title="Log In" onPress={this.handleLogin}/>
-        <Button title="Sign Up" onPress={()=> navigate('Signup')}/>
+        <Button title="Sign Up" onPress={this.handleSignup}/>
       </View>
     )
   }

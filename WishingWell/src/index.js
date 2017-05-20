@@ -4,10 +4,8 @@ import { Provider } from "react-redux";
 import store from './configureStore';
 import AppNav from './containers/AppNav';
 
-export default function WishingWell() {
-  return (
-    <Provider store={store}>
-        <AppNav />
-    </Provider>
-  );
-}
+export default () => (
+  <Provider store={store}>
+      <AppNav />
+  </Provider>
+);

@@ -81,9 +81,11 @@ constructor(props) {
 
 class MapPage extends Component {
   render() {
-    <View>
-      <MapView />
-    </View>
+    return (
+      <View>
+        <MapView />
+      </View>
+    )
   }
 }
 

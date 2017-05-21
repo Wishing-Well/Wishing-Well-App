@@ -11,10 +11,6 @@ class InitialPage extends Component {
   constructor(props) {
     super(props);
 
-    this.navigationOptions = {
-      title: 'Home'
-    };
-
     this.state = {
       username: '',
       password: ''

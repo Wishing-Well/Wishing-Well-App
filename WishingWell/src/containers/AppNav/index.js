@@ -2,13 +2,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addNavigationHelpers, StackNavigator } from "react-navigation";
-import InitialPage from '../InitialPage';
-import SignupPage from '../SignupPage';
+import routes from '../../routeConfig';
 
-export const Routes = StackNavigator({
-  Home: { screen: InitialPage },
-  Signup: {screen: SignupPage}
-});
+export const Routes = StackNavigator(routes);
 
 class AppNav extends Component {
   render() {

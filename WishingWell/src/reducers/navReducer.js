@@ -1,6 +1,7 @@
 /*jshint esversion: 6*/
 import { NavigationActions, StackNavigator } from 'react-navigation';
 import routeConfig from "../routeConfig.js";
+import * as types from '../constants';
 
 const Routes = StackNavigator(routeConfig);
 

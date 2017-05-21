@@ -22,10 +22,6 @@ class InitialPage extends Component {
     this.props.login(this.state.username, this.state.password);
   }
 
-  handleSignup() {
-    console.log('heyyyyy');
-  }
-
   render() {
     return (
       <View>

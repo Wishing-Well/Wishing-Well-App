@@ -15,7 +15,7 @@ import { mapkey }from '../../keys';
 
 Mapbox.setAccessToken(mapkey);
 
-class MapPage extends Component {
+/*class MapPage extends Component {
 
 constructor(props) {
     super(props);
@@ -76,6 +76,14 @@ constructor(props) {
         />
       </View>
     );
+  }
+}*/
+
+class MapPage extends Component {
+  render() {
+    <View>
+      <MapView />
+    </View>
   }
 }
 

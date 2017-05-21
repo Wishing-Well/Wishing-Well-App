@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
+import {login, navigate} from '../../actions';
 
 class InitialPage extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class InitialPage extends Component {
         <TextInput style={styles.input} onChangeText={(username) => this.setState({username})}/>
         <TextInput />
         <Button title="Log In" onPress={this.handleLogin}/>
-        <Button title="Sign Up" onPress={this.handleSignup}/>
+        <Button title="Sign Up" onPress={() => this.props.navigate}/>
       </View>
     )
   }
@@ -42,7 +43,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (username, password) => dispatch(login(username, password))
+  login: (username, password) => dispatch(login(username, password)),
+  navigate: routeName => dispatch(navigate(routeName))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitialPage)

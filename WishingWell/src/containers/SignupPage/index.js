@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {
+  View,
   TextInput
 } from 'react-native';
 
 class SignupPage extends Component {
   render() {
-    <TextInput />
+    <View>
+      <TextInput />
+    </View>
   }
 }
 

@@ -1,28 +1,17 @@
-import React, {Component} from 'react';
-import {
-  TextInput,
-  View
-} from 'react-native';
-import InitialPage from './containers/InitialPage';
-import { connect } from 'react-redux';
+/*jshint esversion: 6*/
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import store from './configureStore';
+import AppNav from './containers/AppNav';
 
-class App extends Component {
+class Root extends React.Component {
   render() {
     return (
-      <View>
-        <InitialPage />
-      </View>
-    )
+      <Provider store={store}>
+        <AppNav />
+      </Provider>
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.loggedIn
-})
-
-const mapDispatchToProps = (dispatch) => ({
-})
-
-const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App)
-
-export default ConnectedApp;
+export default Root;

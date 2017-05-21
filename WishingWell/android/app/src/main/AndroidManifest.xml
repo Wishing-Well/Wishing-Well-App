@@ -19,6 +19,7 @@
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
+      <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -29,9 +30,8 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <service android:name="com.mapbox.services.android.telemetry.service.TelemetryService"/>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-      
+
     </application>
 
 </manifest>

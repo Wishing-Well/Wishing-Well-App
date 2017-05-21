@@ -4,7 +4,8 @@ import users from './UserReducers';
 import nav from './navReducer';
 
 const reducers = combineReducers({
-  users
+  users,
+  nav
 });
 
 export default reducers;

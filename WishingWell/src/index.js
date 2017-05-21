@@ -4,8 +4,14 @@ import { Provider } from "react-redux";
 import store from './configureStore';
 import AppNav from './containers/AppNav';
 
-export default () => (
-  <Provider store={store}>
-      <AppNav />
-  </Provider>
-);
+class Root extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppNav />
+      </Provider>
+    );
+  }
+}
+
+export default Root;

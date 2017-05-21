@@ -1,18 +1,25 @@
 /*jshint esversion: 6*/
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addNavigationHelpers } from "react-navigation";
-import Routes from "../../routeConfig.js";
+import { addNavigationHelpers, StackNavigator } from "react-navigation";
+import InitialPage from '../InitialPage';
+import SignupPage from '../SignupPage';
 
-const AppNav = ({ dispatch, nav }) => (
-  <Routes navigation={addNavigationHelpers({ dispatch, state: nav })} />
-);
+export const Routes = StackNavigator({
+  Home: { screen: InitialPage },
+  Signup: {screen: SignupPage}
+});
 
-
-AppNav.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
-};
+class AppNav extends Component {
+  render() {
+    return (
+      <Routes navigation={addNavigationHelpers({
+        dispatch: this.props.dispatch,
+        state: this.props.nav
+      })} />
+    )
+  }
+}
 
 const mapStateToProps = state => ({
   nav: state.nav,

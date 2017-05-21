@@ -1,7 +1,11 @@
-import { NavigationActions } from 'react-navigation';
-import Routes from "../routeConfig.js";
+/*jshint esversion: 6*/
+import { NavigationActions, StackNavigator } from 'react-navigation';
+import routeConfig from "../routeConfig.js";
 
-const initialNavState = Routes.router.getStateForAction(Routes.router.getActionForPathAndParams('Home'));
+const Routes = StackNavigator(routeConfig);
+
+
+const initialNavState = Routes.router.getStateForAction(Routes.router.getStateForAction(Routes.router.getActionForPathAndParams('Home')));
 
 const navReducer = (state = initialNavState, action) => {
   let nextState;
@@ -13,3 +17,5 @@ const navReducer = (state = initialNavState, action) => {
 
   return nextState || state;
 };
+
+export default navReducer;

@@ -1,8 +1,7 @@
-import { StackNavigator } from 'react-navigation';
 import InitialPage from './containers/InitialPage';
 import SignupPage from './containers/SignupPage';
 
-export default StackNavigator({
+export default {
   Home: { screen: InitialPage },
   Signup: {screen: SignupPage}
-});
+};

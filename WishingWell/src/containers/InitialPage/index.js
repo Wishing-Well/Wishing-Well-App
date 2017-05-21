@@ -32,7 +32,8 @@ class InitialPage extends Component {
         <TextInput style={styles.input} onChangeText={(username) => this.setState({username})}/>
         <TextInput />
         <Button title="Log In" onPress={this.handleLogin}/>
-        <Button title="Sign Up" onPress={() => this.props.navigate}/>
+        <Button title="Sign Up" onPress={() => this.props.navigate('Signup')}/>
+        <Button title="Map" onPress={() => this.props.navigate('MapPage')}/>
       </View>
     )
   }

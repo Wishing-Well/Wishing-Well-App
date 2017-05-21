@@ -6,9 +6,11 @@ import {
 
 class SignupPage extends Component {
   render() {
-    <View>
-      <TextInput />
-    </View>
+    return(
+      <View>
+        <TextInput />
+      </View>
+    )
   }
 }
 

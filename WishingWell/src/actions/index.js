@@ -11,3 +11,9 @@ export const login = (username, password) => {
       .catch(err => dispatch({type: LOGIN_FAIL}));
   };
 };
+
+export const navigate = routeName => {
+  return dispatch => {
+    dispatch({type: types.NAVIGATE, routeName});
+  };
+};

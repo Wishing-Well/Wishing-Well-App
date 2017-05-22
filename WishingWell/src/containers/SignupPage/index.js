@@ -4,6 +4,8 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import { connect } from 'react-redux';
+import {signup} from '../../actions';
 
 class SignupPage extends Component {
   constructor(props) {
@@ -55,4 +57,9 @@ class SignupPage extends Component {
   }
 }
 
-export default SignupPage;
+const mapDispatchToProps = (dispatch) => ({
+  signup: userInfo => dispatch(signup(userInfo)),
+  navigate: routeName => dispatch(navigate(routeName))
+});
+
+export default connect(mapDispatchToProps)(SignupPage);

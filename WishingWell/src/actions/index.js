@@ -2,18 +2,18 @@
 import * as types from '../constants';
 import * as API from '../lib/API_CALLS.js';
 
-export const login = (username, password) => {
-  return dispatch => {
-    return db.login(username, password)
-      .then(user => {
-        dispatch({type: types.LOGIN_SUCCESS, user});
-      })
-      .catch(err => dispatch({type: LOGIN_FAIL}));
-  };
-};
+export const login = (username, password) => dispatch => db.login(username, password)
+  .then(user => {
+    dispatch({type: types.LOGIN_SUCCESS, user});
+    dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
+  })
+  .catch(err => dispatch({type: types.LOGIN_FAIL}));
 
-export const navigate = routeName => {
-  return dispatch => {
-    dispatch({type: types.NAVIGATE, routeName});
-  };
-};
+export const signup = userInfo => dispatch => db.signup(userInfo)
+  .then(user => {
+    dispatch({type: types.SIGNUP_SUCCESS, user});
+    dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
+  })
+  .catch(err => dispatch({type: types.SIGNUP_FAIL}));
+
+export const navigate = routeName => dispatch => dispatch({type: types.NAVIGATE, routeName});

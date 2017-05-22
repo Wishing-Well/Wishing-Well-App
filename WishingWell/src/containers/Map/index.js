@@ -1,4 +1,4 @@
- /*jshint esversion: 6*/
+
 import React, { Component } from 'react';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import {
@@ -12,49 +12,28 @@ import { connect } from 'react-redux';
 import { mapkey }from '../../keys';
 
 
-
 Mapbox.setAccessToken(mapkey);
 
-/*class MapPage extends Component {
+class MapPage extends Component {
 
 constructor(props) {
     super(props);
+    console.log(props);
       this.state = {
-          zoom: 19,
-          userTrackingMode: Mapbox.userTrackingMode.follow
-        };
+        userTrackingMode: Mapbox.userTrackingMode.follow, // <-------- DOCS had it like this but not really working
+        zoom: 20
+      };
+  };
 
-  }
+  //MAP WORKS BUT IT IS NOT INITIALLY STARTING AT USER'S LOCATION WHICH IS KEY TO OUR APP... NEEDA FIGURE IT OUT...
 
   onRegionWillChange = (location) => {
-    console.log('onRegionWillChange', location);
-    console.log(location.pitch)
     if (location.pitch < 60){
       this._map.setPitch(60);
+      console.log(location)
     }
   };
-  onChangeUserTrackingMode = (userTrackingMode) => {
-    this.setState({ userTrackingMode });
-    console.log('onChangeUserTrackingMode', userTrackingMode);
-  };
 
-  componentWillMount() {
-    this._offlineProgressSubscription = Mapbox.addOfflinePackProgressListener(progress => {
-      console.log('offline pack progress', progress);
-    });
-    this._offlineMaxTilesSubscription = Mapbox.addOfflineMaxAllowedTilesListener(tiles => {
-      console.log('offline max allowed tiles', tiles);
-    });
-    this._offlineErrorSubscription = Mapbox.addOfflineErrorListener(error => {
-      console.log('offline error', error);
-    });
-  }
-
-  componentWillUnmount() {
-    this._offlineProgressSubscription.remove();
-    this._offlineMaxTilesSubscription.remove();
-    this._offlineErrorSubscription.remove();
-  }
 
 
   render() {
@@ -64,22 +43,19 @@ constructor(props) {
         <MapView
           ref={map => { this._map = map; }}
           style={styles.map}
-          pitch={this.state.pitch}
           initialZoomLevel={this.state.zoom}
           initialDirection={0}
           showsUserLocation={true}
           styleURL={'mapbox://styles/ctsygiel/cj2wllwes001p2rpmb1yup02a'}
-          userTrackingMode={this.state.userTrackingMode}
-          onChangeUserTrackingMode={this.onChangeUserTrackingMode}
           onRegionWillChange={this.onRegionWillChange}
           logoIsHidden={true}
         />
       </View>
     );
   }
-}*/
+}
 
-class MapPage extends Component {
+/*class MapPage extends Component {
   render() {
     return (
       <View>
@@ -87,6 +63,6 @@ class MapPage extends Component {
       </View>
     )
   }
-}
+}*/
 
 export default MapPage;

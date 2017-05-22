@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-mapbox-gl": "^5.1.0",

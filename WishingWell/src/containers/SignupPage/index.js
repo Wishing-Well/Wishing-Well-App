@@ -11,7 +11,7 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullName: '',
+      full_name: '',
       email: '',
       password: '',
       togglePW: true
@@ -29,9 +29,9 @@ class SignupPage extends Component {
     if(this.state.password.length < 5) {
       return this.setState({password: ''});
     }
-
+    console.log(this.props);
     this.props.signup({
-      fullname: this.state.fullname,
+      full_name: this.state.full_name,
       email: this.state.email,
       password: this.state.password
     });
@@ -41,7 +41,7 @@ class SignupPage extends Component {
     return(
       <View>
         <TextInput
-          onChangeText={(fullName)=> this.setState({fullName})}
+          onChangeText={(full_name)=> this.setState({full_name})}
           value={this.state.fullname}
           placeholder="Enter Full Name"
           />
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
   navigate: routeName => dispatch(navigate(routeName))
 });
 
-export default connect(mapDispatchToProps)(SignupPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

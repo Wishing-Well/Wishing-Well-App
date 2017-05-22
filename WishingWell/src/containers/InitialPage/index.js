@@ -26,7 +26,7 @@ class InitialPage extends Component {
     if(!this.validateEmail(this.state.email)) {
       return this.setState({email: '', password: ''});
     }
-    this.props.login(this.state.username, this.state.password);
+    this.props.login(this.state.email, this.state.password);
   };
 
   render() {

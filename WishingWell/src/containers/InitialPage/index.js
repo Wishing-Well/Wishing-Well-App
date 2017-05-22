@@ -32,28 +32,35 @@ class InitialPage extends Component {
 
   render() {
     return (
-      <View>
+      <View
+        style={styles.container}
+        >
         <TextInput
           onChangeText={(email) => this.setState({email})}
           value={this.state.email}
           placeholder="Email"
+          style={styles.inputs}
           />
         <TextInput
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
           placeholder="Password"
+          style={styles.inputs}
           />
         <Button
           title="Log In"
           onPress={this.handleLogin}
+          style={styles.inputs}
           />
         <Button
           title="Sign Up"
           onPress={() => this.props.navigate('Signup')}
+          style={styles.inputs}
           />
         <Button
           title="Map"
           onPress={() => this.props.navigate('MapPage')}
+          style={styles.inputs}
           />
       </View>
     )

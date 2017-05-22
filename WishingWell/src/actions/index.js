@@ -1,5 +1,5 @@
 /*jshint esversion: 6*/
-import * as types from '../constants';
+import * as types from '../lib/constants';
 import * as API from '../lib/API_CALLS.js';
 
 export const login = (username, password) => dispatch => db.login(username, password)

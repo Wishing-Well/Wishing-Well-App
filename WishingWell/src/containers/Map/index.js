@@ -20,17 +20,14 @@ constructor(props) {
     super(props);
     console.log(props);
       this.state = {
-        userTrackingMode: Mapbox.userTrackingMode.follow, // <-------- DOCS had it like this but not really working
-        zoom: 20
+        userTrackingMode: Mapbox.userTrackingMode.follow,
+        zoom: 17
       };
   };
-
-  //MAP WORKS BUT IT IS NOT INITIALLY STARTING AT USER'S LOCATION WHICH IS KEY TO OUR APP... NEEDA FIGURE IT OUT...
 
   onRegionWillChange = (location) => {
     if (location.pitch < 60){
       this._map.setPitch(60);
-      console.log(location)
     }
   };
 
@@ -41,14 +38,18 @@ constructor(props) {
     return (
       <View style={styles.container}>
         <MapView
+          userTrackingMode={this.state.userTrackingMode}
           ref={map => { this._map = map; }}
           style={styles.map}
+          scrollEnabled={false}
+          zoomEnabled={false}
+          showsUserLocation={true}
           initialZoomLevel={this.state.zoom}
           initialDirection={0}
-          showsUserLocation={true}
           styleURL={'mapbox://styles/ctsygiel/cj2wllwes001p2rpmb1yup02a'}
           onRegionWillChange={this.onRegionWillChange}
           logoIsHidden={true}
+          attributionButtonIsHidden={true}
         />
       </View>
     );

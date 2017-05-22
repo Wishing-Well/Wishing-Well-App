@@ -1,7 +1,7 @@
 /*jshint esversion: 6*/
 import { NavigationActions, StackNavigator } from 'react-navigation';
 import routeConfig from "../routeConfig.js";
-import * as types from '../constants';
+import * as types from '../lib/constants';
 
 const Routes = StackNavigator(routeConfig);
 
@@ -10,7 +10,6 @@ const initialNavState = Routes.router.getStateForAction(Routes.router.getActionF
 
 const navReducer = (state = initialNavState, action) => {
   let nextState;
-  console.log(action);
   switch (action.type) {
     case types.NAVIGATE:
       nextState = Routes.router.getStateForAction(Routes.router.getActionForPathAndParams(action.routeName));

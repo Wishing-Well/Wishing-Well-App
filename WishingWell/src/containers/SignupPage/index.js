@@ -4,6 +4,8 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import { connect } from 'react-redux';
+import {signup} from '../../actions';
 
 class SignupPage extends Component {
   constructor(props) {
@@ -22,8 +24,17 @@ class SignupPage extends Component {
 
   handleSignup = () => {
     if(!this.validateEmail(this.state.email)) {
-      this.setState({email: ''});
+      return this.setState({email: '', password: ''});
     }
+    if(this.state.password.length < 5) {
+      return this.setState({password: ''});
+    }
+
+    this.props.signup({
+      fullname: this.state.fullname,
+      email: this.state.email,
+      password: this.state.password
+    });
   };
 
   render() {
@@ -44,7 +55,7 @@ class SignupPage extends Component {
           onChangeText={(password)=> this.setState({password})}
           secureTextEntry={this.state.togglePW}
           value={this.state.password}
-          placeholder="Create Password"
+          placeholder="Create Password (Min. 5 Char)"
           />
         <Button
           title="Sign Up"
@@ -55,4 +66,13 @@ class SignupPage extends Component {
   }
 }
 
-export default SignupPage;
+const mapStateToProps = state => ({
+  signupErr: state.users.signupErr
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  signup: userInfo => dispatch(signup(userInfo)),
+  navigate: routeName => dispatch(navigate(routeName))
+});
+
+export default connect(mapDispatchToProps)(SignupPage);

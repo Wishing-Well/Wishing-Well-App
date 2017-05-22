@@ -24,10 +24,9 @@ class InitialPage extends Component {
 
   handleLogin = () => {
     if(!this.validateEmail(this.state.email)) {
-      this.setState({email: '', password: ''});
-    } else {
-      this.props.login(this.state.username, this.state.password);
+      return this.setState({email: '', password: ''});
     }
+    this.props.login(this.state.username, this.state.password);
   };
 
   render() {
@@ -44,6 +43,7 @@ class InitialPage extends Component {
         <TextInput
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
+          secureTextEntry={true}
           placeholder="Password"
           style={styles.inputs}
           />
@@ -68,7 +68,8 @@ class InitialPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.users.loggedIn
+  loggedIn: state.users.loggedIn,
+  userInfo: state.users.userInfo
 })
 
 const mapDispatchToProps = (dispatch) => ({

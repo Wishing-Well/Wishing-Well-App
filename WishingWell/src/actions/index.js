@@ -3,10 +3,12 @@ import * as types from '../lib/constants';
 import * as API from '../lib/API_CALLS.js';
 
 export const login = (email, password) => dispatch => API.login(email, password)
-  .then(user => {
-    console.log(user);
-    if(user.success === true) {
-      dispatch({type: types.LOGIN_SUCCESS, user});
+  .then(res => {
+    console.log(res);
+    if(res.success === true) {
+      AsyncStorage.setItem('email', email);
+      AsyncStorage.setItem('loggedIn', true);
+      dispatch({type: types.LOGIN_SUCCESS, email});
       dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
     } else {
       dispatch({type: types.LOGIN_FAIL});
@@ -17,10 +19,14 @@ export const login = (email, password) => dispatch => API.login(email, password)
 export const signup = userInfo => {
   return dispatch => {
     return API.signup(userInfo)
-    .then(user => {
-      console.log(user);
-      dispatch({type: types.SIGNUP_SUCCESS, user});
-      //dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
+    .then(res => {
+      console.log(res);
+      if(res.success === true) {
+        dispatch({type: types.SIGNUP_SUCCESS, user});
+        dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
+      } else {
+        dispatch({type: types.SIGNUP_FAIL});
+      }
     })
     .catch(err => dispatch({type: types.SIGNUP_FAIL}));
   };

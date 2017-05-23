@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux';
 import {navigate} from '../../actions';
 
-class ListPage extends Component {
+class WellPage extends Component {
   render() {
     return (
       <View>
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch) => ({
   navigate: routeName => dispatch(navigate(routeName))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListPage)
+export default connect(mapStateToProps, mapDispatchToProps)(WellPage)

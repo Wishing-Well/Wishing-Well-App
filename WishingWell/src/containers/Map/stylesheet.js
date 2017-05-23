@@ -33,5 +33,26 @@ export default StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     color: 'white'
+  },
+  profileContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  profileButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 40,
+    borderColor: '#65D0E8',
+    backgroundColor: '#65D0E8',
+    position: 'absolute',
+    bottom: 80
+
+  },
+  profileButtonText: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: 'white'
   }
 });

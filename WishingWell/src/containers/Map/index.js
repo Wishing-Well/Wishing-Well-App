@@ -54,14 +54,25 @@ constructor(props) {
           attributionButtonIsHidden={true}
         />
           <View style={styles.listContainer}>
-          <TouchableNativeFeedback
-              onPress={()=>{this.props.navigate('ListPage')}}
-              background={TouchableNativeFeedback.Ripple('red')}>
-                <View style={styles.listView}>
-                <Text style={styles.listViewText}>List</Text>
-              </View>
-          </TouchableNativeFeedback>
+            <TouchableNativeFeedback
+                onPress={()=>{this.props.navigate('ListPage')}}
+                background={TouchableNativeFeedback.Ripple('red')}>
+                  <View style={styles.listView}>
+                  <Text style={styles.listViewText}>List</Text>
+                </View>
+            </TouchableNativeFeedback>
           </View>
+
+          <View style={styles.profileContainer}>
+            <TouchableNativeFeedback
+                onPress={()=>{this.props.navigate('ProfilePage')}}
+                background={TouchableNativeFeedback.Ripple('red')}>
+                  <View style={styles.profileButton}>
+                  <Text style={styles.profileButtonText}>Profile</Text>
+                </View>
+            </TouchableNativeFeedback>
+          </View>
+
       </View>
     );
   }

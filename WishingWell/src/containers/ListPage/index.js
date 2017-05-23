@@ -7,7 +7,13 @@ import { connect } from 'react-redux';
 import {navigate} from '../../actions';
 
 class ListPage extends Component {
+
+  static navigationOptions = {
+    tapBarLabel: 'List of Wells',
+  };
+
   render() {
+    if (!this.props.loggedIn) {this.props.navigate('InitialPage')}
     return (
       <View>
 

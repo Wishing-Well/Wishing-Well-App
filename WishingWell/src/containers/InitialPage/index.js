@@ -3,7 +3,9 @@ import {
   TextInput,
   View,
   Button,
-  StatusBar
+  StatusBar,
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
@@ -17,6 +19,16 @@ class InitialPage extends Component {
       email: '',
       password: ''
     };
+  }
+
+  componentDidMount() {
+    AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'], (err, stores) => {
+      console.log(stores);
+      if (stores[2] === 'true') {
+        console.log(stores);
+        this.props.loginUser(stores);
+      }
+    });
   }
 
   validateEmail = (email) => {
@@ -63,6 +75,16 @@ class InitialPage extends Component {
           onPress={() => this.props.navigate('MapPage')}
           style={styles.inputs}
           />
+          {this.props.loginErr && Alert.alert(
+            'Alert Title',
+            'My Alert Msg',
+            [
+              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            { cancelable: false }
+          )}
       </View>
     )
   }
@@ -70,7 +92,8 @@ class InitialPage extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.users.loggedIn,
-  userInfo: state.users.userInfo
+  userInfo: state.users.userInfo,
+  loginErr: state.users.loginErr
 })
 
 const mapDispatchToProps = (dispatch) => ({

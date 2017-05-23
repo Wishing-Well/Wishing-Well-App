@@ -5,8 +5,7 @@ import {
   Text,
   StatusBar,
   View,
-  ScrollView,
-  Button
+  TouchableNativeFeedback
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
@@ -54,10 +53,15 @@ constructor(props) {
           logoIsHidden={true}
           attributionButtonIsHidden={true}
         />
-        <Button style={styles.listView}
-          title = 'List'
-          onPress = {()=>{this.props.navigate('ListPage')}}
-        />
+          <View style={styles.listContainer}>
+          <TouchableNativeFeedback
+              onPress={()=>{this.props.navigate('ListPage')}}
+              background={TouchableNativeFeedback.Ripple('red')}>
+                <View style={styles.listView}>
+                <Text style={styles.listViewText}>List</Text>
+              </View>
+          </TouchableNativeFeedback>
+          </View>
       </View>
     );
   }

@@ -5,7 +5,8 @@ import {
   Text,
   StatusBar,
   View,
-  ScrollView
+  ScrollView,
+  Button
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
@@ -31,17 +32,18 @@ constructor(props) {
     }
   };
 
-
-
   render() {
     StatusBar.setHidden(true);
     return (
       <View style={styles.container}>
         <MapView
-          userTrackingMode={this.state.userTrackingMode}
           ref={map => { this._map = map; }}
-          style={styles.map}
+          userTrackingMode={this.state.userTrackingMode}
+          compassIsHidden={true}
+          rotateEnabled={false}
+          pitchEnabled={false}
           scrollEnabled={false}
+          style={styles.map}
           zoomEnabled={false}
           showsUserLocation={true}
           initialZoomLevel={this.state.zoom}
@@ -51,19 +53,21 @@ constructor(props) {
           logoIsHidden={true}
           attributionButtonIsHidden={true}
         />
+        <Button style={styles.listView}
+          title = 'List'
+          onPress = {()=>{this.props.navigate('ListPage')}}
+        />
       </View>
     );
   }
 }
 
-/*class MapPage extends Component {
-  render() {
-    return (
-      <View>
-        <MapView />
-      </View>
-    )
-  }
-}*/
+const mapStateToProps = state => ({
 
-export default MapPage;
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  navigate: routeName => dispatch(navigate(routeName))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapPage)

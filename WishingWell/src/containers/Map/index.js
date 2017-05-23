@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import Mapbox, { MapView } from 'react-native-mapbox-gl';
+import Mapbox, { MapView, Annotation } from 'react-native-mapbox-gl';
 import {
   Text,
   StatusBar,
@@ -17,14 +17,29 @@ Mapbox.setAccessToken(mapkey);
 
 class MapPage extends Component {
 
-constructor(props) {
-    super(props);
-    console.log(props);
-      this.state = {
-        userTrackingMode: Mapbox.userTrackingMode.follow,
-        zoom: 17
-      };
+  constructor(props) {
+      super(props);
+      console.log(props);
+        this.state = {
+          userTrackingMode: Mapbox.userTrackingMode.follow,
+          zoom: 17,
+          annotations: []
+        };
+    };
+
+    dropWell = () => {
+      this._map.getCenterCoordinateZoomLevel(data => {
+        this.setState({
+          annotations: [ ...this.state.annotations, {
+            coordinates: [data.latitude, data.longitude],
+            type: 'point',
+            title: 'This is your new well',
+            id: 'foo'
+          }]
+      });
+    });
   };
+
 
   onRegionWillChange = (location) => {
     if (location.pitch < 60){
@@ -52,6 +67,7 @@ constructor(props) {
           onRegionWillChange={this.onRegionWillChange}
           logoIsHidden={true}
           attributionButtonIsHidden={true}
+          annotations={this.state.annotations}
         />
           <View style={styles.listContainer}>
             <TouchableNativeFeedback
@@ -69,6 +85,16 @@ constructor(props) {
                 background={TouchableNativeFeedback.Ripple('red')}>
                   <View style={styles.profileButton}>
                   <Text style={styles.profileButtonText}>Profile</Text>
+                </View>
+            </TouchableNativeFeedback>
+          </View>
+
+          <View style={styles.dropContainer}>
+            <TouchableNativeFeedback
+                onPress={this.dropWell}
+                background={TouchableNativeFeedback.Ripple('red')}>
+                  <View style={styles.dropButton}>
+                  <Text style={styles.dropButtonText}>Drop a Well</Text>
                 </View>
             </TouchableNativeFeedback>
           </View>

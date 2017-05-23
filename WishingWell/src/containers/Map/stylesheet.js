@@ -54,5 +54,26 @@ export default StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     color: 'white'
+  },
+  dropContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  dropButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 40,
+    borderColor: '#65D0E8',
+    backgroundColor: '#65D0E8',
+    position: 'absolute',
+    bottom: 140
+
+  },
+  dropButtonText: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: 'white'
   }
 });

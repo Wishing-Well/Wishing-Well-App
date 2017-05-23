@@ -13,7 +13,6 @@ export const login = (email, password) => dispatch => API.login(email, password)
         })
         .then(() => {
           dispatch({type: types.LOGIN_SUCCESS, email});
-          dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
         });
       });
     } else {
@@ -26,7 +25,6 @@ export const signup = userInfo => dispatch => API.signup(userInfo)
   .then(res => {
     if(res.success === true) {
       dispatch({type: types.SIGNUP_SUCCESS, userInfo});
-      dispatch({type: types.NAVIGATE, routeName: 'MapPage'});
     } else {
       dispatch({type: types.SIGNUP_FAIL});
     }
@@ -38,5 +36,3 @@ export const loginUser = asyncArr => dispatch =>
     email: asyncArr[0][1],
     user_id: asyncArr[1][1]
   }});
-
-export const navigate = routeName => dispatch => dispatch({type: types.NAVIGATE, routeName});

@@ -11,8 +11,6 @@ import {logout} from '../../actions';
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
-
-    this.title= props.userInfo.email;
   }
   static navigationOptions = {
     tapBarLabel: 'My Profile',
@@ -21,12 +19,6 @@ class ProfilePage extends Component {
   render() {
     return(
       <View>
-        <Text>
-          Email: {this.props.userInfo.email}
-        </Text>
-        <Text>
-          WishCoins: {this.props.userInfo.coins || 100} Coins
-        </Text>
         <Text>
           Current Location: {navigator.geolocation.getCurrentPosition(position => position.coords.latitude)}
         </Text>
@@ -53,7 +45,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
-  navigate: routeName => dispatch(navigate(routeName))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

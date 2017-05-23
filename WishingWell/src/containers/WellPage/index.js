@@ -4,7 +4,6 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import {navigate} from '../../actions';
 
 class WellPage extends Component {
   render() {

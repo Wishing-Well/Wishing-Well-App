@@ -25,7 +25,7 @@ class InitialPage extends Component {
     AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'], (err, stores) => {
       if (stores[2][1] == 'true') {
         this.props.loginUser(stores);
-        this.props.navigation.navigate('MapPage');
+        //this.props.navigation.navigate('MapPage');
       }
     });
   }

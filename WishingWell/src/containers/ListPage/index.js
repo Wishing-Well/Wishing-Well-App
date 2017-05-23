@@ -4,7 +4,6 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import {navigate} from '../../actions';
 
 class ListPage extends Component {
 
@@ -13,7 +12,6 @@ class ListPage extends Component {
   };
 
   render() {
-    if (!this.props.loggedIn) {this.props.navigate('InitialPage')}
     return (
       <View>
 
@@ -26,7 +24,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  navigate: routeName => dispatch(navigate(routeName))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPage)

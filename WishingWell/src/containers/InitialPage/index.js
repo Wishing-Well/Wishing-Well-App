@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {
   TextInput,
   View,
-  Button
+  Button,
+  StatusBar
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';

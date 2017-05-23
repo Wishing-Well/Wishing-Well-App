@@ -3,12 +3,13 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  inputs: {
-    width: '80%'
-  },
   container: {
-    display: 'flex',
-    alignItems: 'center',
+    marginTop: 0
+  },
+  inputs: {
+    width: '100%'
+  },
+  buttons: {
     width: '100%'
   }
 });

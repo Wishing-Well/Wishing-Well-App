@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addNavigationHelpers, StackNavigator } from "react-navigation";
 import routes from '../../routeConfig';
+import InitialPage from '../InitialPage';
 
 export const Routes = StackNavigator(routes);
 

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
+import {navigate} from '../../actions';
 import { mapkey }from '../../keys';
 
 

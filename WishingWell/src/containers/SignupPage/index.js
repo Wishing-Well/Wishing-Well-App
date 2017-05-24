@@ -17,6 +17,15 @@ class SignupPage extends Component {
       togglePW: true
     };
   }
+  static navigationOptions = {
+    tapBarLabel: 'Sign Up',
+  };
+
+  componentDidMount() {
+    if (this.props.loggedIn) {
+      this.props.navigation.navigate('MapPage');
+    }
+  }
 
   validateEmail = (email) => {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
@@ -29,7 +38,6 @@ class SignupPage extends Component {
     if(this.state.password.length < 5) {
       return this.setState({password: ''});
     }
-    console.log(this.props);
     this.props.signup({
       full_name: this.state.full_name,
       email: this.state.email,
@@ -72,7 +80,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   signup: userInfo => dispatch(signup(userInfo)),
-  navigate: routeName => dispatch(navigate(routeName))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
-import {login, navigate} from '../../actions';
+import {login, navigate, loginUser} from '../../actions';
 
 class InitialPage extends Component {
   constructor(props) {
@@ -23,13 +23,15 @@ class InitialPage extends Component {
 
   componentDidMount() {
     AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'], (err, stores) => {
-      console.log(stores);
-      if (stores[2] === 'true') {
-        console.log(stores);
+      if (stores[2][1] == 'true') {
         this.props.loginUser(stores);
+        //this.props.navigation.navigate('MapPage');
       }
     });
   }
+  static navigationOptions = {
+    tapBarLabel: 'Login',
+  };
 
   validateEmail = (email) => {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
@@ -43,6 +45,7 @@ class InitialPage extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View
         style={styles.container}
@@ -67,24 +70,14 @@ class InitialPage extends Component {
           />
         <Button
           title="Sign Up"
-          onPress={() => this.props.navigate('Signup')}
+          onPress={() => navigate('Signup')}
           style={styles.inputs}
           />
         <Button
           title="Map"
-          onPress={() => this.props.navigate('MapPage')}
+          onPress={() => navigate('MapPage')}
           style={styles.inputs}
           />
-          {this.props.loginErr && Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
-            [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            { cancelable: false }
-          )}
       </View>
     )
   }
@@ -98,7 +91,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   login: (username, password) => dispatch(login(username, password)),
-  navigate: routeName => dispatch(navigate(routeName))
+  loginUser: asyncArray => dispatch(loginUser(asyncArray)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitialPage)

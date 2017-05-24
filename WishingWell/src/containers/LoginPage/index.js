@@ -7,7 +7,6 @@ import {
   Alert,
   AsyncStorage
 } from 'react-native';
-import styles from './stylesheet';
 import { connect } from 'react-redux';
 import {login, navigate, loginUser} from '../../actions';
 
@@ -20,12 +19,14 @@ class InitialPage extends Component {
       password: ''
     };
   }
+  static navigationOptions = {
+    header: null,
+  }
 
   componentDidMount() {
     AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'], (err, stores) => {
       if (stores[2][1] == 'true') {
-        this.props.loginUser(stores);
-        //this.props.navigation.navigate('MapPage');
+        //this.props.loginUser(stores);
       }
     });
   }
@@ -42,38 +43,28 @@ class InitialPage extends Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
+    const {navigate} = this.props.navigation;
     return (
       <View
-        style={styles.container}
         >
         <TextInput
           onChangeText={(email) => this.setState({email})}
           value={this.state.email}
           placeholder="Email"
-          style={styles.inputs}
           />
         <TextInput
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
           secureTextEntry={true}
           placeholder="Password"
-          style={styles.inputs}
           />
         <Button
           title="Log In"
           onPress={this.handleLogin}
-          style={styles.inputs}
           />
         <Button
           title="Sign Up"
-          onPress={() => navigate('Signup')}
-          style={styles.inputs}
-          />
-        <Button
-          title="Map"
-          onPress={() => navigate('MapPage')}
-          style={styles.inputs}
+          onPress={() => navigate('Sign Up')}
           />
       </View>
     )

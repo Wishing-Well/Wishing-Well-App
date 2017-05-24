@@ -17,6 +17,12 @@ class SignupPage extends Component {
       togglePW: true
     };
   }
+  static navigationOptions = {
+    headerTintColor: '#F2C71B',
+    headerStyle: {
+      backgroundColor: '#65D0E8'
+    }
+  }
 
   componentDidMount() {
     if (this.props.loggedIn) {

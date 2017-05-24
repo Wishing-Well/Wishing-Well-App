@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 
-export const login = (username, password) => fetch('http://72.235.193.62:4000/api/users/login',
+export const login = (username, password) => fetch('http://10.0.1.10:4000/api/users/login',
   {
     method: 'POST',
     headers: {
@@ -14,7 +14,7 @@ export const login = (username, password) => fetch('http://72.235.193.62:4000/ap
 .catch(error => err);
 
 
-export const signup = userInfo => fetch('http://72.235.193.62:4000/api/users',
+export const signup = userInfo => fetch('http://10.0.1.10:4000/api/users/create',
   {
     method: 'POST',
     headers: {
@@ -27,7 +27,7 @@ export const signup = userInfo => fetch('http://72.235.193.62:4000/api/users',
 .then(res => res.json())
 .catch(err => err);
 
-export const createWell = wellInfo => fetch('http://72.235.193.62:4000/api/wells',
+export const createWell = wellInfo => fetch('http://10.0.1.10:4000/api/wells',
   {
     method: 'POST',
     headers: {

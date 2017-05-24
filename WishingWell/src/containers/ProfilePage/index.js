@@ -14,6 +14,7 @@ class ProfilePage extends Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
     return(
       <View>
         <Text>
@@ -21,15 +22,15 @@ class ProfilePage extends Component {
         </Text>
         <Button
           title="Check Out Your Well"
-          onPress={()=> this.props.navigate("WellPage")}
+          onPress={()=> navigate("WellPage")}
           />
         <Button
           title="See Your Donations"
-          onPress={()=> this.props.navigate("DonationsPage")}
+          onPress={()=> navigate("DonationsPage")}
           />
         <Button
           title="Create Your Own Well"
-          onPress={()=> this.props.navigate("CreateWellPage")}
+          onPress={()=> navigate("CreateWellPage")}
           />
       </View>
     )

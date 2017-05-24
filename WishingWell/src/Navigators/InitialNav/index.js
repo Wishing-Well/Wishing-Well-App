@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { addNavigationHelpers, StackNavigator } from "react-navigation";
 import {initialNav} from '../../routeConfig';
 
-export const InitialNavRoutes = StackNavigator(initialNav);
+const InitialNavRoutes = StackNavigator(initialNav);
 
 class InitialNav extends Component {
   render() {

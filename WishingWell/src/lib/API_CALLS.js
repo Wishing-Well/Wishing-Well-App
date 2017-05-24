@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 
-export const login = (username, password) => fetch('http://10.0.1.10:4000/api/users/login',
+export const login = (username, password) => fetch('http://10.0.1.35:4000/api/users/login',
   {
     method: 'POST',
     headers: {
@@ -14,7 +14,7 @@ export const login = (username, password) => fetch('http://10.0.1.10:4000/api/us
 .catch(error => err);
 
 
-export const signup = userInfo => fetch('http://10.0.1.10:4000/api/users/create',
+export const signup = userInfo => fetch('http://10.0.1.35:4000/api/users/create',
   {
     method: 'POST',
     headers: {
@@ -27,7 +27,7 @@ export const signup = userInfo => fetch('http://10.0.1.10:4000/api/users/create'
 .then(res => res.json())
 .catch(err => err);
 
-export const createWell = wellInfo => fetch('http://10.0.1.10:4000/api/wells',
+export const createWell = wellInfo => fetch('http://10.0.1.35:4000/api/wells',
   {
     method: 'POST',
     headers: {
@@ -40,18 +40,18 @@ export const createWell = wellInfo => fetch('http://10.0.1.10:4000/api/wells',
 .then(res => res.json())
 .catch(error => error);
 
-export const getAllWells = () => fetch('http://10.0.1.10:4000/api/wells')
+export const getAllWells = () => fetch('http://10.0.1.35:4000:4000/api/wells')
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserWell = user_id => fetch(`http://10.0.1.10:4000/api/users/${user_id}/wells`)
+export const getUserWell = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}/wells`)
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserDonations = user_id => fetch(`http://10.0.1.10:4000/api/users/${user_id}/donations`)
+export const getUserDonations = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}/donations`)
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserInfo = user_id => fetch(`http://10.0.1.10:4000/api/users/${user_id}`)
+export const getUserInfo = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}`)
   .then(res => res.json())
   .catch(error => error);

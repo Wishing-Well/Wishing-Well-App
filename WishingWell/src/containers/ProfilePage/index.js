@@ -12,9 +12,6 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
   }
-  static navigationOptions = {
-    tapBarLabel: 'My Profile',
-  };
 
   render() {
     return(

@@ -17,9 +17,6 @@ class SignupPage extends Component {
       togglePW: true
     };
   }
-  static navigationOptions = {
-    tapBarLabel: 'Sign Up',
-  };
 
   componentDidMount() {
     if (this.props.loggedIn) {

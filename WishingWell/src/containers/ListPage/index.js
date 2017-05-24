@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 
 class ListPage extends Component {
 
-  static navigationOptions = {
-    tapBarLabel: 'List of Wells',
-  };
-
   render() {
     return (
       <View>

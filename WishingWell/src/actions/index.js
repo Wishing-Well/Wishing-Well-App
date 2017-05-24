@@ -23,6 +23,7 @@ export const login = (email, password) => dispatch => API.login(email, password)
 
 export const signup = userInfo => dispatch => API.signup(userInfo)
   .then(res => {
+    console.log(res);
     if(res.success === true) {
       dispatch({type: types.SIGNUP_SUCCESS, userInfo});
     } else {

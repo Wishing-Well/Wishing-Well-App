@@ -26,7 +26,7 @@ class InitialPage extends Component {
   componentDidMount() {
     AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'], (err, stores) => {
       if (stores[2][1] == 'true') {
-        //this.props.loginUser(stores);
+        this.props.loginUser(stores);
       }
     });
   }

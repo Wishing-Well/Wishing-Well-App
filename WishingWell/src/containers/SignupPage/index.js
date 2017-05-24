@@ -66,7 +66,7 @@ class SignupPage extends Component {
           onChangeText={(password)=> this.setState({password})}
           secureTextEntry={this.state.togglePW}
           value={this.state.password}
-          placeholder="Create Password (Min. 5 Char)"
+          placeholder="Create Password (Min. 6 Char)"
           />
         <Button
           title="Sign Up"

@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
-import {navigate} from '../../actions';
 import { mapkey }from '../../keys';
 
 
@@ -49,6 +48,7 @@ class MapPage extends Component {
 
   render() {
     StatusBar.setHidden(true);
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <MapView
@@ -71,7 +71,7 @@ class MapPage extends Component {
         />
           <View style={styles.listContainer}>
             <TouchableNativeFeedback
-                onPress={()=>{this.props.navigate('ListPage')}}
+                onPress={()=>navigate('ListPage')}
                 background={TouchableNativeFeedback.Ripple('red')}>
                   <View style={styles.listView}>
                   <Text style={styles.listViewText}>List</Text>
@@ -81,7 +81,7 @@ class MapPage extends Component {
 
           <View style={styles.profileContainer}>
             <TouchableNativeFeedback
-                onPress={()=>{this.props.navigate('ProfilePage')}}
+                onPress={()=>navigate('ProfilePage')}
                 background={TouchableNativeFeedback.Ripple('red')}>
                   <View style={styles.profileButton}>
                   <Text style={styles.profileButtonText}>Profile</Text>

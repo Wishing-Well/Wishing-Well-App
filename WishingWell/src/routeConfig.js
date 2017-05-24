@@ -6,8 +6,8 @@ import ProfilePage from './containers/ProfilePage';
 
 export default {
   Home: { screen: InitialPage },
-  Signup: {screen: SignupPage},
-  //MapPage: {screen: MapPage},
-  ListPage: {screen: ListPage},
-  ProfilePage: {screen: ProfilePage}
+  //Signup: {screen: SignupPage},
+  'Map View': {screen: MapPage},
+  'List View': {screen: ListPage},
+  Profile: {screen: ProfilePage}
 };

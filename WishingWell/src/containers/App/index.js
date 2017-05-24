@@ -1,13 +1,13 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import MainNav from '../../Navigators/MainNav';
-import InitialNav from '../../Navigators/InitialNav';
+import MainNav from '../../navigators/MainNav';
+import InitialNav from '../../navigators/InitialNav';
 
 class App extends Component {
 
   render() {
-    if(this.props.loggedIn) {
+    if(!this.props.loggedIn) {
       return (
         <MainNav />
       );

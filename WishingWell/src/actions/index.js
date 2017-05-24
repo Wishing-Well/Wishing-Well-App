@@ -23,9 +23,7 @@ export const login = (email, password) => dispatch => API.login(email, password)
 
 export const signup = userInfo => dispatch => API.signup(userInfo)
   .then(res => {
-    console.log(res);
     if(res.success === true) {
-      console.log(res);
       dispatch({type: types.SIGNUP_SUCCESS, userInfo});
     } else {
       dispatch({type: types.SIGNUP_FAIL});
@@ -38,3 +36,5 @@ export const loginUser = asyncArr => dispatch =>
     email: asyncArr[0][1],
     user_id: asyncArr[1][1]
   }});
+
+

@@ -1,22 +1,17 @@
 /*jshint esversion: 6*/
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { addNavigationHelpers, TabNavigator } from "react-navigation";
-import routes from '../../routeConfig';
-import InitialPage from '../InitialPage';
+import {appNav} from '../../routeConfig';
 
-export const Routes = TabNavigator(routes);
+
+export const AppNavRoutes = TabNavigator(appNav);
 
 class AppNav extends Component {
   render() {
     return (
-      <Routes  />
+      <AppNavRoutes  />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  nav: state.nav,
-});
-
-export default connect(mapStateToProps)(AppNav);
+export default AppNav;

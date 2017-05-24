@@ -17,15 +17,6 @@ class SignupPage extends Component {
       togglePW: true
     };
   }
-  static navigationOptions = {
-    tapBarLabel: 'Sign Up',
-  };
-
-  componentDidMount() {
-    if (this.props.loggedIn) {
-      this.props.navigation.navigate('MapPage');
-    }
-  }
 
   componentDidMount() {
     if (this.props.loggedIn) {
@@ -69,7 +60,7 @@ class SignupPage extends Component {
           onChangeText={(password)=> this.setState({password})}
           secureTextEntry={this.state.togglePW}
           value={this.state.password}
-          placeholder="Create Password (Min. 5 Char)"
+          placeholder="Create Password (Min. 6 Char)"
           />
         <Button
           title="Sign Up"

@@ -6,7 +6,6 @@ import {
 import { connect } from 'react-redux';
 
 class ListPage extends Component {
-
   render() {
     return (
       <View>

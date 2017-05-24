@@ -3,13 +3,67 @@ import React, { Component } from 'react';
 import Mapbox, { MapView, Annotation } from 'react-native-mapbox-gl';
 import {
   Text,
-  StatusBar,
   View,
   TouchableNativeFeedback
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
 import { mapkey }from '../../keys';
+
+const wells = [
+  {
+    id: 'cogan',
+    coordinates: [
+      21.3087,
+      -157.809
+    ],
+    type: 'point',
+    annotationImage: {
+      source: { uri: 'well' },
+      height: 50,
+      width: 50
+    }
+  },
+  {
+    id: 'gan',
+    coordinates: [
+      21.3187,
+      -157.8109
+    ],
+    type: 'point',
+    annotationImage: {
+      source: { uri: 'well' },
+      height: 50,
+      width: 50
+    }
+  },
+  {
+    id: 'coganad',
+    coordinates: [
+      21.3287,
+      -157.8209
+    ],
+    type: 'point',
+    annotationImage: {
+      source: { uri: 'well' },
+      height: 50,
+      width: 50
+    }
+  },
+  {
+    id: 'godi',
+    coordinates: [
+      21.3087,
+      -157.810
+    ],
+    type: 'point',
+    annotationImage: {
+      source: { uri: 'well' },
+      height: 50,
+      width: 50
+    }
+  }
+]
 
 
 Mapbox.setAccessToken(mapkey);
@@ -32,8 +86,12 @@ class MapPage extends Component {
           annotations: [ ...this.state.annotations, {
             coordinates: [data.latitude, data.longitude],
             type: 'point',
-            title: 'This is your new well',
-            id: 'foo'
+            id: 'foo',
+            annotationImage: {
+              source: { uri: 'well' },
+              height: 50,
+              width: 50
+            }
           }]
       });
     });
@@ -47,7 +105,6 @@ class MapPage extends Component {
   };
 
   render() {
-    StatusBar.setHidden(true);
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -65,39 +122,11 @@ class MapPage extends Component {
           initialDirection={0}
           styleURL={'mapbox://styles/ctsygiel/cj2wllwes001p2rpmb1yup02a'}
           onRegionWillChange={this.onRegionWillChange}
+          onOpenAnnotation={() => console.log('hey')}
           logoIsHidden={true}
           attributionButtonIsHidden={true}
-          annotations={this.state.annotations}
+          annotations={wells}
         />
-          <View style={styles.listContainer}>
-            <TouchableNativeFeedback
-                onPress={()=>navigate('ListPage')}
-                background={TouchableNativeFeedback.Ripple('red')}>
-                  <View style={styles.listView}>
-                  <Text style={styles.listViewText}>List</Text>
-                </View>
-            </TouchableNativeFeedback>
-          </View>
-
-          <View style={styles.profileContainer}>
-            <TouchableNativeFeedback
-                onPress={()=>navigate('ProfilePage')}
-                background={TouchableNativeFeedback.Ripple('red')}>
-                  <View style={styles.profileButton}>
-                  <Text style={styles.profileButtonText}>Profile</Text>
-                </View>
-            </TouchableNativeFeedback>
-          </View>
-
-          <View style={styles.dropContainer}>
-            <TouchableNativeFeedback
-                onPress={this.dropWell}
-                background={TouchableNativeFeedback.Ripple('red')}>
-                  <View style={styles.dropButton}>
-                  <Text style={styles.dropButtonText}>Drop a Well</Text>
-                </View>
-            </TouchableNativeFeedback>
-          </View>
 
       </View>
     );

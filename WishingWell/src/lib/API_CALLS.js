@@ -38,4 +38,20 @@ export const createWell = wellInfo => fetch('http://10.0.1.10:4000/api/wells',
   }
 )
 .then(res => res.json())
-.catch(error => err);
+.catch(error => error);
+
+export const getAllWells = () => fetch('http://10.0.1.10:4000/api/wells')
+  .then(res => res.json())
+  .catch(error => error);
+
+export const getUserWell = user_id => fetch(`http://10.0.1.10:4000/api/users/${user_id}/wells`)
+  .then(res => res.json())
+  .catch(error => error);
+
+export const getUserDonations = user_id => fetch(`http://10.0.1.10:4000/api/users/${user_id}/donations`)
+  .then(res => res.json())
+  .catch(error => error);
+
+export const getUserInfo = user_id => fetch(`http://10.0.1.10:4000/api/users/${user_id}`)
+  .then(res => res.json())
+  .catch(error => error);

@@ -22,7 +22,7 @@ class ProfilePage extends Component {
         </Text>
         <Button
           title="Check Out Your Well"
-          onPress={()=> navigate("WellPage")}
+          onPress={()=> navigate("WellsListPage")}
           />
         <Button
           title="See Your Donations"

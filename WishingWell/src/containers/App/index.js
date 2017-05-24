@@ -1,19 +1,15 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
-import {
-  TextInput,
-  View
-} from 'react-native';
 import { connect } from 'react-redux';
-import AppNav from '../AppNav';
-import InitialNav from '../InitialNav';
+import MainNav from '../../Navigators/MainNav';
+import InitialNav from '../../Navigators/InitialNav';
 
 class App extends Component {
 
   render() {
     if(this.props.loggedIn) {
       return (
-        <AppNav />
+        <MainNav />
       );
     } else {
       return (

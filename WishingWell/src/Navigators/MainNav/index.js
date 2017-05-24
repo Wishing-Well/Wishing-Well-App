@@ -1,17 +1,17 @@
 /*jshint esversion: 6*/
 import React, { Component } from "react";
 import { addNavigationHelpers, TabNavigator } from "react-navigation";
-import {appNav} from '../../routeConfig';
+import {mainNav} from '../../routeConfig';
 
 
-export const AppNavRoutes = TabNavigator(appNav);
+const MainNavRoutes = TabNavigator(mainNav);
 
-class AppNav extends Component {
+class MainNav extends Component {
   render() {
     return (
-      <AppNavRoutes  />
+      <MainNavRoutes  />
     );
   }
 }
 
-export default AppNav;
+export default MainNav;

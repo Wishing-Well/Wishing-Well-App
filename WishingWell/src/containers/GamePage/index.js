@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-class WellPage extends Component {
+class GamePage extends Component {
   render() {
     return (
       <View>
@@ -21,4 +21,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(WellPage)
+export default connect(mapStateToProps, mapDispatchToProps)(GamePage)

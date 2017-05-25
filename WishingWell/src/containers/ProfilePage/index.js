@@ -42,7 +42,8 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.users.userInfo
+  userInfo: state.users.userInfo,
+  globalErr: state.errors.globalErr
 })
 
 const mapDispatchToProps = (dispatch) => ({

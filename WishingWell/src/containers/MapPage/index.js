@@ -115,7 +115,7 @@ class MapPage extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  globalErr: state.errors.globalErr
 })
 
 const mapDispatchToProps = (dispatch) => ({

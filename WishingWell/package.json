@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "clamp": "^1.0.1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-mapbox-gl": "^5.1.0",

@@ -1,13 +1,25 @@
 /*jshint esversion: 6*/
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {AsyncStorage} from 'react-native';
 import MainNav from '../../Navigators/MainNav';
 import InitialNav from '../../Navigators/InitialNav';
+import {loadApp, closeErrors} from '../../actions';
 
 class App extends Component {
 
   componentDidMount() {
-    //this.props.loadApp();
+    return AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'])
+      .then(stores => {
+        console.log(stores);
+        if (stores[2][1] == 'true') {
+          this.props.loginUser(stores);
+          this.props.loadApp(stores[1][1]);
+        } else {
+          this.props.loadApp();
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -28,7 +40,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadApp: () => dispatch(loadApp())
+  loadApp: () => dispatch(loadApp()),
+  loginUser: asyncArray => dispatch(loginUser(asyncArray))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

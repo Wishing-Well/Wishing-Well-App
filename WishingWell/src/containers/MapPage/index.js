@@ -71,7 +71,6 @@ class MapPage extends Component {
 
   constructor(props) {
       super(props);
-      console.log(props);
         this.state = {
           userTrackingMode: Mapbox.userTrackingMode.follow,
           zoom: 17,
@@ -87,6 +86,7 @@ class MapPage extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <MapView
@@ -106,7 +106,7 @@ class MapPage extends Component {
           onOpenAnnotation={() => console.log('hey')}
           logoIsHidden={true}
           attributionButtonIsHidden={true}
-          annotations={wells}
+          annotations={this.props.allWells}
         />
 
       </View>
@@ -115,7 +115,8 @@ class MapPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  allWells: state.wells.allWells
 })
 
 const mapDispatchToProps = (dispatch) => ({

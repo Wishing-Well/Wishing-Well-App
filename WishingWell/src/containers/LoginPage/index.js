@@ -80,7 +80,6 @@ const mapStateToProps = state => ({
   globalErr: state.errors.globalErr,
   loginErr: state.errors.loginErr
 })
-})
 
 const mapDispatchToProps = (dispatch) => ({
   login: (username, password) => dispatch(login(username, password)),

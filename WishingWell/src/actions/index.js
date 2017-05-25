@@ -6,19 +6,16 @@ import * as API from '../lib/API_CALLS.js';
 
 export const login = (email, password) => dispatch => API.login(email, password)
   .then(res => {
-    console.log(res);
     if(res.success === true) {
       AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => {
-        AsyncStorage.multiSet([
-          ['email', res.user.email],
-          ['user_id', `${res.user.id}`],
-          ['loggedIn', 'true']],
-          (error) => dispatch({type: types.ASYNC_SET_ERROR, error}))
-        .then(() => dispatch({type: types.LOGIN_SUCCESS, userInfo: res}))
-        .catch(error => dispatch({type: types.ASYNC_SET_ERROR, error}));
-      })
-      .catch(error => dispatch({type: types.ASYNC_SET_ERROR, error}));
+        AsyncStorage.multiSet([['email', email], ['user_id', `${res.user_id}`], ['loggedIn', 'true']], (err) => {
+          console.log(err);
+        })
+        .then(() => {
+          dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
+        });
+      });
     } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
@@ -27,23 +24,24 @@ export const signup = userInfo => dispatch => API.signup(userInfo)
   .then(res => {
     console.log(res);
     if(res.success === true) {
-      AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
+      API.login(res.user.email, userInfo.password)
+        .then(res => {
+          console.log(res);
+          if(res.success === true) {
+            AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => {
-        AsyncStorage.multiSet([
-          ['email', res.user.email],
-          ['user_id', `${res.user.id}`],
-          ['loggedIn', 'true']],
-          (error) => dispatch({type: types.ASYNC_SET_ERROR, error}))
-        .then(response => {
-          API.login(res.user.email, userInfo.password)
-            .then(res => {
-              dispatch({type: types.LOGIN_SUCCESS, userInfo: res});
-            });
+        AsyncStorage.multiSet([['email', email], ['user_id', `${res.user_id}`], ['loggedIn', 'true']], (err) => {
+          console.log(err);
+        })
+        .then(() => {
+          dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
         });
-      })
-      .catch(error => dispatch({type: types.ASYNC_SET_ERROR, error}));
-    } else {failure(res, dispatch);}
-  })
+      });
+          } else {failure(res, dispatch);}
+        })
+        .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
+          } else {failure(res, dispatch);}
+        })
   .catch(error => failure());
 
 export const loginUser = asyncArr => dispatch =>

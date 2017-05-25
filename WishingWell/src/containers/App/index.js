@@ -31,4 +31,4 @@ const mapDispatchToProps = dispatch => ({
   loadApp: () => dispatch(loadApp())
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

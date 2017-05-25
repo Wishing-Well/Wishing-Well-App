@@ -43,6 +43,12 @@ const UserReducers = (state = initialState, action) => {
         userInfo: action.userInfo
       });
 
+    case types.LOG_OUT:
+      return Object.assign({}, state, {
+        loggedIn: false,
+        userInfo: null
+      });
+
     case types.CLOSE_ERR:
       return Object.assign({}, state, {
         loginErr: false,

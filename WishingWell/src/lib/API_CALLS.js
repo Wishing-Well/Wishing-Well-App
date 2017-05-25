@@ -42,10 +42,11 @@ export const createWell = wellInfo => fetch('http://10.0.1.35:4000/api/wells/cre
 )
 .then(res => {
   console.log(res);
-  return res.json()})
+  return res.json();
+})
 .catch(error => error);
 
-export const getAllWells = () => fetch('http://10.0.1.35:4000:4000/api/wells', {
+export const getAllWells = () => fetch('http://10.0.1.35:4000/api/wells', {
   credentials: 'include'
 })
   .then(res => res.json())
@@ -64,6 +65,12 @@ export const getUserDonations = user_id => fetch(`http://10.0.1.35:4000/api/user
   .catch(error => error);
 
 export const getUserInfo = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}`, {
+  credentials: 'include',
+})
+  .then(res => res.json())
+  .catch(error => error);
+
+export const logout = () => fetch('http://10.0.1.35:4000/api/users/logout', {
   credentials: 'include',
 })
   .then(res => res.json())

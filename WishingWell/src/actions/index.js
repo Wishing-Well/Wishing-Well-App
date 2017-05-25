@@ -6,6 +6,7 @@ import * as API from '../lib/API_CALLS.js';
 
 export const login = (email, password) => dispatch => API.login(email, password)
   .then(res => {
+    console.log(res);
     if(res.success === true) {
       AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => {
@@ -13,36 +14,35 @@ export const login = (email, password) => dispatch => API.login(email, password)
           ['email', res.user.email],
           ['user_id', `${res.user.id}`],
           ['loggedIn', 'true']],
-          (err) => dispatch({type: types.ASYNC_SET_ERROR}))
-        .then(() => {
-          dispatch({type: types.LOGIN_SUCCESS, userInfo: res});
-        });
-      });
-    } else {
-      failure(res);
-    }
+          (error) => dispatch({type: types.ASYNC_SET_ERROR, error}))
+        .then(() => dispatch({type: types.LOGIN_SUCCESS, userInfo: res}))
+        .catch(error => dispatch({type: types.ASYNC_SET_ERROR, error}));
+      })
+      .catch(error => dispatch({type: types.ASYNC_SET_ERROR, error}));
+    } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
 
 export const signup = userInfo => dispatch => API.signup(userInfo)
   .then(res => {
+    console.log(res);
     if(res.success === true) {
       AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => {
         AsyncStorage.multiSet([
           ['email', res.user.email],
           ['user_id', `${res.user.id}`],
-          ['loggedIn', 'true']])
+          ['loggedIn', 'true']],
+          (error) => dispatch({type: types.ASYNC_SET_ERROR, error}))
         .then(response => {
           API.login(res.user.email, userInfo.password)
             .then(res => {
-              dispatch({type: types.SIGNUP_SUCCESS, userInfo: res});
+              dispatch({type: types.LOGIN_SUCCESS, userInfo: res});
             });
         });
-      });
-    } else {
-      failure(res);
-    }
+      })
+      .catch(error => dispatch({type: types.ASYNC_SET_ERROR, error}));
+    } else {failure(res, dispatch);}
   })
   .catch(error => failure());
 
@@ -52,50 +52,76 @@ export const loginUser = asyncArr => dispatch =>
     id: asyncArr[1][1]
   }});
 
-export const logout = () => dispatch => API.logout()
-  .then(res => {
-    if( res.success === true) {
+export const logout = () => dispatch => //API.logout()
+  //.then(res => {
+    console.log(res);
+    //if( res.success === true) {
       AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
         .then(() => dispatch({type: types.LOG_OUT}))
         .catch(error => dispatch({type: types.LOG_OUT, error}));
-    }
-  });
+    //}
+  //});
 
 export const createWell = wellInfo => dispatch => API.createWell(wellInfo)
   .then(res => {
+    console.log(res);
     if (res.success === true) {
       dispatch({type: types.ADD_WELL, well: res.well});
-    } else {
-      failure(res);
-    }
+    } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.CREATE_WELL_FAIL, error}));
 
-export const loadApp = () => dispatch =>
+export const loadApp = (id) => dispatch =>
 API.getAllWells()
   .then((res) => {
+    console.log(res);
     if (res.success === true) {
-      dispatch({type: types.ALL_WELLS, wells: res.wells});
-    } else {failure(res);}
-    API.getUserWells(id)
-      .then((res) => {
-        if (res.success === true) {
-          dispatch({type: types.USER_WELL, well: res.well});
-        } else {failure(res);}
-        API.getUserDonations(id)
-          .then(res => {
-            if (res.success === true) {
-              dispatch({type: types.USER_DONATIONS, donations: res.donations});
-            } else {failure(res);}
-          });
-      });
+      dispatch({type: types.ALL_WELLS, wells: prepareAllWells(res.wells)});
+    } else {failure(res, dispatch);}
+    if (id !== undefined) {
+      API.getUserWell(id)
+        .then((res) => {
+          console.log(res);
+          if (res.success === true) {
+            dispatch({type: types.USER_WELL, well: res.well});
+          } else {failure(res, dispatch);}
+          /*API.getUserDonations(id)
+            .then(res => {
+              console.log(res);
+              if (res.success === true) {
+                dispatch({type: types.USER_DONATIONS, donations: res.donations});
+              } else {failure(res, dispatch);}
+            });*/
+        });
+    }
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
 export const makeDonation = (well_id, user_id, amount) => dispatch => API.makeDonation(well_id, user_id, amount)
   .then(res => {
+    console.log(res);
     if (res.success === true) {
       dispatch({type: types.MAKE_DONATION, donation: res.donation});
-    } else {failure(res);}
+    } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.DONATION_FAIL, error}));
+
+const prepareAllWells = wellsArray => {
+  console.log(wellsArray);
+  return wellsArray.map(
+    well => (
+      {
+        coordinates: [Number(well.location.split(',')[0]), Number(well.location.split(',')[1])],
+        type: 'point',
+        title: well.title,
+        id: `${well.id}`,
+        annotationImage: {
+          source: { uri: 'well' },
+          height: 50,
+          width: 50
+        },
+        key: well.id
+      }
+    )
+  );
+};

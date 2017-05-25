@@ -3,7 +3,7 @@
 export const login = (username, password) => fetch('http://10.0.1.35:4000/api/users/login',
   {
     method: 'POST',
-    credentials: 'same-origin',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ export const login = (username, password) => fetch('http://10.0.1.35:4000/api/us
 export const signup = userInfo => fetch('http://10.0.1.35:4000/api/users/create',
   {
     method: 'POST',
-    credentials: 'same-origin',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export const signup = userInfo => fetch('http://10.0.1.35:4000/api/users/create'
 export const createWell = wellInfo => fetch('http://10.0.1.35:4000/api/wells/create',
   {
     method: 'POST',
-    credentials: 'same-origin',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -46,25 +46,25 @@ export const createWell = wellInfo => fetch('http://10.0.1.35:4000/api/wells/cre
 .catch(error => error);
 
 export const getAllWells = () => fetch('http://10.0.1.35:4000:4000/api/wells', {
-  credentials: 'same-origin'
+  credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
 export const getUserWell = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}/wells`, {
-  credentials: 'same-origin'
+  credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
 export const getUserDonations = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}/donations`, {
-  credentials: 'same-origin'
+  credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
 export const getUserInfo = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}`, {
-  credentials: 'same-origin',
+  credentials: 'include',
 })
   .then(res => res.json())
   .catch(error => error);

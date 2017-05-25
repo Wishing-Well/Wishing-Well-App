@@ -4,7 +4,6 @@ import Mapbox, { MapView, Annotation } from 'react-native-mapbox-gl';
 import {
   Text,
   View,
-  TouchableNativeFeedback
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';
@@ -79,24 +78,6 @@ class MapPage extends Component {
           annotations: []
         };
     };
-
-    dropWell = () => {
-      this._map.getCenterCoordinateZoomLevel(data => {
-        this.setState({
-          annotations: [ ...this.state.annotations, {
-            coordinates: [data.latitude, data.longitude],
-            type: 'point',
-            id: 'foo',
-            annotationImage: {
-              source: { uri: 'well' },
-              height: 50,
-              width: 50
-            }
-          }]
-      });
-    });
-  };
-
 
   onRegionWillChange = (location) => {
     if (location.pitch < 60){

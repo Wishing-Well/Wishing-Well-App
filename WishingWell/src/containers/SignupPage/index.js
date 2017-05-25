@@ -32,9 +32,9 @@ class SignupPage extends Component {
     if(!this.validateEmail(this.state.email)) {
       return this.setState({email: '', password: ''});
     }
-    /*if(this.state.password.length < 5) {
+    if(this.state.password.length < 5) {
       return this.setState({password: ''});
-    }*/
+    }
     this.props.signup({
       full_name: this.state.full_name,
       email: this.state.email,

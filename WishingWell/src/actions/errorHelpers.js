@@ -1,18 +1,27 @@
 /*jshint esversion: 6*/
+import * as error from '../lib/errors';
+import * as types from '../lib/constants';
 
 export default (res) => {
-  switch(res.error || 'NONE') {
+  switch(res.error || error.UNKNOWN_ERROR) {
     case error.USER_NOT_AUTHORIZED:
       return dispatch(
         {
-          type: types.PERMISSION_ERROR,
+          type: types.GLOBAL_ERROR,
           message: 'You must be authorized'
         }
       );
     case error.SERVER_UNKNOWN_ERROR:
       return dispatch(
         {
-          type: types.UNKNOWN_ERROR,
+          type: types.GLOBAL_ERROR,
+          message: 'Sorry, something may have gone wrong'
+        }
+      );
+    case error.UNKNOWN_ERROR:
+      return dispatch(
+        {
+          type: types.GLOBAL_ERROR,
           message: 'Sorry, something may have gone wrong'
         }
       );
@@ -117,7 +126,7 @@ export default (res) => {
     default:
       return dispatch(
         {
-          type: types.UNKNOWN_ERROR,
+          type: types.GLOBAL_ERROR,
           message: 'Sorry, something may have gone wrong'
         }
       );

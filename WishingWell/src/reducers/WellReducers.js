@@ -7,7 +7,7 @@ const initialState = {
   user_donations: [],
 };
 
-const UserReducers = (state = initialState, action) => {
+const WellReducers = (state = initialState, action) => {
   switch (action.type) {
     case types.ALL_WELLS:
       return Object.assign({}, state, {
@@ -40,4 +40,4 @@ const UserReducers = (state = initialState, action) => {
   }
 };
 
-export default UserReducers;
+export default WellReducers;

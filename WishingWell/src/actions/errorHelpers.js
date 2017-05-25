@@ -2,7 +2,8 @@
 import * as error from '../lib/errors';
 import * as types from '../lib/constants';
 
-export default (res) => {
+export default (res, dispatch) => {
+  console.log(res);
   switch(res.error || error.UNKNOWN_ERROR) {
     case error.USER_NOT_AUTHORIZED:
       return dispatch(

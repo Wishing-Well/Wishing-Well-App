@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 import React, {Component} from 'react';
 import {
   TextInput,
@@ -19,20 +20,6 @@ class InitialPage extends Component {
       password: ''
     };
   }
-  static navigationOptions = {
-    header: null,
-  }
-
-  componentDidMount() {
-    AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'], (err, stores) => {
-      if (stores[2][1] == 'true') {
-        this.props.loginUser(stores);
-      }
-    });
-  }
-  static navigationOptions = {
-    tapBarLabel: 'Login',
-  };
 
   validateEmail = (email) => {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
@@ -82,8 +69,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (username, password) => dispatch(login(username, password)),
-  loginUser: asyncArray => dispatch(loginUser(asyncArray)),
+  login: (username, password) => dispatch(login(username, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitialPage)

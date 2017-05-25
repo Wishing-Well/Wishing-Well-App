@@ -11,13 +11,11 @@ import {createWell} from '../../actions';
 class CreateWellPage extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state= {
       title: '',
       time: 7,
       description: '',
-      funding_target: 5000
-
+      funding_target: 0
     };
   }
 
@@ -27,12 +25,11 @@ class CreateWellPage extends Component {
         title: this.state.title,
         description: this.state.description,
         location: `${position.coords.latitude},${position.coords.longitude}`,
-        organizer_id: this.props.userInfo.id,
+        organizer_id: this.props.userInfo.user.id,
         funding_target: this.state.funding_target
       });
     }, error => {
       console.error(error);
-      // handle the error
     });
   }
   render() {

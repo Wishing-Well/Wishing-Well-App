@@ -7,3 +7,7 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const LOGIN_USER = 'LOGIN_USER';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const NAVIGATE = 'NAVIGATE';
+export const ADD_WELL = 'ADD_WELL';
+export const ALL_WELLS = 'ALL_WELLS';
+export const USER_WELL = 'USER_WELL';
+export const USER_DONATIONS = 'USER_DONATIONS';

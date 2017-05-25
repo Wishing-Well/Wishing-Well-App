@@ -6,7 +6,7 @@ import {
   Button
 } from 'react-native';
 import { connect } from 'react-redux';
-import {createWell} from '../../actions';
+import {createWell, closeErrors} from '../../actions';
 
 class CreateWellPage extends Component {
   constructor(props) {
@@ -81,7 +81,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createWell: wellInfo => dispatch(createWell(wellInfo))
+  createWell: wellInfo => dispatch(createWell(wellInfo)),
+  closeErrors: () => dispatch(closeErrors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateWellPage)

@@ -9,6 +9,7 @@ const initialState = {
   signEmailErr: null,
   signNameErr: null,
   signPwErr: null,
+  loginErr: null
 };
 
 const ErrorReducers = (state = initialState, action) => {
@@ -46,6 +47,11 @@ const ErrorReducers = (state = initialState, action) => {
     case types.SIGNUP_PW_ERROR:
       return Object.assign({}, state, {
         signPwErr: action.message
+      });
+
+    case types.LOGIN_ERROR:
+      return Object.assign({}, state, {
+        loginErr: action.message
       });
 
     default:

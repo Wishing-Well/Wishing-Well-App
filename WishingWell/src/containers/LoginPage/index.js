@@ -77,7 +77,9 @@ class InitialPage extends Component {
 const mapStateToProps = state => ({
   loggedIn: state.users.loggedIn,
   userInfo: state.users.userInfo,
-  loginErr: state.users.loginErr
+  globalErr: state.errors.globalErr,
+  loginErr: state.errors.loginErr
+})
 })
 
 const mapDispatchToProps = (dispatch) => ({

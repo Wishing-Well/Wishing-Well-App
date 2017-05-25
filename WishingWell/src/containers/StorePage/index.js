@@ -49,7 +49,7 @@ class StorePage extends Component {
             if (Math.abs(this.state.pan.y._value) > SWIPE_THRESHOLD) {
               Animated.decay(this.state.pan, {
                 velocity: {x: vx, y: velocity},
-                deceleration: 0.98
+                deceleration: 0.55
               }).start(this._resetState)
             } else {
               Animated.spring(this.state.pan, {

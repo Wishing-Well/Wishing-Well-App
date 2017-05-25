@@ -16,17 +16,26 @@ class StorePage extends Component {
         this.state = {
           pan: new Animated.ValueXY()
         };
-    };
+
+        this.panResponder = PanResponder.create({
+          onStartShouldSetPanResponder: () => true,
+          onPanResponderMove: Animated.event([null, {
+            dx: this.state.pan.x,
+            dy: this.state.pan.y
+          }]),
+          onPanResponderRelease: (e, gesture) => {}
+        })
+      };
+
 
   render() {
     return (
+        <View style={styles.wellContainer}>
+          <View style={styles.well}>
+          </View>
 
-      <View style={styles.wellContainer}>
-        <View style={styles.well}>
+          {this.renderCoin()}
         </View>
-
-        {this.renderCoin()}
-      </View>
     );
   }
 
@@ -37,7 +46,9 @@ class StorePage extends Component {
                 alignItems: 'center',
               }}>
         <View style={styles.coinContainer}>
-          <Animated.View style={styles.coin}>
+          <Animated.View
+            {...this.panResponder.panHandlers}
+            style={[this.state.pan.getLayout(), styles.coin]}>
           </Animated.View>
         </View>
       </View>

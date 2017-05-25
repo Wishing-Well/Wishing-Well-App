@@ -2,18 +2,38 @@ import React, {Component} from 'react';
 import {
   TextInput,
   View,
-  Picker
+  Picker,
+  Button
 } from 'react-native';
 import { connect } from 'react-redux';
+import {createWell} from '../../actions';
 
 class CreateWellPage extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state= {
       title: '',
       time: 7,
-      description: ''
+      description: '',
+      funding_target: 5000
+
     };
+  }
+
+  prepareWell = (done) => {
+    navigator.geolocation.getCurrentPosition( position => {
+      done({
+        title: this.state.title,
+        description: this.state.description,
+        location: `${position.coords.latitude},${position.coords.longitude}`,
+        organizer_id: this.props.userInfo.id,
+        funding_target: this.state.funding_target
+      });
+    }, error => {
+      console.error(error);
+      // handle the error
+    });
   }
   render() {
     return (
@@ -39,7 +59,7 @@ class CreateWellPage extends Component {
           />
         <Button
           title="Submit Your Well"
-          onPress={this.handleSubmit}
+          onPress={() => this.prepareWell(this.props.createWell)}
           />
       </View>
     );
@@ -47,9 +67,11 @@ class CreateWellPage extends Component {
 }
 
 const mapStateToProps = state => ({
+  userInfo: state.users.userInfo
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  createWell: wellInfo => dispatch(createWell(wellInfo))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateWellPage)

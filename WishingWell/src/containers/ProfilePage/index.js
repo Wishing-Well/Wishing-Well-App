@@ -32,6 +32,10 @@ class ProfilePage extends Component {
           title="Create Your Own Well"
           onPress={()=> navigate("CreateWellPage")}
           />
+        <Button
+          title="Log Out"
+          onPress={this.props.logout}
+          />
       </View>
     )
   }

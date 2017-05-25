@@ -6,6 +6,10 @@ import InitialNav from '../../Navigators/InitialNav';
 
 class App extends Component {
 
+  componentDidMount() {
+    //this.props.loadApp();
+  }
+
   render() {
     if(this.props.loggedIn) {
       return (
@@ -21,6 +25,10 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.users.loggedIn
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadApp: () => dispatch(loadApp())
 });
 
 export default connect(mapStateToProps)(App);

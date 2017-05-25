@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
+import {refreshDonations} from '../../actions';
 
 class DonationsPage extends Component {
   render() {
@@ -16,10 +17,12 @@ class DonationsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  user_donations: state.wells.user_donations
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  refreshDonations: () => dispatch(refreshDonations())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DonationsPage)

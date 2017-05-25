@@ -10,14 +10,16 @@ import { connect } from 'react-redux';
 import styles from './stylesheet';
 import clamp from 'clamp';
 
-let SWIPE_THRESHOLD = 120;
+let SWIPE_THRESHOLD = 100;
 
 class StorePage extends Component {
 
   constructor(props) {
       super(props);
         this.state = {
-          pan: new Animated.ValueXY()
+          showCoin: true,
+          pan: new Animated.ValueXY(),
+          wellValues: null
         };
 
         this.panResponder = PanResponder.create({
@@ -49,8 +51,14 @@ class StorePage extends Component {
             if (Math.abs(this.state.pan.y._value) > SWIPE_THRESHOLD) {
               Animated.decay(this.state.pan, {
                 velocity: {x: vx, y: velocity},
-                deceleration: 0.55
-              }).start(this._resetState)
+                deceleration: 0.98
+              }).start()
+              if(this.isWell({vx, vy})){
+                  console.log('hit')
+                  this.setState({
+                    showCoin: false
+                  })
+              }
             } else {
               Animated.spring(this.state.pan, {
                 toValue: {x: 0, y: 0},
@@ -58,14 +66,26 @@ class StorePage extends Component {
               }).start()
             }
           }
-        })
-      };
+      })
+  };
 
+  isWell({vx,vy}){
+    let dz = this.state.wellValues;
+    return {vx,vy}.moveY > dz.y && {vx,vy}.moveY < dz.y + dz.height;
+  }
+
+  setWellValues(event){
+    this.setState({
+      wellValues: event.nativeEvent.layout
+    })
+  }
 
   render() {
     return (
         <View style={styles.wellContainer}>
-          <View style={styles.well}>
+          <View
+            onLayout={this.setWellValues.bind(this)}
+            style={styles.well}>
           </View>
 
           {this.renderCoin()}

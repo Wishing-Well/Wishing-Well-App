@@ -61,7 +61,7 @@ export const createWell = wellInfo => dispatch => API.createWell(wellInfo)
   .then(res => {
     console.log(res);
     if (res.success === true) {
-      dispatch({type: types.ADD_WELL, well: res.well});
+      dispatch({type: types.ADD_WELL, well: prepareAllWells([res.well])});
     } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.CREATE_WELL_FAIL, error}));
@@ -115,7 +115,10 @@ const prepareAllWells = wellsArray => {
           height: 50,
           width: 50
         },
-        key: well.id
+        key: well.id,
+        description: well.description,
+        funding_target: well.funding_target,
+        current_amount: well.current_amount
       }
     )
   );

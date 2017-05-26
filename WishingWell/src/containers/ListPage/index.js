@@ -13,16 +13,20 @@ class ListPage extends Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View>
         {this.props.allWells.map(well => (
-            <TouchableOpacity onPress={this._onPressButton} key={well.id}>
+            <TouchableOpacity onPress={()=> navigate()} key={well.id}>
               <View>
                 <Text>
                   {well.title}
                 </Text>
                 <Text>
-                  {well.description}
+                  Collected: {well.current_amount}
+                </Text>
+                <Text>
+                  Target: {well.funding_target}
                 </Text>
               </View>
             </TouchableOpacity>

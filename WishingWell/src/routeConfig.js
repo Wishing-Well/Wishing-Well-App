@@ -39,7 +39,6 @@ export const mainNav = {
   'Map View': {screen: StackNavigator(mapNav)},
   'List View': {screen: StackNavigator(listNav)},
   Profile: {screen: StackNavigator(profileNav)},
-  Store: {screen: StackNavigator(storeNav)}
 };
 
 export const initialNav = {

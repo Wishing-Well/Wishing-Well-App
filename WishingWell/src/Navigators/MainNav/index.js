@@ -5,16 +5,17 @@ import {mainNav} from '../../routeConfig';
 
 const tabBarOptions = {
   tabBarPosition: 'bottom',
-  inactiveBackgroundColor: '#84dbef',
-  activeBackgroundColor: '#65d0e8',
-  labelStyle: {
-    fontSize: 15
-  },
-  style: {
-    backgroundColor: '#65d0e8'
+  tabBarOptions: {
+    pressColor: '#F2C71B',
+    labelStyle: {
+      color: '#FFF',
+      fontWeight: 'bold'
+    },
+    style: {
+      backgroundColor: '#65D0E8',
+    },
   }
 };
-
 
 const MainNavRoutes = TabNavigator(mainNav, tabBarOptions);
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  Text,
   TextInput,
   View,
   Picker,
@@ -40,6 +41,9 @@ class CreateWellPage extends Component {
           onChangeText={title => this.setState({title})}
           autoCorrect={false}
           />
+          {this.props.wellTitleErr &&
+            (<Text>{this.props.errMessage}</Text>)
+          }
         <TextInput
           value={`${this.state.funding_target}`}
           onChangeText={funding_target => this.setState({funding_target})}
@@ -76,7 +80,8 @@ const mapStateToProps = state => ({
   globalErr: state.errors.globalErr,
   wellTitleErr: state.errors.wellTitleErr,
   wellDescErr: state.errors.wellDescErr,
-  wellFundErr: state.errors.wellFundErr
+  wellFundErr: state.errors.wellFundErr,
+  errMessage: state.errors.errMessage
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -75,3 +75,12 @@ export const logout = () => fetch('http://10.0.1.35:4000/api/users/logout', {
 })
   .then(res => res.json())
   .catch(error => error);
+
+export const reLogin = () => fetch('http://10.0.1.35:4000/api/users/info', {
+  credentials: 'include',
+})
+  .then(res => {
+    console.log(res);
+    return res.json();
+  })
+  .catch(error => error);

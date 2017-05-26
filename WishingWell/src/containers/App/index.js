@@ -13,7 +13,7 @@ class App extends Component {
       .then(stores => {
         console.log(stores);
         if (stores[2][1] == 'true') {
-          this.props.loginUser(stores);
+          this.props.loginUser();
           this.props.loadApp(stores[1][1]);
         } else {
           this.props.loadApp();

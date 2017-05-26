@@ -15,7 +15,7 @@ class CreateWellPage extends Component {
       title: '',
       time: 7,
       description: '',
-      funding_target: 0
+      funding_target: ''
     };
   }
 
@@ -41,7 +41,7 @@ class CreateWellPage extends Component {
           autoCorrect={false}
           />
         <TextInput
-          value={this.state.funding_target}
+          value={`${this.state.funding_target}`}
           onChangeText={funding_target => this.setState({funding_target})}
           keyboardType= "numeric"
           placeholder="Funding Target"

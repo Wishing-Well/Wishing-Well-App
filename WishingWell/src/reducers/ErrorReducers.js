@@ -2,56 +2,65 @@
 import * as types from '../lib/constants';
 
 const initialState = {
-  globalErr: null,
-  wellTitleErr: null,
-  wellDescErr: null,
-  wellFundErr: null,
-  signEmailErr: null,
-  signNameErr: null,
-  signPwErr: null,
-  loginErr: null
+  globalErr: false,
+  wellTitleErr: false,
+  wellDescErr: false,
+  wellFundErr: false,
+  signEmailErr: false,
+  signNameErr: false,
+  signPwErr: false,
+  loginErr: false,
+  errMessage: ''
 };
 
 const ErrorReducers = (state = initialState, action) => {
   switch (action.type) {
     case types.GLOBAL_ERROR:
       return Object.assign({}, state, {
-        globalErr: action.message
+        globalErr: true,
+        errMessage: action.message
       });
 
     case types.WELL_TITLE_ERROR:
       return Object.assign({}, state, {
-        wellTitleErr: action.message
+        wellTitleErr: true,
+        errMessage: action.message
       });
 
     case types.WELL_DESCRIPTION_ERROR:
       return Object.assign({}, state, {
-        wellDescErr: action.message
+        wellDescErr: true,
+        errMessage: action.message
       });
 
     case types.WELL_FUNDING_ERROR:
       return Object.assign({}, state, {
-        wellFundErr: action.message
+        wellFundErr: true,
+        errMessage: action.message
       });
 
     case types.SIGNUP_EMAIL_ERROR:
       return Object.assign({}, state, {
-        signEmailErr: action.message
+        signEmailErr: true,
+        errMessage: action.message
       });
 
     case types.SIGNUP_NAME_ERROR:
       return Object.assign({}, state, {
-        signNameErr: action.message
+        signNameErr: true,
+        errMessage: action.message
       });
 
     case types.SIGNUP_PW_ERROR:
       return Object.assign({}, state, {
-        signPwErr: action.message
+        signPwErr: true,
+        errMessage: action.message
       });
 
     case types.LOGIN_ERROR:
       return Object.assign({}, state, {
-        loginErr: action.message
+        loginErr: true,
+        errMessage: action.message
       });
 
     default:

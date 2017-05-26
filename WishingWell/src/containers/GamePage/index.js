@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 
 class GamePage extends Component {
+
   render() {
     return (
       <View>

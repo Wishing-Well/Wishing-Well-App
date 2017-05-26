@@ -12,6 +12,9 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
   }
+  static navigationOptions = {
+    header: null,
+  }
 
   render() {
     const {navigate} = this.props.navigation;

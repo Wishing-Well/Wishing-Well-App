@@ -33,8 +33,9 @@ export const signup = userInfo => dispatch => API.signup(userInfo)
         AsyncStorage.multiSet([['email', email], ['user_id', `${res.user_id}`], ['loggedIn', 'true']], (err) => {
           console.log(err);
         })
+        .then()
         .then(() => {
-          dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
+          dispatch({type: types.SIGNIN_SUCCESS, userInfo: res.user});
         });
       });
           } else {failure(res, dispatch);}

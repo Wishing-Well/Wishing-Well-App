@@ -41,10 +41,13 @@ export const login = (email, password) => dispatch =>
 
 
 export const loginUser = asyncArr => dispatch =>
-  dispatch({type: types.LOGIN_USER, userInfo: {
-    email: asyncArr[0][1],
-    id: asyncArr[1][1]
-  }});
+API.reLogin()
+.then(res => {
+  console.log(res);
+  if(res.success) {
+    dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
+  }
+});
 
 export const logout = () => dispatch => API.logout()
   .then(res => {

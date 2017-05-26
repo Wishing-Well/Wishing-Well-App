@@ -25,7 +25,6 @@ class CreateWellPage extends Component {
         title: this.state.title,
         description: this.state.description,
         location: `${position.coords.latitude},${position.coords.longitude}`,
-        organizer_id: this.props.userInfo.user.id,
         funding_target: this.state.funding_target * 100
       });
     }, error => {

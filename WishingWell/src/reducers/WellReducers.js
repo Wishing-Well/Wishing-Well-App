@@ -3,7 +3,7 @@ import * as types from '../lib/constants';
 
 const initialState = {
   allWells: [],
-  user_well: null,
+  user_well: [],
   user_donations: [],
 };
 
@@ -26,7 +26,7 @@ const WellReducers = (state = initialState, action) => {
 
     case types.ADD_WELL:
       return Object.assign({}, state, {
-        allWells: state.allWells.concat([action.well]),
+        allWells: state.allWells.concat(action.well),
         user_well: action.well
       });
 

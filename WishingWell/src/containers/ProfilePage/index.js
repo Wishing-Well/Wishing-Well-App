@@ -3,10 +3,12 @@ import {
   View,
   TextInput,
   Button,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import {logout} from '../../actions';
+import styles from './styles';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -19,26 +21,51 @@ class ProfilePage extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return(
-      <View>
-        <Text>
-          Current Location: {navigator.geolocation.getCurrentPosition(position => position.coords.latitude)}
-        </Text>
-        <Button
-          title="Check Out Your Well"
-          onPress={()=> navigate("WellsListPage")}
-          />
-        <Button
-          title="See Your Donations"
-          onPress={()=> navigate("DonationsPage")}
-          />
-        <Button
-          title="Create Your Own Well"
-          onPress={()=> navigate("CreateWellPage")}
-          />
-        <Button
-          title="Log Out"
-          onPress={this.props.logout}
-          />
+      <View style={styles.wholeContainer}>
+        <View style={styles.infoContainer}>
+          <Text style={styles.pageTitle}>
+            PROFILE
+          </Text>
+          <Text style={styles.allText}>
+            Hello {this.props.userInfo.full_name}
+          </Text>
+          <Text style={styles.allText}>
+            Account E-Mail: {this.props.userInfo.email}
+          </Text>
+          <Text style={styles.allText}>
+            Coins Thrown: {this.props.userInfo.coins_thrown}
+          </Text>
+        </View>
+        <View style={styles.wellContainer}>
+          <TouchableOpacity>
+            <Text style={styles.allText}>
+              Your Well
+            </Text>
+            <Text style={styles.allText}>
+              {'It is free to create a well'}
+            </Text>
+            <Text style={styles.allText}>
+              {'Create a well below'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="See Your Donations"
+            onPress={()=> navigate("DonationsPage")}
+            color='#84DBEF'
+            />
+          <Button
+            title="Create Your Own Well"
+            onPress={()=> navigate("CreateWellPage")}
+            color='#84DBEF'
+            />
+          <Button
+            title="Log Out"
+            onPress={this.props.logout}
+            color='#84DBEF'
+            />
+        </View>
       </View>
     )
   }
@@ -46,7 +73,8 @@ class ProfilePage extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.users.userInfo,
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  user_well: state.wells.user_well
 })
 
 const mapDispatchToProps = (dispatch) => ({

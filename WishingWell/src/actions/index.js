@@ -4,15 +4,13 @@ import * as types from '../lib/constants';
 import failure from './errorHelpers.js';
 import * as API from '../lib/API_CALLS.js';
 
-export const login = (email, password) => dispatch => API.login(email, password)
+export const login = (email, password) => dispatch =>
+  API.login(email, password)
   .then(res => {
-    if(res.success === true) {
-      AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
-      .then(() => {
-        AsyncStorage.multiSet([['email', email], ['user_id', `${res.user_id}`], ['loggedIn', 'true']], (err) => {
-          console.log(err);
-        })
-        .then(() => {
+    if(res.success) {
+      AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'], (err) => {
+        if (err) failure(err, dispatch);
+        AsyncStorage.multiSet([['email', res.user.email], ['user_id', `${res.user.user_id}`], ['loggedIn', 'true']], () => {
           dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
         });
       });
@@ -20,30 +18,27 @@ export const login = (email, password) => dispatch => API.login(email, password)
   })
   .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
 
-export const signup = userInfo => dispatch => API.signup(userInfo)
-  .then(res => {
-    console.log(res);
-    if(res.success === true) {
-      API.login(res.user.email, userInfo.password)
+  export const signup = userInfo => dispatch =>
+    API.signup(userInfo)
+    .then(res => {
+      if (res.success) {
+        API.login(userInfo.email, userInfo.password)
         .then(res => {
-          console.log(res);
-          if(res.success === true) {
-            AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
-      .then(() => {
-        AsyncStorage.multiSet([['email', email], ['user_id', `${res.user_id}`], ['loggedIn', 'true']], (err) => {
-          console.log(err);
-        })
-        .then()
-        .then(() => {
-          dispatch({type: types.SIGNIN_SUCCESS, userInfo: res.user});
+          if(res.success) {
+            AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'], (err) => {
+              if (err) failure(err, dispatch);
+
+              AsyncStorage.multiSet([['email', res.user.email], ['user_id', `${res.user.user_id}`], ['loggedIn', 'true']], () => {
+                dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
+              });
+            });
+          } else {failure(res, dispatch);}
         });
-      });
-          } else {failure(res, dispatch);}
-        })
-        .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
-          } else {failure(res, dispatch);}
-        })
-  .catch(error => failure());
+      } else {failure(res, dispatch);}
+    })
+    .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
+
+
 
 export const loginUser = asyncArr => dispatch =>
   dispatch({type: types.LOGIN_USER, userInfo: {
@@ -51,15 +46,13 @@ export const loginUser = asyncArr => dispatch =>
     id: asyncArr[1][1]
   }});
 
-export const logout = () => dispatch => //API.logout()
-  //.then(res => {
+export const logout = () => dispatch => API.logout()
+  .then(res => {
     console.log(res);
-    //if( res.success === true) {
       AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
         .then(() => dispatch({type: types.LOG_OUT}))
         .catch(error => dispatch({type: types.LOG_OUT, error}));
-    //}
-  //});
+  });
 
 export const createWell = wellInfo => dispatch => API.createWell(wellInfo)
   .then(res => {

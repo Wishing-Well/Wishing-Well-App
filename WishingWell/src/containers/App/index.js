@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {AsyncStorage} from 'react-native';
 import MainNav from '../../Navigators/MainNav';
 import InitialNav from '../../Navigators/InitialNav';
-import {loadApp, closeErrors} from '../../actions';
+import {loadApp, closeErrors, loginUser} from '../../actions';
 
 class App extends Component {
 
@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   render() {
-    if(!this.props.loggedIn) {
+    if(this.props.loggedIn) {
       return (
         <MainNav />
       );

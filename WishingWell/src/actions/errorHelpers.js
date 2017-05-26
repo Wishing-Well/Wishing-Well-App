@@ -54,20 +54,6 @@ export default (res, dispatch) => {
           message: 'Sorry, description may not be more than 1000 characters'
         }
       );
-    case error.FUNDING_TARGET_INVALID_NUMBER:
-      return dispatch(
-        {
-          type: types.WELL_FUNDING_ERROR,
-          message: 'Please check your funding target and try again'
-        }
-      );
-    case error.FUNDING_TARGET_INVALID_VALUE:
-      return dispatch(
-        {
-          type: types.WELL_FUNDING_ERROR,
-          message: 'Sorry, max target is only 100 Dollars'
-        }
-      );
     case error.REGISTRATION_USER_ALREADY_EXISTS:
       return dispatch(
         {

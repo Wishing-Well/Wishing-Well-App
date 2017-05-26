@@ -4,10 +4,12 @@ import {
   TextInput,
   View,
   Picker,
-  Button
+  Button,
+  Slider
 } from 'react-native';
 import { connect } from 'react-redux';
 import {createWell, closeErrors} from '../../actions';
+import { styles } from './stylesheet'
 
 class CreateWellPage extends Component {
   constructor(props) {
@@ -16,7 +18,8 @@ class CreateWellPage extends Component {
       title: '',
       time: 7,
       description: '',
-      funding_target: ''
+      funding_target: 1,
+      height: 0
     };
   }
 
@@ -26,7 +29,7 @@ class CreateWellPage extends Component {
         title: this.state.title,
         description: this.state.description,
         location: `${position.coords.latitude},${position.coords.longitude}`,
-        funding_target: this.state.funding_target * 100
+        funding_target: Number(this.state.funding_target) * 100
       });
     }, error => {
       console.error(error);
@@ -44,12 +47,14 @@ class CreateWellPage extends Component {
           {this.props.wellTitleErr &&
             (<Text>{this.props.errMessage}</Text>)
           }
-        <TextInput
-          value={`${this.state.funding_target}`}
-          onChangeText={funding_target => this.setState({funding_target})}
-          keyboardType= "numeric"
-          placeholder="Funding Target"
-          maxLength={6}
+          <Text>{'Set your funding goal'}</Text>
+          <Text>{'$' + this.state.funding_target}</Text>
+        <Slider
+          onValueChange={(funding_target) => this.setState({funding_target: funding_target})}
+          title="Funding Target"
+          minimumValue={1}
+          maximumValue={100}
+          step={1}
           />
         <Picker
           selectedValue={String(this.state.time)}
@@ -60,9 +65,13 @@ class CreateWellPage extends Component {
           <Picker.Item label="30 Days" value="30" />
         </Picker>
         <TextInput
-          value={this.state.description}
-          onChangeText={description => this.setState({description})}
           multiLine={true}
+          onChangeText={description => this.setState({description})}
+          onContentSizeChange={(event) => {
+            this.setState({height: event.nativeEvent.contentSize.height});
+            }}
+          style={{height: Math.max(35, this.state.height)}}
+          value={this.state.description}
           placeholder="Description"
           maxLength={500}
           />

@@ -33,12 +33,6 @@ const ErrorReducers = (state = initialState, action) => {
         errMessage: action.message
       });
 
-    case types.WELL_FUNDING_ERROR:
-      return Object.assign({}, state, {
-        wellFundErr: true,
-        errMessage: action.message
-      });
-
     case types.SIGNUP_EMAIL_ERROR:
       return Object.assign({}, state, {
         signEmailErr: true,

@@ -33,7 +33,10 @@ class ProfilePage extends Component {
             Account E-Mail: {this.props.userInfo.email}
           </Text>
           <Text style={styles.allText}>
-            Coins Thrown: {this.props.userInfo.coins_thrown}
+            Inventory: ${this.props.userInfo.coin_inventory / 100}
+          </Text>
+          <Text style={styles.allText}>
+            Donated: ${this.props.userInfo.amount_donated / 100}
           </Text>
         </View>
         <View style={styles.wellContainer}>

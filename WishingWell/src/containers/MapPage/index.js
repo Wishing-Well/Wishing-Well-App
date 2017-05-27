@@ -1,4 +1,4 @@
-
+/*jshint esversion: 6*/
 import React, { Component } from 'react';
 import Mapbox, { MapView, Annotation } from 'react-native-mapbox-gl';
 import {
@@ -8,6 +8,7 @@ import {
 import styles from './stylesheet';
 import { connect } from 'react-redux';
 import { mapkey }from '../../keys';
+import {Button} from 'react-native';
 
 Mapbox.setAccessToken(mapkey);
 
@@ -18,19 +19,28 @@ class MapPage extends Component {
         this.state = {
           userTrackingMode: Mapbox.userTrackingMode.follow,
           zoom: 17,
-          annotations: []
+          annotations: [],
+          rotate: 0
         };
     };
 
   static navigationOptions = {
     header: null,
-  }
+  };
 
   onRegionWillChange = (location) => {
     if (location.pitch < 60){
       this._map.setPitch(60);
     }
   };
+
+  handleCenter = () => {
+    console.log('hereee')
+    navigator.geolocation.getCurrentPosition( position => {
+      this._map.setCenterCoordinate(position.coords.latitude, position.coords.longitude);
+      console.log('thereee')
+    })
+  }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -40,9 +50,9 @@ class MapPage extends Component {
           ref={map => { this._map = map; }}
           userTrackingMode={this.state.userTrackingMode}
           compassIsHidden={true}
-          rotateEnabled={false}
+          rotateEnabled={true}
           pitchEnabled={false}
-          scrollEnabled={false}
+          scrollEnabled={true}
           style={styles.map}
           zoomEnabled={false}
           showsUserLocation={true}
@@ -50,10 +60,15 @@ class MapPage extends Component {
           initialDirection={0}
           styleURL={'mapbox://styles/ctsygiel/cj2wllwes001p2rpmb1yup02a'}
           onRegionWillChange={this.onRegionWillChange}
-          onOpenAnnotation={() => console.log(this)}
+          onOpenAnnotation={()=> navigate('WellPage', {well: this.props.allWells[0]})}
           logoIsHidden={true}
           attributionButtonIsHidden={true}
           annotations={this.props.allWells}
+        />
+        <Button
+        title="Center"
+        onPress={this.handleCenter}
+        style={{alignItems: 'center', justifyContent: 'center', position: 'absolute'}}
         />
 
       </View>

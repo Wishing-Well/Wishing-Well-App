@@ -47,7 +47,8 @@ API.reLogin()
   if(res.success) {
     dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
   }
-});
+})
+.catch(error => dispatch({type: types.LOG_OUT, error}));
 
 export const logout = () => dispatch => API.logout()
   .then(res => {

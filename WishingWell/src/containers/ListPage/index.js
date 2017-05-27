@@ -17,7 +17,7 @@ class ListPage extends Component {
     return (
       <View>
         {this.props.allWells.map(well => (
-            <TouchableOpacity onPress={()=> navigate()} key={well.id}>
+            <TouchableOpacity onPress={()=> navigate('WellPage', {well: well})} key={well.id}>
               <View>
                 <Text>
                   {well.title}

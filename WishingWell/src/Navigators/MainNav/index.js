@@ -4,6 +4,7 @@ import { TabBarBottom, TabNavigator } from "react-navigation";
 import {mainNav} from '../../routeConfig';
 
 const tabBarOptions = {
+  swipeEnabled: false,
   tabBarPosition: 'bottom',
   tabBarOptions: {
     pressColor: '#F2C71B',

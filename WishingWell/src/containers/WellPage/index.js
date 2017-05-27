@@ -8,6 +8,7 @@ import {
   Slider
 } from 'react-native';
 import { connect } from 'react-redux';
+import {donate} from '../../actions';
 
 class WellPage extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class WellPage extends Component {
             />
           <Button
             title={'Donate $' + this.state.custom_donation}
-            onPress={()=> this.props.donate(well.id, 500)}
+            onPress={()=> this.props.donate(well.id, this.state.custom_donation * 100)}
             color='#84DBEF'
             />
 
@@ -69,6 +70,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  donate: (well_id, amount) => dispatch(donate(well_id, amount))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WellPage)

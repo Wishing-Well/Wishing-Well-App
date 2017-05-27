@@ -93,11 +93,11 @@ API.getAllWells()
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
-export const makeDonation = (well_id, user_id, amount) => dispatch => API.makeDonation(well_id, user_id, amount)
+export const donate = (well_id, amount) => dispatch => API.donate(well_id, amount)
   .then(res => {
     console.log(res);
     if (res.success === true) {
-      dispatch({type: types.MAKE_DONATION, donation: res.donation});
+      //dispatch({type: types.MAKE_DONATION, donation: res.donation});
     } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.DONATION_FAIL, error}));

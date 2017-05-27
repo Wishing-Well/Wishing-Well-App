@@ -18,8 +18,7 @@ class CreateWellPage extends Component {
       title: '',
       time: 7,
       description: '',
-      funding_target: 1,
-      height: 0
+      funding_target: 1
     };
   }
 
@@ -45,7 +44,7 @@ class CreateWellPage extends Component {
           autoCorrect={false}
           />
           {this.props.wellTitleErr &&
-            (<Text>{this.props.errMessage}</Text>)
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
           <Text>{'Set your funding goal'}</Text>
           <Text>{'$' + this.state.funding_target}</Text>
@@ -67,14 +66,14 @@ class CreateWellPage extends Component {
         <TextInput
           multiLine={true}
           onChangeText={description => this.setState({description})}
-          onContentSizeChange={(event) => {
-            this.setState({height: event.nativeEvent.contentSize.height});
-            }}
-          style={{height: Math.max(35, this.state.height)}}
+          numberOfLines={4}
           value={this.state.description}
           placeholder="Description"
           maxLength={500}
           />
+          {this.props.wellDescErr &&
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
+          }
         <Button
           title="Submit Your Well"
           onPress={() => this.prepareWell(this.props.createWell)}

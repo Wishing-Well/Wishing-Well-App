@@ -110,6 +110,13 @@ export default (res, dispatch) => {
           message: 'Password length must be between 6 and 500 characters'
         }
       );
+    case error.LOGIN_INVALID:
+      return dispatch(
+        {
+          type: types.LOGIN_FAIL,
+          message: 'Sorry, that is an invalid username or password'
+        }
+      );
     default:
       return dispatch(
         {

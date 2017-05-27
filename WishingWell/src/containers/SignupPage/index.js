@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  Text,
   View,
   TextInput,
   Button
@@ -43,19 +44,29 @@ class SignupPage extends Component {
   };
 
   render() {
+    console.log(this.props)
     return(
       <View>
+         {this.props.signNameErr &&
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
+          }
         <TextInput
           onChangeText={(full_name)=> this.setState({full_name})}
           value={this.state.fullname}
           placeholder="Enter Full Name"
           />
+          {this.props.signEmailErr &&
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
+          }
         <TextInput
           onChangeText={(email)=> this.setState({email})}
           value={this.state.email}
           placeholder="Enter Email"
           keyboardType="email-address"
           />
+           {this.props.signPwErr &&
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
+          }
         <TextInput
           onChangeText={(password)=> this.setState({password})}
           secureTextEntry={this.state.togglePW}
@@ -75,7 +86,8 @@ const mapStateToProps = state => ({
   signEmailErr: state.errors.signEmailErr,
   signNameErr: state.errors.signNameErr,
   signPwErr: state.errors.signPwErr,
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  errMessage: state.errors.errMessage
 })
 
 const mapDispatchToProps = (dispatch) => ({

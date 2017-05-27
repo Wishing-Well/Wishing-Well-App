@@ -6,7 +6,8 @@ import {
   Button,
   StatusBar,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import {login, navigate, loginUser} from '../../actions';
@@ -37,10 +38,13 @@ class InitialPage extends Component {
   };
 
   render() {
+    console.log(this.props)
     const {navigate} = this.props.navigation;
     return (
-      <View
-        >
+      <View>
+         {this.props.loginErr &&
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
+          }
         <TextInput
           onChangeText={(email) => this.setState({email})}
           value={this.state.email}
@@ -69,7 +73,8 @@ const mapStateToProps = state => ({
   loggedIn: state.users.loggedIn,
   userInfo: state.users.userInfo,
   globalErr: state.errors.globalErr,
-  loginErr: state.errors.loginErr
+  loginErr: state.errors.loginErr,
+  errMessage: state.errors.errMessage
 })
 
 const mapDispatchToProps = (dispatch) => ({

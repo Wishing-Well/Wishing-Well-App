@@ -5,7 +5,6 @@ const initialState = {
   globalErr: false,
   wellTitleErr: false,
   wellDescErr: false,
-  wellFundErr: false,
   signEmailErr: false,
   signNameErr: false,
   signPwErr: false,
@@ -51,7 +50,7 @@ const ErrorReducers = (state = initialState, action) => {
         errMessage: action.message
       });
 
-    case types.LOGIN_ERROR:
+    case types.LOGIN_FAIL:
       return Object.assign({}, state, {
         loginErr: true,
         errMessage: action.message

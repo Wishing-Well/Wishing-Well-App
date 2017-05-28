@@ -8,6 +8,7 @@ import StorePage from './containers/StorePage';
 import LoginPage from './containers/LoginPage';
 import WellPage from './containers/WellPage';
 import GamePage from './containers/GamePage';
+import StripePage from './containers/StripePage';
 import DonationsPage from './containers/DonationsPage';
 import CreateWellPage from './containers/CreateWellPage';
 
@@ -15,13 +16,15 @@ import CreateWellPage from './containers/CreateWellPage';
 export const mapNav = {
   Home: {screen: MapPage},
   WellPage: {screen: WellPage},
-  GamePage: {screen: GamePage}
+  GamePage: {screen: GamePage},
+  StripePage: {screen: StripePage}
 };
 
 export const listNav = {
   Home: {screen: ListPage},
   WellPage: {screen: WellPage},
-  GamePage: {screen: GamePage}
+  GamePage: {screen: GamePage},
+  StripePage: {screen: StripePage}
 };
 
 export const profileNav = {

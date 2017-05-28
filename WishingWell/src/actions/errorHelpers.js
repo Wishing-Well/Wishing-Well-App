@@ -117,6 +117,27 @@ export default (res, dispatch) => {
           message: 'Sorry, that is an invalid username or password'
         }
       );
+    case error.USER_DONATED_NEGATIVE_OR_ZERO_MONEY:
+      return dispatch(
+        {
+          type: types.DONATION_FAIL,
+          message: 'Sorry, you must donate at least $1 USD'
+        }
+      );
+    case error.WELL_DOES_NOT_EXIST:
+      return dispatch(
+        {
+          type: types.DONATION_FAIL,
+          message: 'Sorry, the well you are donating to does not exist'
+        }
+      );
+    case error.USER_NOT_ENOUGH_MONEY:
+      return dispatch(
+        {
+          type: types.DONATION_FAIL,
+          message: 'Sorry, you have insufficient funds'
+        }
+      );
     default:
       return dispatch(
         {

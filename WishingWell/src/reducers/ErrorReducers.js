@@ -9,6 +9,7 @@ const initialState = {
   signNameErr: false,
   signPwErr: false,
   loginErr: false,
+  donationErr: false,
   errMessage: ''
 };
 
@@ -53,6 +54,12 @@ const ErrorReducers = (state = initialState, action) => {
     case types.LOGIN_FAIL:
       return Object.assign({}, state, {
         loginErr: true,
+        errMessage: action.message
+      });
+
+    case types.DONATION_FAIL:
+      return Object.assign({}, state, {
+        donationErr: true,
         errMessage: action.message
       });
 

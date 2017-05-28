@@ -9,7 +9,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import {createWell, closeErrors} from '../../actions';
-import { styles } from './stylesheet'
+import { styles } from './stylesheet';
+import stripe from 'tipsi-stripe';
+import {STRIPE_KEY} from '../../keys';
+
+stripe.init({
+  publishableKey: STRIPE_KEY
+});
 
 class CreateWellPage extends Component {
   constructor(props) {
@@ -18,7 +24,11 @@ class CreateWellPage extends Component {
       title: '',
       time: 7,
       description: '',
-      funding_target: 1
+      funding_target: 1,
+      readyToSubmit: false,
+      accountNumber: '',
+      routingNumber: '',
+      tokenId: ''
     };
   }
 
@@ -28,12 +38,30 @@ class CreateWellPage extends Component {
         title: this.state.title,
         description: this.state.description,
         location: `${position.coords.latitude},${position.coords.longitude}`,
-        funding_target: Number(this.state.funding_target) * 100
+        funding_target: Number(this.state.funding_target) * 100,
+        tokenId: this.state.tokenId
       });
     }, error => {
       console.error(error);
     });
   }
+
+  handleBankInfo = () => {
+    stripe.createTokenWithBankAccount({
+      accountNumber: this.state.accountNumber,
+      routingNumber: this.state.routingNumber,
+      countryCode: 'us',
+      currency: 'usd'
+    })
+      .then(token => {
+        console.log(token);
+        this.setState({readyToSubmit: true, tokenId: token.tokenId})
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   render() {
     return (
       <View>
@@ -71,13 +99,33 @@ class CreateWellPage extends Component {
           placeholder="Description"
           maxLength={500}
           />
+        <TextInput
+          value={this.state.accountNumber}
+          placeholder="Bank Account Number"
+          onChangeText={accountNumber => this.setState({accountNumber})}
+          />
+        <TextInput
+          value={this.state.routingNumber}
+          placeholder="Bank Routing Number"
+          onChangeText={routingNumber => this.setState({routingNumber})}
+          />
+        {
+          !this.state.readyToSubmit &&
+          <Button
+            title="Validate Information"
+            onPress={this.handleBankInfo}
+            />
+        }
           {this.props.wellDescErr &&
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
-        <Button
-          title="Submit Your Well"
-          onPress={() => this.prepareWell(this.props.createWell)}
-          />
+        {
+          this.state.readyToSubmit &&
+          <Button
+            title="Submit Your Well"
+            onPress={() => this.prepareWell(this.props.createWell)}
+            />
+        }
       </View>
     );
   }

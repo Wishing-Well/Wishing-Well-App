@@ -15,7 +15,8 @@
     "react-navigation": "^1.0.0-beta.9",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "tipsi-stripe": "^2.3.0"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

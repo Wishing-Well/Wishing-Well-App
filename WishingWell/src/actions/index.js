@@ -21,9 +21,11 @@ export const login = (email, password) => dispatch =>
   export const signup = userInfo => dispatch =>
     API.signup(userInfo)
     .then(res => {
+      console.log(res);
       if (res.success) {
         API.login(userInfo.email, userInfo.password)
         .then(res => {
+          console.log(res);
           if(res.success) {
             AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'], (err) => {
               if (err) failure(err, dispatch);
@@ -93,7 +95,7 @@ API.getAllWells()
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
-export const donate = (well_id, amount) => dispatch => API.donate(well_id, amount)
+export const donate = (well_id, amount, tokenId) => dispatch => API.donate(well_id, amount, tokenId)
   .then(res => {
     console.log(res);
     if (res.success === true) {

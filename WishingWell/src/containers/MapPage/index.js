@@ -35,10 +35,8 @@ class MapPage extends Component {
   };
 
   handleCenter = () => {
-    console.log('hereee')
     navigator.geolocation.getCurrentPosition( position => {
       this._map.setCenterCoordinate(position.coords.latitude, position.coords.longitude);
-      console.log('thereee')
     })
   }
 

@@ -5,6 +5,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
+import  styles  from './styles';
 
 class ListPage extends Component {
 
@@ -15,10 +16,13 @@ class ListPage extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View>
+      <View style={styles.wholeContainer}>
         {this.props.allWells.map(well => (
             <TouchableOpacity onPress={()=> navigate('WellPage', {well: well})} key={well.id}>
               <View>
+                <View style={styles.progressBarContainer}>
+                  <View style ={styles.progressBar} />
+                </View>
                 <Text>
                   {well.title}
                 </Text>

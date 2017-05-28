@@ -20,6 +20,7 @@ class ProfilePage extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
+    console.log('props',this.props)
     return(
       <View style={styles.wholeContainer}>
         <View style={styles.infoContainer}>
@@ -36,7 +37,7 @@ class ProfilePage extends Component {
             Inventory: ${this.props.userInfo.coin_inventory / 100}
           </Text>
           <Text style={styles.allText}>
-            Donated: ${this.props.userInfo.amount_donated / 100}
+            Donated: ${this.props.userInfo.donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}
           </Text>
         </View>
         <View style={styles.wellContainer}>

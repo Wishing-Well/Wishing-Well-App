@@ -36,7 +36,7 @@ class StripePage extends Component {
     stripe.createTokenWithCard(this.state.params)
       .then(token => {
         console.log(token);
-        this.props.donate(this.props.well_id, this.props.amount, token.tokenId);
+        this.props.navigation.state.params.donate(this.props.navigation.state.params.well_id, this.props.navigation.state.params.amount, token.tokenId);
       });
   };
 

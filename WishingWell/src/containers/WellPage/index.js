@@ -39,12 +39,12 @@ class WellPage extends Component {
         <View>
           <Button
             title="Donate $1"
-            onPress={()=> navigate('StripePage', {well_id: well.id, amount: 100})}
+            onPress={()=> navigate('StripePage', {well_id: well.id, amount: 100, donate:this.props.donate})}
             color='#84DBEF'
             />
           <Button
             title="Donate $5"
-            onPress={()=> navigate('StripePage', {well_id: well.id, amount: 500})}
+            onPress={()=> navigate('StripePage', {well_id: well.id, amount: 500, donate:this.props.donate})}
             color='#84DBEF'
             />
           <Text>{'Donate a custom amount'}</Text>
@@ -57,7 +57,7 @@ class WellPage extends Component {
             />
           <Button
             title={'Donate $' + this.state.custom_donation}
-            onPress={()=> navigate('StripePage', {well_id: well.id, amount: this.state.custom_donation * 100})}
+            onPress={()=> navigate('StripePage', {well_id: well.id, amount: this.state.custom_donation * 100, donate:this.props.donate})}
             color='#84DBEF'
             />
 

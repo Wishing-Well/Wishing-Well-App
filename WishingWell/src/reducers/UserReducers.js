@@ -32,6 +32,11 @@ const UserReducers = (state = initialState, action) => {
         loggedIn: false,
         userInfo: null
       });
+    case types.ADD_USER_WELL:
+    case types.MAKE_DONATION:
+      return Object.assign({}, state, {
+        userInfo: action.userInfo
+      });
 
     default:
       return state;

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Mapbox, { MapView, Annotation } from 'react-native-mapbox-gl';
 import {
   Text,
+  TouchableOpacity,
+  Image,
   View,
 } from 'react-native';
 import styles from './stylesheet';
@@ -20,12 +22,17 @@ class MapPage extends Component {
           userTrackingMode: Mapbox.userTrackingMode.follow,
           zoom: 17,
           annotations: [],
-          rotate: 0
         };
     };
 
   static navigationOptions = {
     header: null,
+    tabBarIcon: () => (
+      <Image
+        source={require('./map.png')}
+        style={styles.icon}
+      />
+      )
   };
 
   onRegionWillChange = (location) => {
@@ -63,11 +70,12 @@ class MapPage extends Component {
           attributionButtonIsHidden={true}
           annotations={this.props.allWells}
         />
-        <Button
-        title="Center"
-        onPress={this.handleCenter}
-        style={{alignItems: 'center', justifyContent: 'center', position: 'absolute'}}
-        />
+        <TouchableOpacity onPress={this.handleCenter} style={styles.locator}>
+          <Image
+            source={require('./locator.png')}
+            style={styles.locatorImage}
+          />
+        </TouchableOpacity>
 
       </View>
     );

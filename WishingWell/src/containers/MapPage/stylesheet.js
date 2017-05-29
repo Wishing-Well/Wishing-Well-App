@@ -12,5 +12,18 @@ export default StyleSheet.create({
   },
   scrollView: {
     flex: 1
+  },
+  icon: {
+    width: 22,
+    height: 22
+  },
+  locator: {
+    position: 'absolute',
+    top: '5%',
+    right: '5%'
+  },
+  locatorImage: {
+    width: 50,
+    height: 50
   }
 });

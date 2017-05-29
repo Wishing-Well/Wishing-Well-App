@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import {createWell, closeErrors} from '../../actions';
-import { styles } from './stylesheet';
+import styles from './stylesheet';
 import stripe from 'tipsi-stripe';
 import {STRIPE_KEY} from '../../keys';
 
@@ -34,7 +34,6 @@ class CreateWellPage extends Component {
   }
 
   static navigationOptions = {
-    header: null,
     tabBarIcon: () => (
       <Image
         source={require('../ProfilePage/profile.png')}

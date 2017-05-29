@@ -15,6 +15,8 @@ const tabBarOptions = {
     style: {
       backgroundColor: '#65D0E8',
     },
+    showIcon: true,
+    showLabel: false
   }
 };
 

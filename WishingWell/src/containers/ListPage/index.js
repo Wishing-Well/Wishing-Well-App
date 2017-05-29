@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {
   Text,
+  Image,
   View,
   TouchableOpacity
 } from 'react-native';
@@ -11,6 +12,12 @@ class ListPage extends Component {
 
   static navigationOptions = {
     header: null,
+    tabBarIcon: () => (
+      <Image
+        source={require('./list.png')}
+        style={styles.icon}
+      />
+      )
   }
 
   render() {

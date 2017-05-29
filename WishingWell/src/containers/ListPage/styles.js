@@ -41,5 +41,9 @@ export default StyleSheet.create({
   allText: {
     color: 'oldlace',
     textAlign: 'center'
+  },
+  icon: {
+    width: 22,
+    height: 22
   }
 });

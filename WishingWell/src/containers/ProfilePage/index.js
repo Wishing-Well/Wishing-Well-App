@@ -25,33 +25,28 @@ class ProfilePage extends Component {
     )
   }
 
-  render() {
-    const {navigate} = this.props.navigation;
-    console.log('props',this.props)
-    return(
-      <View style={styles.wholeContainer}>
-        <View style={styles.infoContainer}>
-          <Text style={styles.pageTitle}>
-            PROFILE
-          </Text>
-          <Text style={styles.allText}>
-            {/*Hello {this.props.userInfo.full_name}*/}
-          </Text>
-          <Text style={styles.allText}>
-            {/*Account E-Mail: {this.props.userInfo.email}*/}
-          </Text>
-          <Text style={styles.allText}>
-            {/*Inventory: ${this.props.userInfo.coin_inventory / 100}*/}
-          </Text>
-          <Text style={styles.allText}>
-            {/*Donated: ${this.props.userInfo.donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}*/}
-          </Text>
-        </View>
+  renderWellInfo = () => {
+    console.log(this.props.userInfo)
+    if(this.props.userInfo.Wells.length < 0) {
+      return (
         <View style={styles.wellContainer}>
           <TouchableOpacity>
             <Text style={styles.allText}>
               Your Well
             </Text>
+            <Text style={styles.allText}>
+              {this.props.userInfo.wells[0].title}
+            </Text>
+            <Text style={styles.allText}>
+              {this.props.userInfo.wells[0].description.splice(0, 30)}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.wellContainer}>
+          <TouchableOpacity>
             <Text style={styles.allText}>
               {'It is free to create a well'}
             </Text>
@@ -60,6 +55,34 @@ class ProfilePage extends Component {
             </Text>
           </TouchableOpacity>
         </View>
+      )
+    }
+  }
+
+  render() {
+    const {navigate} = this.props.navigation;
+    const {userInfo} = this.props
+    console.log('props',this.props)
+    return(
+      <View style={styles.wholeContainer}>
+        <View style={styles.infoContainer}>
+          <Text style={styles.pageTitle}>
+            PROFILE
+          </Text>
+          <Text style={styles.allText}>
+            Hello {userInfo.full_name}
+          </Text>
+          <Text style={styles.allText}>
+            Account E-Mail: {userInfo.email}
+          </Text>
+          <Text style={styles.allText}>
+            Inventory: ${userInfo.coin_inventory / 100}
+          </Text>
+          <Text style={styles.allText}>
+            Donated: ${userInfo.Donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}
+          </Text>
+        </View>
+        {this.renderWellInfo()}
         <View style={styles.buttonContainer}>
           <Button
             title="See Your Donations"
@@ -84,8 +107,7 @@ class ProfilePage extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.users.userInfo,
-  globalErr: state.errors.globalErr,
-  user_well: state.wells.user_well
+  globalErr: state.errors.globalErr
 })
 
 const mapDispatchToProps = (dispatch) => ({

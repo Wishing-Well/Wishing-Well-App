@@ -64,34 +64,19 @@ export const createWell = wellInfo => dispatch => API.createWell(wellInfo)
   .then(res => {
     console.log(res);
     if (res.success === true) {
-      dispatch({type: types.ADD_WELL, well: prepareAllWells([res.well])});
+      dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
+      dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
     } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.CREATE_WELL_FAIL, error}));
 
-export const loadApp = (id) => dispatch =>
+export const loadApp = () => dispatch =>
 API.getAllWells()
   .then((res) => {
     console.log(res);
     if (res.success === true) {
-      dispatch({type: types.ALL_WELLS, wells: prepareAllWells(res.wells)});
+      dispatch({type: types.ALL_WELLS, wells: prepareWells(res.wells)});
     } else {failure(res, dispatch);}
-    if (id !== undefined) {
-      API.getUserWell(id)
-        .then((res) => {
-          console.log(res);
-          if (res.success === true) {
-            dispatch({type: types.USER_WELL, well: res.well});
-          } else {failure(res, dispatch);}
-          /*API.getUserDonations(id)
-            .then(res => {
-              console.log(res);
-              if (res.success === true) {
-                dispatch({type: types.USER_DONATIONS, donations: res.donations});
-              } else {failure(res, dispatch);}
-            });*/
-        });
-    }
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
@@ -99,12 +84,12 @@ export const donate = (well_id, amount, tokenId) => dispatch => API.donate(well_
   .then(res => {
     console.log(res);
     if (res.success === true) {
-      //dispatch({type: types.MAKE_DONATION, donation: res.donation});
+      dispatch({type: types.MAKE_DONATION, userInfo: res.user});
     } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.DONATION_FAIL, error}));
 
-const prepareAllWells = wellsArray => {
+const prepareWells = wellsArray => {
   console.log(wellsArray);
   return wellsArray.map(
     well => (

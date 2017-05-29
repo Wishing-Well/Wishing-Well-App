@@ -11,7 +11,6 @@ class App extends Component {
   componentDidMount() {
     return AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'])
       .then(stores => {
-        console.log(stores);
         if (stores[2][1] == 'true') {
           this.props.loginUser();
           this.props.loadApp(stores[1][1]);

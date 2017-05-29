@@ -35,16 +35,16 @@ class ProfilePage extends Component {
             PROFILE
           </Text>
           <Text style={styles.allText}>
-            {/*Hello {this.props.userInfo.full_name}*/}
+            Hello {this.props.userInfo.full_name}
           </Text>
           <Text style={styles.allText}>
-            {/*Account E-Mail: {this.props.userInfo.email}*/}
+            Account E-Mail: {this.props.userInfo.email}
           </Text>
           <Text style={styles.allText}>
-            {/*Inventory: ${this.props.userInfo.coin_inventory / 100}*/}
+            Inventory: ${this.props.userInfo.coin_inventory / 100}
           </Text>
           <Text style={styles.allText}>
-            {/*Donated: ${this.props.userInfo.donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}*/}
+            Donated: ${this.props.userInfo.donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}
           </Text>
         </View>
         <View style={styles.wellContainer}>

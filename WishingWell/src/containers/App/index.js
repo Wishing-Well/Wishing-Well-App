@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   render() {
-    if(!this.props.loggedIn) {
+    if(this.props.loggedIn) {
       return (
         <MainNav />
       );

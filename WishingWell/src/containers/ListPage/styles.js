@@ -17,7 +17,6 @@ export default StyleSheet.create({
   },
   progressBar: {
     height: 16,
-    width: 100,
     backgroundColor: 'purple'
   },
   infoContainer: {

@@ -80,6 +80,7 @@ class ProfilePage extends Component {
           </Text>
           <Text style={styles.allText}>
             Donated: ${userInfo.Donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}
+
           </Text>
         </View>
         {this.renderWellInfo()}

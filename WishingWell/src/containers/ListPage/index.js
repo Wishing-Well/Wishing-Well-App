@@ -8,6 +8,8 @@ import {
 import { connect } from 'react-redux';
 import  styles  from './styles';
 
+let width = 300;
+
 class ListPage extends Component {
 
   static navigationOptions = {
@@ -28,7 +30,7 @@ class ListPage extends Component {
             <TouchableOpacity onPress={()=> navigate('WellPage', {well: well})} key={well.id}>
               <View>
                 <View style={styles.progressBarContainer}>
-                  <View style ={styles.progressBar} />
+                  <View style ={[styles.progressBar, {width: `${well.current_amount / well.funding_target * 100}%`}]} />
                 </View>
                 <Text>
                   {well.title}

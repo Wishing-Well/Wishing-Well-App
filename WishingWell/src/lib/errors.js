@@ -1,5 +1,5 @@
  /*jshint esversion: 6*/
-export const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
+export const USER_NOT_AUTHENTICATED = 'USER_NOT_AUTHENTICATED';
 
 // title validation
 export const TITLE_FORBIDDEN_WORD = 'TITLE_FORBIDDEN_WORD';

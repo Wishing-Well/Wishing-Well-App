@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   Text,
   TextInput,
+  Image,
   View,
   Picker,
   Button,
@@ -30,6 +31,16 @@ class CreateWellPage extends Component {
       routingNumber: '',
       tokenId: ''
     };
+  }
+
+  static navigationOptions = {
+    header: null,
+    tabBarIcon: () => (
+      <Image
+        source={require('../ProfilePage/profile.png')}
+        style={styles.icon}
+      />
+    )
   }
 
   prepareWell = (done) => {

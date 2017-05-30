@@ -19,7 +19,7 @@ class ProfilePage extends Component {
     header: null,
     tabBarIcon: () => (
       <Image
-        source={require('./profile.png')}
+        source={require('../../assets/profile.png')}
         style={styles.icon}
       />
     )

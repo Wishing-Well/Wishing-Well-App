@@ -16,7 +16,7 @@ class ListPage extends Component {
     header: null,
     tabBarIcon: () => (
       <Image
-        source={require('./list.png')}
+        source={require('../../assets/list.png')}
         style={styles.icon}
       />
       )

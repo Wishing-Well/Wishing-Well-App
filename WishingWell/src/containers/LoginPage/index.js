@@ -7,9 +7,11 @@ import {
   StatusBar,
   Alert,
   AsyncStorage,
-  Text
+  Text,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
+import styles from './styles.js';
 import {login, navigate, loginUser} from '../../actions';
 
 class InitialPage extends Component {
@@ -40,21 +42,36 @@ class InitialPage extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View>
+      <View style={styles.container}>
          {this.props.loginErr &&
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
-        <TextInput
-          onChangeText={(email) => this.setState({email})}
-          value={this.state.email}
-          placeholder="Email"
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../../assets/Coin.png')}
           />
-        <TextInput
-          onChangeText={(password) => this.setState({password})}
-          value={this.state.password}
-          secureTextEntry={true}
-          placeholder="Password"
-          />
+        </View>
+        <View style={styles.formContainer}>
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            underlineColorAndroid='rgba(0,0,0,0)'
+            style={styles.formInput}
+            onChangeText={(email) => this.setState({email})}
+            value={this.state.email}
+            />
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            underlineColorAndroid='rgba(0,0,0,0)'
+            tintColor='#FFF'
+            style={styles.formInput}
+            onChangeText={(password) => this.setState({password})}
+            value={this.state.password}
+            secureTextEntry={true}
+            />
+        </View >
         <Button
           title="Log In"
           onPress={this.handleLogin}

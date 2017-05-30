@@ -3,9 +3,13 @@ import {
   Text,
   View,
   TextInput,
-  Button
+  Button,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 import { connect } from 'react-redux';
+import styles from './styles.js';
 import {signup} from '../../actions';
 
 class SignupPage extends Component {
@@ -17,6 +21,14 @@ class SignupPage extends Component {
       password: '',
       togglePW: true
     };
+  }
+
+  static navigationOptions= {
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#65D0E8',
+      elevation: 0
+    }
   }
 
   componentDidMount() {
@@ -45,11 +57,25 @@ class SignupPage extends Component {
 
   render() {
     return(
-      <View>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.container}
+        keyboardVerticalOffset={
+        Platform.select({
+           ios: () => 0,
+           android: () => -150
+        })()
+      }>
          {this.props.signNameErr &&
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
+      <View style={styles.formContainer}>
         <TextInput
+          style={styles.formInput}
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid='rgba(0,0,0,0)'
+          autoCorrect={false}
+          keyboardType="email-address"
           onChangeText={(full_name)=> this.setState({full_name})}
           value={this.state.fullname}
           placeholder="Enter Full Name"
@@ -58,6 +84,12 @@ class SignupPage extends Component {
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
         <TextInput
+          style={styles.formInput}
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid='rgba(0,0,0,0)'
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
           onChangeText={(email)=> this.setState({email})}
           value={this.state.email}
           placeholder="Enter Email"
@@ -67,16 +99,20 @@ class SignupPage extends Component {
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
         <TextInput
+          style={styles.formInput}
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          underlineColorAndroid='rgba(0,0,0,0)'
+          autoCorrect={false}
           onChangeText={(password)=> this.setState({password})}
           secureTextEntry={this.state.togglePW}
           value={this.state.password}
           placeholder="Create Password (Min. 6 Char)"
           />
-        <Button
-          title="Sign Up"
-          onPress={this.handleSignup}
-          />
-      </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={this.handleSignup}>
+          <Text style={styles.buttonText}>SIGN UP</Text>
+        </TouchableOpacity>
+      </View >
+      </KeyboardAvoidingView>
     )
   }
 }

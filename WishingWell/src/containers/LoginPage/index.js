@@ -46,9 +46,6 @@ class InitialPage extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar backgroundColor="#65D0E8"/>
-         {this.props.loginErr &&
-            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
-          }
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
@@ -80,6 +77,9 @@ class InitialPage extends Component {
             secureTextEntry={true}
             ref={(input) => this.passwordInput = input}
             />
+          {this.props.loginErr &&
+            (<Text style={{color: '#F0766A', textAlign: 'center', paddingBottom: 10}}>{this.props.errMessage}</Text>)
+          }
           <TouchableOpacity style={styles.buttonContainer} onPress={this.handleLogin}>
             <Text style={styles.buttonText}>LOGIN</Text>
           </TouchableOpacity>

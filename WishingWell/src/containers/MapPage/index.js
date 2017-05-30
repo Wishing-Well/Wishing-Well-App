@@ -29,7 +29,7 @@ class MapPage extends Component {
     header: null,
     tabBarIcon: () => (
       <Image
-        source={require('./map.png')}
+        source={require('../../assets/map.png')}
         style={styles.icon}
       />
       )
@@ -72,7 +72,7 @@ class MapPage extends Component {
         />
         <TouchableOpacity onPress={this.handleCenter} style={styles.locator}>
           <Image
-            source={require('./locator.png')}
+            source={require('../../assets/locator.png')}
             style={styles.locatorImage}
           />
         </TouchableOpacity>

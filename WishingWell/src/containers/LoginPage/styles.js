@@ -21,10 +21,22 @@ export default StyleSheet.create({
     padding: 20
   },
   formInput: {
+    borderRadius: 5,
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 20,
+    marginBottom: 10,
     color: '#FFF',
     paddingHorizontal: 10
+  },
+  buttonContainer: {
+    borderRadius: 5,
+    marginBottom: 10,
+    backgroundColor: '#3BA8C1',
+    paddingVertical: 10
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#FFF',
+    fontWeight: '700'
   }
 });

@@ -8,7 +8,9 @@ import {
   Alert,
   AsyncStorage,
   Text,
-  Image
+  Image,
+  KeyboardAvoidingView,
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles.js';
@@ -42,7 +44,8 @@ class InitialPage extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <StatusBar backgroundColor="#65D0E8"/>
          {this.props.loginErr &&
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
@@ -57,30 +60,34 @@ class InitialPage extends Component {
             placeholder="Email"
             placeholderTextColor="rgba(255,255,255,0.7)"
             underlineColorAndroid='rgba(0,0,0,0)'
+            returnKeyType="next"
             style={styles.formInput}
+            onSubmitEditing={()=> this.passwordInput.focus()}
             onChangeText={(email) => this.setState({email})}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
             value={this.state.email}
             />
           <TextInput
             placeholder="Password"
             placeholderTextColor="rgba(255,255,255,0.7)"
             underlineColorAndroid='rgba(0,0,0,0)'
-            tintColor='#FFF'
+            returnKeyType="go"
             style={styles.formInput}
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
             secureTextEntry={true}
+            ref={(input) => this.passwordInput = input}
             />
+          <TouchableOpacity style={styles.buttonContainer} onPress={this.handleLogin}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigate('Sign Up')}>
+           <Text style={styles.buttonText}>SIGN UP</Text>
+          </TouchableOpacity>
         </View >
-        <Button
-          title="Log In"
-          onPress={this.handleLogin}
-          />
-        <Button
-          title="Sign Up"
-          onPress={() => navigate('Sign Up')}
-          />
-      </View>
+    </KeyboardAvoidingView>
     )
   }
 }

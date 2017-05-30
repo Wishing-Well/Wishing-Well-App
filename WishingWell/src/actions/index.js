@@ -80,7 +80,7 @@ API.getAllWells()
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
-export const donate = (well_id, amount, tokenId) => dispatch => API.donate(well_id, amount, tokenId)
+export const donate = (well_id, amount, token) => dispatch => API.donate(well_id, amount, token)
   .then(res => {
     console.log(res);
     if (res.success === true) {

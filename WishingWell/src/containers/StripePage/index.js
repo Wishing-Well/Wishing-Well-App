@@ -36,7 +36,7 @@ class StripePage extends Component {
     stripe.createTokenWithCard(this.state.params)
       .then(token => {
         console.log(token);
-        this.props.navigation.state.params.donate(this.props.navigation.state.params.well_id, this.props.navigation.state.params.amount, token.tokenId);
+        this.props.navigation.state.params.donate(this.props.navigation.state.params.well_id, this.props.navigation.state.params.amount, token);
       });
   };
 
@@ -48,8 +48,8 @@ class StripePage extends Component {
           cursorColor={"blue"}
           textErrorColor={"red"}
           placeholderColor={"green"}
-          numberPlaceholder={"00"}
-          expirationPlaceholder={"0"}
+          numberPlaceholder={""}
+          expirationPlaceholder={""}
           cvcPlaceholder={"-"}
           disabled={false}
           onParamsChange={this.handleFieldParamsChange}

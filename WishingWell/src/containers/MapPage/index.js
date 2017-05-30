@@ -65,7 +65,7 @@ class MapPage extends Component {
           initialDirection={0}
           styleURL={'mapbox://styles/ctsygiel/cj2wllwes001p2rpmb1yup02a'}
           onRegionWillChange={this.onRegionWillChange}
-          onOpenAnnotation={()=> navigate('WellPage', {well: this.props.allWells[0]})}
+          onOpenAnnotation={(event)=> navigate('WellPage', {well: this.props.allWells.filter(well => well.id === event.id)[0]})}
           logoIsHidden={true}
           attributionButtonIsHidden={true}
           annotations={this.props.allWells}

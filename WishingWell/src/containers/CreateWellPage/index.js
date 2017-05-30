@@ -64,7 +64,6 @@ class CreateWellPage extends Component {
       currency: 'usd'
     })
       .then(token => {
-        console.log(token);
         this.setState({readyToSubmit: true, tokenId: token.tokenId})
       })
       .catch(error => {

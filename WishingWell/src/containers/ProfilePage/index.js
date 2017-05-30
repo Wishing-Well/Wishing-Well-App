@@ -27,7 +27,7 @@ class ProfilePage extends Component {
 
   renderWellInfo = () => {
     console.log(this.props.userInfo)
-    if(this.props.userInfo.Wells.length < 0) {
+    if(this.props.userInfo.Wells.length > 0) {
       return (
         <View style={styles.wellContainer}>
           <TouchableOpacity>
@@ -35,10 +35,10 @@ class ProfilePage extends Component {
               Your Well
             </Text>
             <Text style={styles.allText}>
-              {this.props.userInfo.wells[0].title}
+              {this.props.userInfo.Wells[0].title}
             </Text>
             <Text style={styles.allText}>
-              {this.props.userInfo.wells[0].description.splice(0, 30)}
+              {this.props.userInfo.Wells[0].description}
             </Text>
           </TouchableOpacity>
         </View>

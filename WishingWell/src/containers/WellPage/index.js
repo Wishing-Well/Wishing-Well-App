@@ -72,7 +72,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  donate: (well_id, amount) => dispatch(donate(well_id, amount))
+  donate: (well_id, amount, token) => dispatch(donate(well_id, amount, token))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WellPage)

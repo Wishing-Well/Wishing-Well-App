@@ -59,7 +59,6 @@ class InitialPage extends Component {
             underlineColorAndroid='rgba(0,0,0,0)'
             returnKeyType="next"
             style={styles.formInput}
-            onSubmitEditing={()=> this.passwordInput.focus()}
             onChangeText={(email) => this.setState({email})}
             keyboardType="email-address"
             autoCapitalize="none"
@@ -75,7 +74,6 @@ class InitialPage extends Component {
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
             secureTextEntry={true}
-            ref={(input) => this.passwordInput = input}
             />
           {this.props.loginErr &&
             (<Text style={{color: '#F0766A', textAlign: 'center', paddingBottom: 10}}>{this.props.errMessage}</Text>)

@@ -6,7 +6,8 @@ import {
   View,
   Picker,
   Button,
-  Slider
+  Slider,
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import {createWell, closeErrors} from '../../actions';
@@ -29,7 +30,7 @@ class CreateWellPage extends Component {
       readyToSubmit: false,
       accountNumber: '',
       routingNumber: '',
-      tokenId: ''
+      token: ''
     };
   }
 
@@ -49,7 +50,7 @@ class CreateWellPage extends Component {
         description: this.state.description,
         location: `${position.coords.latitude},${position.coords.longitude}`,
         funding_target: Number(this.state.funding_target) * 100,
-        tokenId: this.state.tokenId
+        token: this.state.token
       });
     }, error => {
       console.error(error);
@@ -64,7 +65,8 @@ class CreateWellPage extends Component {
       currency: 'usd'
     })
       .then(token => {
-        this.setState({readyToSubmit: true, tokenId: token.tokenId})
+        console.log(token);
+        this.setState({readyToSubmit: true, token: token})
       })
       .catch(error => {
         console.log(error)
@@ -73,7 +75,7 @@ class CreateWellPage extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <TextInput
           value={this.state.title}
           placeholder="Title of your Well"
@@ -135,7 +137,7 @@ class CreateWellPage extends Component {
             onPress={() => this.prepareWell(this.props.createWell)}
             />
         }
-      </View>
+      </ScrollView>
     );
   }
 }

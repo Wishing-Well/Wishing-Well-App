@@ -11,12 +11,19 @@ import {makeCharge} from '../../actions';
 
 class StorePage extends Component {
 
+  static navigationOptions = {
+    header: null,
+    tabBarIcon: () => (
+      <Image
+        source={require('../../assets/shop.png')}
+        style={styles.icon}
+      />
+      )
+  }
+
   constructor(props) {
     super(props);
   }
-  static navigationOptions = {
-    header: null
-  };
 
 
 
@@ -25,8 +32,8 @@ class StorePage extends Component {
     return (
         <View style={styles.wholePage}>
           <View style={styles.textContainer}>
-            <Text style={styles.title}>Wellit Shop</Text>
-            <Text style={styles.subtitle}>Buy Your Tokens</Text>
+            <Text style={styles.title}>Buy some coins</Text>
+            <Text style={styles.subtitle}>Discover wells around you. Toss them in to donate.</Text>
           </View>
           <View style={styles.firstRow}>
             <TouchableOpacity
@@ -35,8 +42,9 @@ class StorePage extends Component {
               >
               <Image
                 style={styles.tenPic}
-                source={require('../../assets/ten_coin.png')}
+                source={require('../../assets/10_Coin.png')}
               />
+              <Text style={styles.coinText}>$3</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.fiftyDollars}
@@ -44,8 +52,9 @@ class StorePage extends Component {
               >
               <Image
                 style={styles.fiftyPic}
-                source={require('../../assets/fifty_coin.png')}
+                source={require('../../assets/50_Coin.png')}
               />
+              <Text style={styles.coinText}>$5</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.secondRow}>
@@ -55,8 +64,9 @@ class StorePage extends Component {
               >
               <Image
                 style={styles.hundredPic}
-                source={require('../../assets/hundred_coin.png')}
+                source={require('../../assets/100_Coin.png')}
               />
+              <Text style={styles.coinText}>$10</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -12,6 +12,7 @@ stripe.init({
 const styles = StyleSheet.create({
   field: {
     width: '100%',
+    height: 200,
     color: '#449aeb',
     borderColor: '#000',
     borderWidth: 1,
@@ -36,7 +37,7 @@ class StripePage extends Component {
     stripe.createTokenWithCard(this.state.params)
       .then(token => {
         console.log(token);
-        this.props.navigation.state.params.makeCharge(this.props.navigation.state.params.amount, token);
+        this.props.navigation.state.params.makeCharge(this.props.navigation.state.params.well_id, this.props.navigation.state.params.amount, token);
       });
   };
 

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   View,
+  StatusBar
 } from 'react-native';
 import styles from './stylesheet';
 import { connect } from 'react-redux';

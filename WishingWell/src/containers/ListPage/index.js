@@ -27,13 +27,13 @@ class ListPage extends Component {
       <View style={styles.wholeContainer}>
       <StatusBar backgroundColor="#001b21"/>
         {this.props.allWells.map(well => (
-            <TouchableOpacity onPress={()=> navigate('WellPage', {well: well})} key={well.id}>
+            <TouchableOpacity onPress={()=> navigate('WellDescription', {well: well})} key={well.id}>
               <View>
                 <Text style={styles.titleText}>
                   {well.title}
                 </Text>
                 <Text style={styles.wellText}>
-                  Funded: ${well.current_amount} / ${well.funding_target}
+                  Funded: ${(well.current_amount / 100).toFixed(2)} / ${(well.funding_target / 100).toFixed(2)}
                 </Text>
                 <View style={styles.progressBarContainer}>
                   <View style ={[styles.progressBar, {width: `${well.current_amount / well.funding_target * 100}%`}]} />

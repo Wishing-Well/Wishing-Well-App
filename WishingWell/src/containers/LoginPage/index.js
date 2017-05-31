@@ -48,6 +48,10 @@ class InitialPage extends Component {
       <StatusBar backgroundColor="#65D0E8"/>
         <View style={styles.logoContainer}>
           <Image
+            style={styles.wellit}
+            source={require('../../assets/wellit.png')}
+          />
+          <Image
             style={styles.logo}
             source={require('../../assets/Coin.png')}
           />

@@ -67,9 +67,6 @@ class ProfilePage extends Component {
       <View style={styles.wholeContainer}>
         <View style={styles.infoContainer}>
           <Text style={styles.pageTitle}>
-            PROFILE
-          </Text>
-          <Text style={styles.allText}>
             Hello {userInfo.full_name}
           </Text>
           <Text style={styles.allText}>

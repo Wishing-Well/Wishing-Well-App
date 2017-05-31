@@ -7,7 +7,7 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   wholeContainer: {
-    backgroundColor: '#2B2B2B',
+    backgroundColor: '#001b21',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around'
@@ -27,12 +27,16 @@ export default StyleSheet.create({
     justifyContent: 'space-around'
   },
   pageTitle: {
-    fontSize: 50,
-    color: '#84DBEF'
+    paddingTop: '10%',
+    textAlign: 'center',
+    fontWeight: '700',
+    fontSize: 24,
+    color: 'rgba(255,255,255,0.7)'
   },
   allText: {
-    color: 'oldlace',
-    textAlign: 'center'
+    paddingTop: '2%',
+    textAlign: 'center',
+    color: 'rgba(255,255,255,0.4)'
   },
   icon: {
     width: 22,

@@ -23,3 +23,5 @@ export const SIGNUP_NAME_ERROR = 'SIGNUP_NAME_ERROR';
 export const SIGNUP_EMAIL_ERROR = 'SIGNUP_EMAIL_ERROR';
 export const SIGNUP_PW_ERROR = 'SIGNUP_PW_ERROR';
 export const ADD_USER_WELL = 'ADD_USER_WELL';
+export const DROP_COIN = 'DROP_COIN';
+export const RESET_COIN = 'RESET_COIN';

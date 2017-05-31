@@ -57,7 +57,6 @@ class InitialPage extends Component {
             placeholder="Email"
             placeholderTextColor="rgba(255,255,255,0.7)"
             underlineColorAndroid='rgba(0,0,0,0)'
-            returnKeyType="next"
             style={styles.formInput}
             onChangeText={(email) => this.setState({email})}
             keyboardType="email-address"
@@ -69,7 +68,6 @@ class InitialPage extends Component {
             placeholder="Password"
             placeholderTextColor="rgba(255,255,255,0.7)"
             underlineColorAndroid='rgba(0,0,0,0)'
-            returnKeyType="go"
             style={styles.formInput}
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}

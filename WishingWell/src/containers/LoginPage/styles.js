@@ -15,7 +15,13 @@ export default StyleSheet.create({
   },
   logo: {
     width: 100,
-    height: 100
+    height: 100,
+    bottom: 10
+  },
+  wellit: {
+    top: 5,
+    width: 125,
+    height: 125,
   },
   formContainer: {
     padding: 20

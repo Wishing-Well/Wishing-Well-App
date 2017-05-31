@@ -30,7 +30,7 @@ class ProfilePage extends Component {
     if(this.props.userInfo.Wells.length > 0) {
       return (
         <View style={styles.wellContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate('WellPage', {well: this.props.userInfo.Wells[0]})}>
             <Text style={styles.allText}>
               Your Well
             </Text>

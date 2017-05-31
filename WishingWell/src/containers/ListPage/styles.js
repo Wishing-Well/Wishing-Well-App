@@ -23,14 +23,14 @@ export default StyleSheet.create({
     backgroundColor: 'purple'
   },
   titleText : {
-    color: '#00232b',
+    color: '#001b21',
     fontWeight: '700',
     fontSize: 18,
     paddingVertical: 5,
     marginTop: 15
   },
   wellText: {
-    color: '#00232b',
+    color: '#001b21',
     // color: 'rgba(255,255,255,0.5)',
     fontSize: 12,
     paddingVertical: 5

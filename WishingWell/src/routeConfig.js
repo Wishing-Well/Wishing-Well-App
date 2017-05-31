@@ -11,20 +11,23 @@ import GamePage from './containers/GamePage';
 import StripePage from './containers/StripePage';
 import DonationsPage from './containers/DonationsPage';
 import CreateWellPage from './containers/CreateWellPage';
+import WellDescriptionPage from './containers/WellDescriptionPage';
 
 
 export const mapNav = {
   Home: {screen: MapPage},
   WellPage: {screen: WellPage},
   GamePage: {screen: GamePage},
-  Stripe: {screen: StripePage}
+  Stripe: {screen: StripePage},
+  WellDescription: {screen: WellDescriptionPage},
 };
 
 export const listNav = {
   Home: {screen: ListPage},
   WellPage: {screen: WellPage},
   GamePage: {screen: GamePage},
-  Stripe: {screen: StripePage}
+  Stripe: {screen: StripePage},
+  WellDescription: {screen: WellDescriptionPage},
 };
 
 export const profileNav = {
@@ -32,7 +35,8 @@ export const profileNav = {
   WellPage: {screen: WellPage},
   CreateWellPage: {screen: CreateWellPage},
   DonationsPage: {screen: DonationsPage},
-  Stripe: {screen: StripePage}
+  Stripe: {screen: StripePage},
+  WellDescription: {screen: WellDescriptionPage},
 };
 
 export const storeNav = {

@@ -22,20 +22,12 @@ class WellPage extends Component {
   render() {
     const {well} = this.props.navigation.state.params;
     const {navigate} = this.props.navigation;
+    console.log(well);
 
     return (
       <View>
         <Text>
-          {well.title}
-        </Text>
-        <Text>
-          {well.description}
-        </Text>
-        <Text>
-          Collected: {well.current_amount}
-        </Text>
-        <Text>
-          Target: {well.funding_target}
+          Donations go to {well.title}
         </Text>
         <View>
           <Button
@@ -45,9 +37,10 @@ class WellPage extends Component {
             />
             <TextInput
               value={this.state.title}
-              placeholder="Attach Message With Doantions of 5+"
+              placeholder="Attach Short Message With Donations of 5+"
               onChangeText={message => this.setState({message})}
               autoCorrect={false}
+              maximumValue={20}
               />
           <Button
             title="Donate $5"

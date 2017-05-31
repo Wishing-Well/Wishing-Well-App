@@ -17,31 +17,34 @@ export const mapNav = {
   Home: {screen: MapPage},
   WellPage: {screen: WellPage},
   GamePage: {screen: GamePage},
-  StripePage: {screen: StripePage}
+  Stripe: {screen: StripePage}
 };
 
 export const listNav = {
   Home: {screen: ListPage},
   WellPage: {screen: WellPage},
   GamePage: {screen: GamePage},
-  StripePage: {screen: StripePage}
+  Stripe: {screen: StripePage}
 };
 
 export const profileNav = {
   Home: {screen: ProfilePage},
   WellPage: {screen: WellPage},
   CreateWellPage: {screen: CreateWellPage},
-  DonationsPage: {screen: DonationsPage}
+  DonationsPage: {screen: DonationsPage},
+  Stripe: {screen: StripePage}
 };
 
 export const storeNav = {
-  Home: {screen: StorePage}
+  Home: {screen: StorePage},
+  Stripe: {screen: StripePage}
 };
 
 export const mainNav = {
   'Map View': {screen: StackNavigator(mapNav)},
   'List View': {screen: StackNavigator(listNav)},
   Profile: {screen: StackNavigator(profileNav)},
+  Store: {screen: StackNavigator(storeNav)},
 };
 
 export const initialNav = {

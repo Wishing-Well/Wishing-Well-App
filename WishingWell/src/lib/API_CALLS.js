@@ -64,7 +64,7 @@ export const getUserDonations = user_id => fetch(`http://10.0.1.35:4000/api/user
   .then(res => res.json())
   .catch(error => error);
 
-export const donate = (id, amount, token) => fetch('http://10.0.1.35:4000/api/wells/donate',
+export const donate = (id, amount) => fetch('http://10.0.1.35:4000/api/wells/donate',
   {
     method: 'PUT',
     credentials: 'include',
@@ -72,7 +72,21 @@ export const donate = (id, amount, token) => fetch('http://10.0.1.35:4000/api/we
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({id, amount, token})
+    body: JSON.stringify({id, amount})
+  }
+)
+  .then(res => res.json())
+  .catch(error => error);
+
+export const makeCharge = (amount, token) => fetch('http://10.0.1.35:4000/api/payments/create',
+  {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({amount, token})
   }
 )
   .then(res => res.json())

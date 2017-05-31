@@ -80,7 +80,7 @@ API.getAllWells()
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
-export const donate = (well_id, amount, token) => dispatch => API.donate(well_id, amount, token)
+export const donate = (well_id, amount) => dispatch => API.donate(well_id, amount)
   .then(res => {
     console.log(res);
     if (res.success === true) {
@@ -88,6 +88,14 @@ export const donate = (well_id, amount, token) => dispatch => API.donate(well_id
     } else {failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.DONATION_FAIL, error}));
+
+export const makeCharge = (amount, token) => dispatch => API.makeCharge(amount, token)
+  .then(res => {
+    console.log(res);
+    if (res.success) {
+      dispatch({type: types.PAYMENT_SUCCESS, userInfo: res.user});
+    } else {failure(res, dispatch);}
+  });
 
 const prepareWells = wellsArray => {
   console.log(wellsArray);

@@ -1,112 +1,66 @@
 import React, {Component} from 'react';
 import {
-  Animated,
-  Dimentsions,
-  PanResponder,
-  TextInput,
+  Text,
+  Image,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import styles from './stylesheet';
-import clamp from 'clamp';
-
-let SWIPE_THRESHOLD = 100;
+import styles from './styles';
+import {makeCharge} from '../../actions';
 
 class StorePage extends Component {
 
   constructor(props) {
-      super(props);
-        this.state = {
-          showCoin: true,
-          pan: new Animated.ValueXY(),
-          wellValues: null
-        };
-
-        this.panResponder = PanResponder.create({
-          onMoveShouldSetResponderCapture: () => true,
-          onMoveShouldSetPanResponderCapture: () => true,
-
-          onStartShouldSetPanResponder: () => true,
-
-          onPanResponderGrant: (e, gestureState) => {
-            this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
-            this.state.pan.setValue({x: 0, y: 0});
-          },
-
-          onPanResponderMove: Animated.event([null, {
-            dx: this.state.pan.x,
-            dy: this.state.pan.y
-          }]),
-
-          onPanResponderRelease: (e, {vx, vy}) => {
-            this.state.pan.flattenOffset();
-            let velocity;
-
-            if (vy >= 0){
-              velocity = clamp(vx, 3, 5);
-            } else if (vy < 0){
-              velocity = clamp(vy * -1,3 ,5) * -1;
-            }
-
-            if (Math.abs(this.state.pan.y._value) > SWIPE_THRESHOLD) {
-              Animated.decay(this.state.pan, {
-                velocity: {x: vx, y: velocity},
-                deceleration: 0.98
-              }).start()
-              if(this.isWell({vx, vy})){
-                  console.log('hit')
-                  this.setState({
-                    showCoin: false
-                  })
-              }
-            } else {
-              Animated.spring(this.state.pan, {
-                toValue: {x: 0, y: 0},
-                friction: 4
-              }).start()
-            }
-          }
-      })
+    super(props);
+  }
+  static navigationOptions = {
+    header: null
   };
 
-  isWell({vx,vy}){
-    let dz = this.state.wellValues;
-    return {vx,vy}.moveY > dz.y && {vx,vy}.moveY < dz.y + dz.height;
-  }
 
-  setWellValues(event){
-    this.setState({
-      wellValues: event.nativeEvent.layout
-    })
-  }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
-        <View style={styles.wellContainer}>
-          <View
-            onLayout={this.setWellValues.bind(this)}
-            style={styles.well}>
+        <View style={styles.wholePage}>
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>Wellit Shop</Text>
+            <Text style={styles.subtitle}>Buy Your Tokens</Text>
           </View>
-
-          {this.renderCoin()}
+          <View style={styles.firstRow}>
+            <TouchableOpacity
+              style={styles.tenDollars}
+              onPress={()=>navigate('Stripe', {amount: 1000, makeCharge: this.props.makeCharge})}
+              >
+              <Image
+                style={styles.tenPic}
+                source={require('../../assets/ten_coin.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.fiftyDollars}
+              onPress={()=>navigate('Stripe', {amount: 5000, makeCharge: this.props.makeCharge})}
+              >
+              <Image
+                style={styles.fiftyPic}
+                source={require('../../assets/fifty_coin.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.secondRow}>
+            <TouchableOpacity
+              style={styles.hundredDollars}
+              onPress={()=>navigate('Stripe', {amount: 10000, makeCharge: this.props.makeCharge})}
+              >
+              <Image
+                style={styles.hundredPic}
+                source={require('../../assets/hundred_coin.png')}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
     );
-  }
-
-  renderCoin(){
-    return (
-      <View style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-        <View style={styles.coinContainer}>
-          <Animated.View
-            {...this.panResponder.panHandlers}
-            style={[this.state.pan.getLayout(), styles.coin]}>
-          </Animated.View>
-        </View>
-      </View>
-      );
   }
 
 }
@@ -117,6 +71,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  makeCharge: (amount, token) => dispatch(makeCharge(amount, token))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(StorePage)

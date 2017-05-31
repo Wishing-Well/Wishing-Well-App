@@ -3,12 +3,11 @@ import {
   Text,
   Image,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
 import  styles  from './styles';
-
-let width = 300;
 
 class ListPage extends Component {
 
@@ -26,21 +25,19 @@ class ListPage extends Component {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.wholeContainer}>
+      <StatusBar backgroundColor="#00232b"/>
         {this.props.allWells.map(well => (
             <TouchableOpacity onPress={()=> navigate('WellPage', {well: well})} key={well.id}>
               <View>
+                <Text style={styles.titleText}>
+                  {well.title}
+                </Text>
+                <Text style={styles.wellText}>
+                  Funded: ${well.current_amount} / ${well.funding_target}
+                </Text>
                 <View style={styles.progressBarContainer}>
                   <View style ={[styles.progressBar, {width: `${well.current_amount / well.funding_target * 100}%`}]} />
                 </View>
-                <Text>
-                  {well.title}
-                </Text>
-                <Text>
-                  Collected: {well.current_amount}
-                </Text>
-                <Text>
-                  Target: {well.funding_target}
-                </Text>
               </View>
             </TouchableOpacity>
           ))}

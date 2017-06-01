@@ -20,9 +20,10 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   progressBar: {
-    height: 20,
+    height: 22,
     borderRadius: 5,
     left: '1%',
+    right: '1%',
     backgroundColor: 'rgba(19, 193, 112, 0.7)'
   },
   titleText : {

@@ -55,10 +55,30 @@ export default StyleSheet.create({
     backgroundColor: '#ccf3ff',
     justifyContent: 'center'
   },
+  createWell: {
+    width: 200,
+    height: 100,
+    borderRadius: 5,
+    backgroundColor: 'rgba(19, 193, 112, 0.7)',
+    justifyContent: 'center'
+  },
+  createWellText: {
+    fontWeight: '700',
+    color: 'rgba(255,255,255,0.8)',
+    textAlign: 'center'
+  },
+  button: {
+    width: 150,
+    height: 50,
+    borderRadius: 5,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,75,91,0.7)'
+  },
   progressBar: {
-    height: 20,
+    height: 22,
     borderRadius: 5,
     left: '1%',
+    paddingRight: '1%',
     backgroundColor: 'rgba(19, 193, 112, 0.7)'
   },
   wellHeader: {

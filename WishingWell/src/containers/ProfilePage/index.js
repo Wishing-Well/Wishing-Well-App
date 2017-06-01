@@ -15,12 +15,13 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
 
-    this.expirationDate = new Date(props.userInfo.Wells[0].expiration_date)
-    this.createdDate = new Date(props.userInfo.Wells[0].createdAt)
+
   }
 
+
   handleDaysLeft = () => {
-    console.log(this.expirationDate)
+    let expirationDate = new Date(this.props.userInfo.Wells[0].expiration_date)
+    let createdDate = new Date(this.props.userInfo.Wells[0].createdAt)
     let timeDiff = Math.abs(this.expirationDate.getTime() - this.createdDate.getTime());
     let daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return daysLeft
@@ -38,9 +39,8 @@ class ProfilePage extends Component {
   }
 
   renderWellInfo = () => {
+    const {navigate} = this.props.navigation;
     console.log('props',this.props)
-    console.log(this.expirationDate)
-    console.log('days left:',this.handleDaysLeft())
     if(this.props.userInfo.Wells.length > 0) {
       return (
           <TouchableOpacity onPress={()=>this.props.navigation.navigate('WellDescription', {well: this.props.userInfo.Wells[0]})}>
@@ -66,16 +66,21 @@ class ProfilePage extends Component {
       )
     } else {
       return (
-        <View style={styles.wellContainer}>
-          <TouchableOpacity>
-            <Text style={styles.allText}>
-              {'It is free to create a well'}
-            </Text>
-            <Text style={styles.allText}>
-              {'Create a well below'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={()=> navigate("CreateWellPage")}>
+          <View style={styles.createWell}>
+            <Text style={styles.createWellText}>+ CREATE A WELL</Text>
+          </View>
+        </TouchableOpacity>
+        // <View style={styles.wellContainer}>
+        //   <TouchableOpacity>
+        //     <Text style={styles.allText}>
+        //       {'It is free to create a well'}
+        //     </Text>
+        //     <Text style={styles.allText}>
+        //       {'Create a well below'}
+        //     </Text>
+        //   </TouchableOpacity>
+        // </View>
       )
     }
   }
@@ -95,26 +100,20 @@ class ProfilePage extends Component {
           </Text>
           <Text style={styles.allText}>
             Donated: ${userInfo.Donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}
-
           </Text>
         </View>
         {this.renderWellInfo()}
         <View style={styles.buttonContainer}>
-          <Button
-            title="See Your Donations"
-            onPress={()=> navigate("DonationsPage")}
-            color='#84DBEF'
-            />
-          <Button
-            title="Create Your Own Well"
-            onPress={()=> navigate("CreateWellPage")}
-            color='#84DBEF'
-            />
-          <Button
-            title="Log Out"
-            onPress={this.props.logout}
-            color='#84DBEF'
-            />
+          <TouchableOpacity onPress={()=> navigate("DonationsPage")}>
+            <View style={styles.button}>
+              <Text style={styles.createWellText}>MY DONATIONS</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.logout}>
+            <View style={styles.button}>
+              <Text style={styles.createWellText}>LOGOUT</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     )

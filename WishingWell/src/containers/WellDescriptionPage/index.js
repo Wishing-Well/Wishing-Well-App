@@ -21,7 +21,7 @@ class WellPage extends Component {
     const {navigate} = this.props.navigation;
     console.log(well);
     return (
-      <View>
+      <View style={styles.wholePage}>
         <Text>
           {well.title}
         </Text>

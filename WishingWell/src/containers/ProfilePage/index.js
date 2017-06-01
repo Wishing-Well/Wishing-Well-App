@@ -51,7 +51,7 @@ class ProfilePage extends Component {
                   {this.props.userInfo.Wells[0].title}
                 </Text>
                 <Text style={styles.daysText}>
-                  {`${this.handleDaysLeft()} days left`}
+                  {`${5} days left`}
                 </Text>
               </View>
               <Text style={styles.allText}>

@@ -47,6 +47,7 @@ class CreateWellPage extends Component {
     navigator.geolocation.getCurrentPosition( position => {
       done({
         title: this.state.title,
+        time: this.state.time,
         description: this.state.description,
         location: `${position.coords.latitude},${position.coords.longitude}`,
         funding_target: Number(this.state.funding_target) * 100,

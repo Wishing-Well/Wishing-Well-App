@@ -8,7 +8,6 @@ import StorePage from './containers/StorePage';
 import LoginPage from './containers/LoginPage';
 import WellPage from './containers/WellPage';
 import GamePage from './containers/GamePage';
-import StripePage from './containers/StripePage';
 import DonationsPage from './containers/DonationsPage';
 import CreateWellPage from './containers/CreateWellPage';
 import WellDescriptionPage from './containers/WellDescriptionPage';
@@ -16,32 +15,35 @@ import WellDescriptionPage from './containers/WellDescriptionPage';
 
 export const mapNav = {
   Home: {screen: MapPage},
-  WellPage: {screen: WellPage},
+  WellPage: {screen: WellPage, navigationOptions: ({navigation}) => ({
+      title: `Donating To ${navigation.state.params.well.title}`,
+    })},
   GamePage: {screen: GamePage},
-  Stripe: {screen: StripePage},
   WellDescription: {screen: WellDescriptionPage},
 };
 
 export const listNav = {
   Home: {screen: ListPage},
-  WellPage: {screen: WellPage},
+  WellPage: {screen: WellPage, navigationOptions: ({navigation}) => ({
+      title: `Donating To ${navigation.state.params.well.title}`,
+    })},
   GamePage: {screen: GamePage},
-  Stripe: {screen: StripePage},
   WellDescription: {screen: WellDescriptionPage},
 };
 
 export const profileNav = {
   Home: {screen: ProfilePage},
-  WellPage: {screen: WellPage},
+  WellPage: {screen: WellPage, navigationOptions: ({navigation}) => ({
+      title: `Donating To ${navigation.state.params.well.title}`,
+    })},
   CreateWellPage: {screen: CreateWellPage},
   DonationsPage: {screen: DonationsPage},
-  Stripe: {screen: StripePage},
   WellDescription: {screen: WellDescriptionPage},
 };
 
 export const storeNav = {
   Home: {screen: StorePage},
-  Stripe: {screen: StripePage}
+  //Stripe: {screen: StripePage}
 };
 
 export const mainNav = {

@@ -14,7 +14,19 @@ import styles from './styles';
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
+
+    this.expirationDate = new Date(props.userInfo.Wells[0].expiration_date)
+    this.createdDate = new Date(props.userInfo.Wells[0].createdAt)
   }
+
+  handleDaysLeft = () => {
+    console.log(this.expirationDate)
+    let timeDiff = Math.abs(this.expirationDate.getTime() - this.createdDate.getTime());
+    let daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return daysLeft
+  }
+
+
   static navigationOptions = {
     header: null,
     tabBarIcon: () => (
@@ -26,22 +38,31 @@ class ProfilePage extends Component {
   }
 
   renderWellInfo = () => {
-    console.log(this.props.userInfo)
+    console.log('props',this.props)
+    console.log(this.expirationDate)
+    console.log('days left:',this.handleDaysLeft())
     if(this.props.userInfo.Wells.length > 0) {
       return (
-        <View style={styles.wellContainer}>
           <TouchableOpacity onPress={()=>this.props.navigation.navigate('WellDescription', {well: this.props.userInfo.Wells[0]})}>
-            <Text style={styles.allText}>
-              Your Well
-            </Text>
-            <Text style={styles.allText}>
-              {this.props.userInfo.Wells[0].title}
-            </Text>
-            <Text style={styles.allText}>
-              {this.props.userInfo.Wells[0].description}
-            </Text>
+          <View style={styles.wellCard}>
+            <View style={styles.wellContainer}>
+              <View style={styles.wellHeader}>
+                <Text style={styles.wellTitle}>
+                  {this.props.userInfo.Wells[0].title}
+                </Text>
+                <Text style={styles.daysText}>
+                  {`${this.handleDaysLeft()} days left`}
+                </Text>
+              </View>
+              <Text style={styles.allText}>
+                  Funded: ${(this.props.userInfo.Wells[0].current_amount / 100).toFixed(2)} / ${(this.props.userInfo.Wells[0].funding_target / 100).toFixed(2)}
+              </Text>
+              <View style={styles.progressBarContainer}>
+                  <View style ={[styles.progressBar, {width: `${this.props.userInfo.Wells[0].current_amount / this.props.userInfo.Wells[0].funding_target * 100}%`}]} />
+              </View>
+            </View>
+           </View>
           </TouchableOpacity>
-        </View>
       )
     } else {
       return (
@@ -70,7 +91,7 @@ class ProfilePage extends Component {
             Hello {userInfo.full_name}
           </Text>
           <Text style={styles.allText}>
-            Account E-Mail: {userInfo.email}
+            E-Mail: {userInfo.email}
           </Text>
           <Text style={styles.allText}>
             Donated: ${userInfo.Donations.reduce((prev, curr) => prev + curr.amount, 0) / 100}

@@ -16,21 +16,24 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: 'rgba(101, 208, 232, 0.3)',
-    backgroundColor: '#ccf3ff'
+    backgroundColor: '#ccf3ff',
+    justifyContent: 'center'
   },
   progressBar: {
-    height: 16,
-    backgroundColor: 'purple'
+    height: 20,
+    borderRadius: 5,
+    left: '1%',
+    backgroundColor: 'rgba(19, 193, 112, 0.7)'
   },
   titleText : {
-    color: '#001b21',
+    color: '#004b5b',
     fontWeight: '700',
     fontSize: 18,
     paddingVertical: 5,
     marginTop: 15
   },
   wellText: {
-    color: '#001b21',
+    color: '#004b5b',
     // color: 'rgba(255,255,255,0.5)',
     fontSize: 12,
     paddingVertical: 5

@@ -47,7 +47,7 @@ class WellPage extends Component {
     stripe.createTokenWithCard(this.state.params)
       .then(token => {
         console.log(token);
-        this.props.donate(this.props.navigation.state.params, this.state.amount, token, this.state.message)
+        this.props.donate(this.props.navigation.state.params.well.id, this.state.amount * 100, token, this.state.message)
       });
   };
 
@@ -88,7 +88,7 @@ class WellPage extends Component {
           placeholder="Attach Short Message With Donations of 5+"
           onChangeText={message => this.setState({message})}
           autoCorrect={false}
-          maxLength={30}
+          maxLength={50}
           />
       </View>
     )

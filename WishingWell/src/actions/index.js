@@ -114,7 +114,9 @@ const prepareWells = wellsArray => {
         key: well.id,
         description: well.description,
         funding_target: well.funding_target,
-        current_amount: well.current_amount
+        current_amount: well.current_amount,
+        expiration_date: well.expiration_date,
+        createdAt: well.createdAt
       }
     )
   );

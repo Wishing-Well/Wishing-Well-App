@@ -32,10 +32,10 @@ class WellPage extends Component {
 
 
   static navigationOptions = {
-    headerTintColor: '#65D0E8',
+    headerTintColor: '#004B5B',
     headerStyle: {
       backgroundColor: '#e5f7fc',
-      elevation: 50
+      elevation: 0
     }
   }
 
@@ -54,19 +54,21 @@ class WellPage extends Component {
   renderStepOne = () => {
     return (
       <View style={styles.firstStep}>
-        <Text>Donation Amount: {this.state.amount} Dollars</Text>
+        <Text style={styles.amountText}>Donation Amount: ${this.state.amount}.00</Text>
         <Slider
+          style={styles.amountSlider}
           onValueChange={amount => this.setState({amount})}
           value={this.state.amount}
           minimumValue={1}
           maximumValue={100}
           step={1}
+          thumbTintColor={'#65D0E8'}
           />
         <PaymentCardTextField
           style={styles.field}
           cursorColor={'yellow'}
           textErrorColor={'red'}
-          placeholderColor={'blue'}
+          placeholderColor={'#65D0E8'}
           numberPlaceholder={'Card Number'}
           expirationPlaceholder={'mm/yy'}
           cvcPlaceholder={'cvc'}
@@ -81,11 +83,12 @@ class WellPage extends Component {
     return (
       <View style={styles.secondStep}>
         <TextInput
+          style={styles.messageInput}
           value={this.state.message}
           placeholder="Attach Short Message With Donations of 5+"
           onChangeText={message => this.setState({message})}
           autoCorrect={false}
-          maximumValue={20}
+          maxLength={30}
           />
       </View>
     )
@@ -95,6 +98,7 @@ class WellPage extends Component {
     return (
       <View style={styles.thirdStep}>
         <Button
+          style={styles.submitButton}
           title={`Donate ${this.state.amount}$`}
           onPress={this.handleDonate}
           color='#84DBEF'

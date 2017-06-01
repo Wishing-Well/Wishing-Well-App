@@ -25,7 +25,7 @@ class ListPage extends Component {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.wholeContainer}>
-      <StatusBar backgroundColor="#001b21"/>
+      <StatusBar backgroundColor="#004b5b"/>
         {this.props.allWells.map(well => (
             <TouchableOpacity onPress={()=> navigate('WellDescription', {well: well})} key={well.id}>
               <View>

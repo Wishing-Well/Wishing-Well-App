@@ -26,3 +26,5 @@ export const SIGNUP_PW_ERROR = 'SIGNUP_PW_ERROR';
 export const ADD_USER_WELL = 'ADD_USER_WELL';
 export const DROP_COIN = 'DROP_COIN';
 export const RESET_COIN = 'RESET_COIN';
+export const SHOW_LOADING = 'SHOW_LOADING';
+export const CLOSE_LOADING = 'CLOSE_LOADING'

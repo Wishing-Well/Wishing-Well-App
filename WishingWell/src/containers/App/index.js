@@ -5,6 +5,7 @@ import {AsyncStorage} from 'react-native';
 import MainNav from '../../Navigators/MainNav';
 import InitialNav from '../../Navigators/InitialNav';
 import {loadApp, closeErrors, loginUser} from '../../actions';
+import LoadingScreen from '../LoadingScreen'
 
 class App extends Component {
 
@@ -12,16 +13,20 @@ class App extends Component {
     return AsyncStorage.multiGet(['email', 'user_id', 'loggedIn'])
       .then(stores => {
         if (stores[2][1] == 'true') {
-          this.props.loginUser();
-          this.props.loadApp(stores[1][1]);
+          this.props.loginUser()
+            .then(console.log);
+          this.props.loadApp(stores[1][1])
+            .then(console.log);
         } else {
-          this.props.loadApp();
+          this.props.loadApp()
+            .then(console.log);
         }
       })
       .catch(err => console.log(err));
   }
 
   render() {
+    if(this.props.loading) return (<LoadingScreen/>);
     if(this.props.loggedIn) {
       return (
         <MainNav />
@@ -35,7 +40,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.users.loggedIn
+  loggedIn: state.users.loggedIn,
+  loading: state.wells.loading
 });
 
 const mapDispatchToProps = dispatch => ({

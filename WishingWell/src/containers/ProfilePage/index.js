@@ -40,25 +40,25 @@ class ProfilePage extends Component {
 
   renderWellInfo = () => {
     const {navigate} = this.props.navigation;
-    console.log('props',this.props)
+    const {userInfo} = this.props;
     if(this.props.userInfo.Wells.length > 0) {
       return (
-          <TouchableOpacity onPress={()=>this.props.navigation.navigate('WellDescription', {well: this.props.userInfo.Wells[0]})}>
+          <TouchableOpacity onPress={()=>navigate('WellDescription', {well: this.props.allWells.filter(well => well.id == userInfo.Wells[0].id)[0]} )}>
           <View style={styles.wellCard}>
             <View style={styles.wellContainer}>
               <View style={styles.wellHeader}>
                 <Text style={styles.wellTitle}>
-                  {this.props.userInfo.Wells[0].title}
+                  {userInfo.Wells[0].title}
                 </Text>
                 <Text style={styles.daysText}>
                   {`${5} days left`}
                 </Text>
               </View>
               <Text style={styles.allText}>
-                  Funded: ${(this.props.userInfo.Wells[0].current_amount / 100).toFixed(2)} / ${(this.props.userInfo.Wells[0].funding_target / 100).toFixed(2)}
+                  Funded: ${(userInfo.Wells[0].current_amount / 100).toFixed(2)} / ${(userInfo.Wells[0].funding_target / 100).toFixed(2)}
               </Text>
               <View style={styles.progressBarContainer}>
-                  <View style ={[styles.progressBar, {width: `${this.props.userInfo.Wells[0].current_amount / this.props.userInfo.Wells[0].funding_target * 100}%`}]} />
+                  <View style ={[styles.progressBar, {width: `${userInfo.Wells[0].current_amount / userInfo.Wells[0].funding_target * 100}%`}]} />
               </View>
             </View>
            </View>
@@ -122,7 +122,8 @@ class ProfilePage extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.users.userInfo,
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  allWells: state.wells.allWells
 })
 
 const mapDispatchToProps = (dispatch) => ({

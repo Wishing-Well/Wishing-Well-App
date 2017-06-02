@@ -2,7 +2,8 @@
 import * as types from '../lib/constants';
 
 const initialState = {
-  allWells: []
+  allWells: [],
+  loading: false
 };
 
 const WellReducers = (state = initialState, action) => {
@@ -16,6 +17,15 @@ const WellReducers = (state = initialState, action) => {
       return Object.assign({}, state, {
         allWells: state.allWells.concat(action.well),
       });
+    case types.SHOW_LOADING:
+      return Object.assign({}, state, {
+        loading: true
+      });
+    case types.CLOSE_LOADING:
+      return Object.assign({}, state, {
+        loading: false
+      });
+
 
     default:
       return state;

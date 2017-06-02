@@ -1,6 +1,6 @@
 /*jshint esversion: 6*/
 const old_ip = '10.0.1.35:4000';
-const ip = '165.227.12.249:4000';
+const ip = 'wellitapp.com';
 
 export const login = (username, password) => fetch(`http://${ip}/api/users/login`,
   {

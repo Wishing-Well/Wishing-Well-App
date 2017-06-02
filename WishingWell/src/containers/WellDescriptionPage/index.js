@@ -7,7 +7,8 @@ import {
   Button,
   Slider,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import {donate} from '../../actions';
@@ -23,7 +24,13 @@ class WellPage extends Component {
     headerStyle: {
       backgroundColor: '#e5f7fc',
       elevation: 0
-    }
+    },
+    tabBarIcon: () => (
+      <Image
+        source={require('../../assets/well.png')}
+        style={styles.icon}
+      />
+    )
   }
 
   render() {
@@ -31,14 +38,11 @@ class WellPage extends Component {
     const {navigate} = this.props.navigation;
     console.log(well);
     return (
-      <ScrollView>
+      <ScrollView style={styles.masterPage}>
       <View style={styles.wholePage}>
         <View style={styles.wellAmounts}>
           <Text style={styles.wellCurrent}>
-            Collected: ${(well.current_amount / 100).toFixed(2)}
-          </Text>
-          <Text style={styles.wellTarget}>
-            Target: ${(well.funding_target / 100).toFixed(2)}
+            Funded: ${(well.current_amount / 100).toFixed(2)} / ${(well.funding_target / 100).toFixed(2)}
           </Text>
         </View>
         <View style={styles.progressBarContainer}>
@@ -53,12 +57,12 @@ class WellPage extends Component {
         <TouchableOpacity style={styles.submitButton} onPress={()=> navigate('WellPage', {well: well})}>
           <Text style={styles.buttonText}>Donate</Text>
         </TouchableOpacity>
-        <Text style={styles.messagesTitle}>User Messages Who Donated</Text>
+        <Text style={styles.messagesTitle}>Message Board</Text>
           {well.Messages.map(message => (
             <View key={message.id} style={styles.messageContainer}>
-              <Text style={styles.eachMessage}>{message.message}</Text>
               <Text style={styles.messageUser}>{this.props.allUsers.filter(user => user.id == message.UserId)[0].full_name}</Text>
               <Text style={styles.messageDate}>{new Date(message.createdAt).toDateString()}</Text>
+              <Text style={styles.eachMessage}>{message.message}</Text>
             </View>
             ))}
       </View>

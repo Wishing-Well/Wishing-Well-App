@@ -9,7 +9,7 @@ const WellReducers = (state = initialState, action) => {
   switch (action.type) {
     case types.ALL_WELLS:
       return Object.assign({}, state, {
-        allWells: action.wells
+        allWells: action.allWells
       });
 
     case types.ADD_WELL:

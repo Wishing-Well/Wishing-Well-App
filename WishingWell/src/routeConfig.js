@@ -15,30 +15,54 @@ import WellDescriptionPage from './containers/WellDescriptionPage';
 
 export const mapNav = {
   Home: {screen: MapPage},
-  WellPage: {screen: WellPage, navigationOptions: ({navigation}) => ({
-      title: `Donating To ${navigation.state.params.well.title}`,
-    })},
+  WellPage: {
+    screen: WellPage,
+    navigationOptions: ({navigation}) => ({
+      title: `Donating To ${navigation.state.params.well.title}`
+    })
+  },
   GamePage: {screen: GamePage},
-  WellDescription: {screen: WellDescriptionPage},
+  WellDescription: {
+    screen: WellDescriptionPage,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.well.title}`
+    })
+  }
 };
 
 export const listNav = {
   Home: {screen: ListPage},
-  WellPage: {screen: WellPage, navigationOptions: ({navigation}) => ({
-      title: `Donating To ${navigation.state.params.well.title}`,
-    })},
+  WellPage: {
+    screen: WellPage,
+    navigationOptions: ({navigation}) => ({
+      title: `Donating To ${navigation.state.params.well.title}`
+    })
+  },
   GamePage: {screen: GamePage},
-  WellDescription: {screen: WellDescriptionPage},
+  WellDescription: {
+    screen: WellDescriptionPage,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.well.title}`
+    })
+  }
 };
 
 export const profileNav = {
   Home: {screen: ProfilePage},
-  WellPage: {screen: WellPage, navigationOptions: ({navigation}) => ({
-      title: `Donating To ${navigation.state.params.well.title}`,
-    })},
+  WellPage: {
+    screen: WellPage,
+    navigationOptions: ({navigation}) => ({
+      title: `Donating To ${navigation.state.params.well.title}`
+    })
+  },
   CreateWellPage: {screen: CreateWellPage},
   DonationsPage: {screen: DonationsPage},
-  WellDescription: {screen: WellDescriptionPage},
+  WellDescription: {
+    screen: WellDescriptionPage,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.well.title}`
+    })
+  }
 };
 
 export const storeNav = {

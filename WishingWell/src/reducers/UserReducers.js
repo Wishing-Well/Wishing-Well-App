@@ -4,6 +4,7 @@ import * as types from '../lib/constants';
 const initialState = {
   loggedIn: false,
   userInfo: null,
+  allUsers: []
 };
 
 const UserReducers = (state = initialState, action) => {
@@ -17,8 +18,7 @@ const UserReducers = (state = initialState, action) => {
 
     case types.SIGNUP_SUCCESS:
       return Object.assign({}, state, {
-        loggedIn: true,
-        userInfo: action.userInfo
+        allUsers: state.allUsers.concat([{id: action.id, full_name: action.full_name}])
       });
 
     case types.LOGIN_USER:
@@ -36,6 +36,10 @@ const UserReducers = (state = initialState, action) => {
     case types.MAKE_DONATION:
       return Object.assign({}, state, {
         userInfo: action.userInfo
+      });
+    case types.ALL_USERS:
+      return Object.assign({}, state, {
+        allUsers: action.allUsers
       });
 
     default:

@@ -4,7 +4,10 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-
+  wholePage: {
+    flex: 1,
+    backgroundColor: '#e5f7fc',
+  },
   progressBarContainer: {
     width: 300,
     height: 30,

@@ -54,6 +54,12 @@ export const getAllWells = () => fetch(`http://${ip}/api/wells`, {
   .then(res => res.json())
   .catch(error => error);
 
+export const getAllUsers = () => fetch(`http://${ip}/api/users/names`, {
+  credentials: 'include'
+})
+  .then(res => res.json())
+  .catch(error => error);
+
 
 export const getUserWell = user_id => fetch(`http://${ip}/api/users/${user_id}/wells`, {
   credentials: 'include'

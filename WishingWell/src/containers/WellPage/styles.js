@@ -17,8 +17,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginLeft: '2%',
-    marginRight: '2%'
+    margin: '2%',
   },
   amountText: {
     textAlign: 'center',
@@ -29,15 +28,39 @@ export default StyleSheet.create({
     width: '80%',
   },
   secondStep: {
-    backgroundColor: 'green',
-    flex: 1
+    backgroundColor: '#e6f9ff',
+    borderColor: '#65D0E8',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    margin: '2%',
   },
   messageInput: {
-    width: '80%'
+    width: '90%'
   },
   thirdStep: {
-    backgroundColor: 'yellow',
-    flex: 1
+    backgroundColor: '#e6f9ff',
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    margin: '2%',
+  },
+  submitButton: {
+    borderRadius: 5,
+    marginBottom: 10,
+    backgroundColor: 'rgba(19, 193, 112, 0.7)',
+    paddingVertical: 10,
+    width: '100%',
+    height: 100,
+    justifyContent: 'center'
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#FFF',
+    fontSize: 30
   },
   field: {
     width: 300,

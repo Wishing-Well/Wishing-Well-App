@@ -23,6 +23,7 @@ export const login = (email, password) => dispatch =>
     .then(res => {
       console.log(res);
       if (res.success) {
+        dispatch({type: types.SIGNUP_SUCCESS, id: res.user.id, full_name: res.user.full_name});
         API.login(userInfo.email, userInfo.password)
         .then(res => {
           console.log(res);
@@ -63,7 +64,7 @@ export const logout = () => dispatch => API.logout()
 export const createWell = wellInfo => dispatch => API.createWell(wellInfo)
   .then(res => {
     console.log(res);
-    if (res.success === true) {
+    if (res.success) {
       dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
       dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
     } else {failure(res, dispatch);}
@@ -72,18 +73,26 @@ export const createWell = wellInfo => dispatch => API.createWell(wellInfo)
 
 export const loadApp = () => dispatch =>
 API.getAllWells()
-  .then((res) => {
-    console.log(res);
-    if (res.success === true) {
-      dispatch({type: types.ALL_WELLS, wells: prepareWells(res.wells)});
-    } else {failure(res, dispatch);}
+.then((res) => {
+  console.log(res);
+  if (res.success) {
+    dispatch({type: types.ALL_WELLS, allWells: prepareWells(res.wells)});
+  } else {failure(res, dispatch);}
+  API.getAllUsers()
+  .then(res => {
+    console.log(res)
+    if (res.success) {
+      dispatch({type: types.ALL_USERS, allUsers: res.users});
+    } else {failure(res, dispatch)}
   })
-  .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
+
+})
+.catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 
 export const donate = (well_id, amount, token, message) => dispatch => API.donate(well_id, amount, token, message)
   .then(res => {
     console.log(res);
-    if (res.success === true) {
+    if (res.success) {
       dispatch({type: types.MAKE_DONATION, userInfo: res.user});
     } else {failure(res, dispatch);}
   })
@@ -116,7 +125,9 @@ const prepareWells = wellsArray => {
         funding_target: well.funding_target,
         current_amount: well.current_amount,
         expiration_date: well.expiration_date,
-        createdAt: well.createdAt
+        createdAt: well.createdAt,
+        Donations: well.Donations,
+        Messages: well.Messages
       }
     )
   );

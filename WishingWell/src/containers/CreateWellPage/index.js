@@ -37,7 +37,7 @@ class CreateWellPage extends Component {
   static navigationOptions = {
     tabBarIcon: () => (
       <Image
-        source={require('../../assets/profile.png')}
+        source={require('../../assets/pin.png')}
         style={styles.icon}
       />
     )

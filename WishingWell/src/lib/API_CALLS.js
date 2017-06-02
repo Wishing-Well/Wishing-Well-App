@@ -1,6 +1,8 @@
 /*jshint esversion: 6*/
+const old_ip = '10.0.1.35:4000';
+const ip = '165.227.12.249:4000';
 
-export const login = (username, password) => fetch('http://10.0.1.35:4000/api/users/login',
+export const login = (username, password) => fetch(`http://${ip}/api/users/login`,
   {
     method: 'POST',
     credentials: 'include',
@@ -15,7 +17,7 @@ export const login = (username, password) => fetch('http://10.0.1.35:4000/api/us
 .catch(error => err);
 
 
-export const signup = userInfo => fetch('http://10.0.1.35:4000/api/users/create',
+export const signup = userInfo => fetch(`http://${ip}/api/users/create`,
   {
     method: 'POST',
     credentials: 'include',
@@ -29,7 +31,7 @@ export const signup = userInfo => fetch('http://10.0.1.35:4000/api/users/create'
 .then(res => res.json())
 .catch(err => err);
 
-export const createWell = wellInfo => fetch('http://10.0.1.35:4000/api/wells/create',
+export const createWell = wellInfo => fetch(`http://${ip}/api/wells/create`,
   {
     method: 'POST',
     credentials: 'include',
@@ -46,31 +48,26 @@ export const createWell = wellInfo => fetch('http://10.0.1.35:4000/api/wells/cre
 })
 .catch(error => error);
 
-export const getAllWells = () => fetch('http://10.0.1.35:4000/api/wells', {
+export const getAllWells = () => fetch(`http://${ip}/api/wells`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const getAllUsers = () => fetch('http://10.0.1.35:4000/api/users/names', {
+
+export const getUserWell = user_id => fetch(`http://${ip}/api/users/${user_id}/wells`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserWell = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}/wells`, {
+export const getUserDonations = user_id => fetch(`http://${ip}/api/users/${user_id}/donations`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserDonations = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}/donations`, {
-  credentials: 'include'
-})
-  .then(res => res.json())
-  .catch(error => error);
-
-export const donate = (id, amount, token, message) => fetch('http://10.0.1.35:4000/api/wells/donate',
+export const donate = (id, amount, token, message) => fetch(`http://${ip}/api/wells/donate`,
   {
     method: 'PUT',
     credentials: 'include',
@@ -84,7 +81,7 @@ export const donate = (id, amount, token, message) => fetch('http://10.0.1.35:40
   .then(res => res.json())
   .catch(error => error);
 
-export const makeCharge = (amount, token) => fetch('http://10.0.1.35:4000/api/payments/create',
+export const makeCharge = (amount, token) => fetch(`http://${ip}/api/payments/create`,
   {
     method: 'POST',
     credentials: 'include',
@@ -98,19 +95,19 @@ export const makeCharge = (amount, token) => fetch('http://10.0.1.35:4000/api/pa
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserInfo = user_id => fetch(`http://10.0.1.35:4000/api/users/${user_id}`, {
+export const getUserInfo = user_id => fetch(`http://${ip}/api/users/${user_id}`, {
   credentials: 'include',
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const logout = () => fetch('http://10.0.1.35:4000/api/users/logout', {
+export const logout = () => fetch(`http://${ip}/api/users/logout`, {
   credentials: 'include',
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const reLogin = () => fetch('http://10.0.1.35:4000/api/users/info', {
+export const reLogin = () => fetch(`http://${ip}/api/users/info`, {
   credentials: 'include',
 })
   .then(res => {

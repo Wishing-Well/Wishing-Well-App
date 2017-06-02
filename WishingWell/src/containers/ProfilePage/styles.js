@@ -30,7 +30,8 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     flex: 5,
-    justifyContent: 'space-around'
+    // justifyContent: 'space-around'
+    top: '10%',
   },
   daysText: {
     paddingTop: '5%',
@@ -64,7 +65,7 @@ export default StyleSheet.create({
   },
   createWellText: {
     fontWeight: '700',
-    color: 'rgba(255,255,255,0.8)',
+    color: 'rgba(255,255,255,1)',
     textAlign: 'center'
   },
   button: {
@@ -72,7 +73,8 @@ export default StyleSheet.create({
     height: 50,
     borderRadius: 5,
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,75,91,0.7)'
+    backgroundColor: 'rgba(0,75,91,0.7)',
+    marginTop: '10%'
   },
   progressBar: {
     height: 22,

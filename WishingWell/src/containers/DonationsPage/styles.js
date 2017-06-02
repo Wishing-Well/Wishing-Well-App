@@ -11,19 +11,26 @@ export default StyleSheet.create({
   donation: {
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-around',
+    left: '5%',
+    justifyContent: 'flex-start'
   },
   titleText : {
     color: '#004b5b',
     fontWeight: '700',
+    paddingLeft: '5%',
     fontSize: 18,
-    paddingVertical: 5,
+    paddingVertical: 15,
     marginTop: 15
   },
   wellText: {
     color: '#004b5b',
     fontSize: 12,
     paddingVertical: 5
+  },
+  coin: {
+    top: '6%',
+    width: 40,
+    height: 40
   },
   icon: {
     width: 22,

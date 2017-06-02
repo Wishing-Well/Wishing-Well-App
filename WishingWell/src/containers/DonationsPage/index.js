@@ -28,6 +28,10 @@ class DonationsPage extends Component {
         {userInfo.Donations.map(donation => (
           <TouchableOpacity style={styles.donation} key={donation.id} onPress={ ()=> navigate('WellDescription',
              {well: this.props.allWells.filter(well => well.id == donation.WellId)[0]} )}>
+                <Image
+                  source={require('../../assets/Coin.png')}
+                  style={styles.coin}
+                />
                 <Text style={styles.titleText}>
                   ${(donation.amount / 100).toFixed(2)}
                 </Text>

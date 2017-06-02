@@ -23,6 +23,7 @@ class ListPage extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
+    console.log('allwells',this.props.allWells)
     return (
       <View style={styles.wholeContainer}>
       <StatusBar backgroundColor="#004b5b"/>

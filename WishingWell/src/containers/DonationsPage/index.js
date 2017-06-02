@@ -1,15 +1,41 @@
 import React, {Component} from 'react';
 import {
   TextInput,
-  View
+  View,
+  TouchableOpacity,
+  Image,
+  Text
 } from 'react-native';
 import { connect } from 'react-redux';
+import styles from './styles'
 import {refreshDonations} from '../../actions';
 
 class DonationsPage extends Component {
+  static navigationOptions = {
+    tabBarIcon: () => (
+      <Image
+        source={require('../../assets/profile.png')}
+        style={styles.icon}
+      />
+      )
+  }
+
   render() {
+    const {navigate} = this.props.navigation;
+    const {userInfo} = this.props
     return (
-      <View>
+      <View style={styles.wholeContainer}>
+        {userInfo.Donations.map(donation => (
+          <TouchableOpacity style={styles.donation} key={donation.id} onPress={ ()=> navigate('WellDescription',
+             {well: this.props.allWells.filter(well => well.id == donation.WellId)[0]} )}>
+                <Text style={styles.titleText}>
+                  ${(donation.amount / 100).toFixed(2)}
+                </Text>
+                <Text style={styles.titleText}>
+                  {this.props.allWells.filter(well => well.id == donation.WellId)[0].title}
+                </Text>
+          </TouchableOpacity>
+        ))}
 
       </View>
     );
@@ -18,7 +44,8 @@ class DonationsPage extends Component {
 
 const mapStateToProps = state => ({
   globalErr: state.errors.globalErr,
-  user_donations: state.wells.user_donations
+  userInfo: state.users.userInfo,
+  allWells: state.wells.allWells
 })
 
 const mapDispatchToProps = (dispatch) => ({

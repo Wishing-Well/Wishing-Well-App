@@ -35,7 +35,6 @@ export default StyleSheet.create({
   },
   wellText: {
     color: '#004b5b',
-    // color: 'rgba(255,255,255,0.5)',
     fontSize: 12,
     paddingVertical: 5
   },

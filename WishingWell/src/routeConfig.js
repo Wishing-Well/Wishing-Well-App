@@ -4,10 +4,8 @@ import SignupPage from './containers/SignupPage';
 import MapPage from './containers/MapPage';
 import ListPage from './containers/ListPage';
 import ProfilePage from './containers/ProfilePage';
-import StorePage from './containers/StorePage';
 import LoginPage from './containers/LoginPage';
 import WellPage from './containers/WellPage';
-import GamePage from './containers/GamePage';
 import DonationsPage from './containers/DonationsPage';
 import CreateWellPage from './containers/CreateWellPage';
 import WellDescriptionPage from './containers/WellDescriptionPage';
@@ -21,7 +19,6 @@ export const mapNav = {
       title: `Donating To ${navigation.state.params.well.title}`
     })
   },
-  GamePage: {screen: GamePage},
   WellDescription: {
     screen: WellDescriptionPage,
     navigationOptions: ({navigation}) => ({
@@ -38,7 +35,6 @@ export const listNav = {
       title: `Donating To ${navigation.state.params.well.title}`
     })
   },
-  GamePage: {screen: GamePage},
   WellDescription: {
     screen: WellDescriptionPage,
     navigationOptions: ({navigation}) => ({
@@ -56,7 +52,9 @@ export const profileNav = {
     })
   },
   CreateWellPage: {screen: CreateWellPage},
-  DonationsPage: {screen: DonationsPage},
+  DonationsPage: {
+    screen: DonationsPage
+  },
   WellDescription: {
     screen: WellDescriptionPage,
     navigationOptions: ({navigation}) => ({
@@ -65,16 +63,11 @@ export const profileNav = {
   }
 };
 
-export const storeNav = {
-  Home: {screen: StorePage},
-  //Stripe: {screen: StripePage}
-};
 
 export const mainNav = {
   'Map View': {screen: StackNavigator(mapNav)},
   'List View': {screen: StackNavigator(listNav)},
-  Profile: {screen: StackNavigator(profileNav)},
-  //Store: {screen: StackNavigator(storeNav)},
+  Profile: {screen: StackNavigator(profileNav)}
 };
 
 export const initialNav = {

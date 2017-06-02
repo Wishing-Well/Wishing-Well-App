@@ -11,13 +11,20 @@ import styles from './styles'
 import {refreshDonations} from '../../actions';
 
 class DonationsPage extends Component {
+
   static navigationOptions = {
+    title: 'My Donations',
+    headerTintColor: '#004B5B',
+    headerStyle: {
+      backgroundColor: '#e5f7fc',
+      elevation: 0
+    },
     tabBarIcon: () => (
       <Image
-        source={require('../../assets/profile.png')}
+        source={require('../../assets/coins.png')}
         style={styles.icon}
       />
-      )
+    )
   }
 
   render() {
@@ -32,7 +39,7 @@ class DonationsPage extends Component {
                   source={require('../../assets/Coin.png')}
                   style={styles.coin}
                 />
-                <Text style={styles.titleText}>
+                <Text style={styles.donationText}>
                   ${(donation.amount / 100).toFixed(2)}
                 </Text>
                 <Text style={styles.titleText}>

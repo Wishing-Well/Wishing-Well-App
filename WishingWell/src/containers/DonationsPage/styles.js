@@ -11,11 +11,19 @@ export default StyleSheet.create({
   donation: {
     flexDirection: 'row',
     width: '100%',
-    left: '5%',
+    left: '4%',
     justifyContent: 'flex-start'
   },
   titleText : {
     color: '#004b5b',
+    fontWeight: '700',
+    paddingLeft: '5%',
+    fontSize: 18,
+    paddingVertical: 15,
+    marginTop: 15
+  },
+  donationText: {
+    color: 'rgba(19, 193, 112, 0.7)',
     fontWeight: '700',
     paddingLeft: '5%',
     fontSize: 18,

@@ -7,7 +7,8 @@ import {
   Button,
   Slider,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import {donate} from '../../actions';
@@ -37,7 +38,13 @@ class WellPage extends Component {
     headerStyle: {
       backgroundColor: '#e5f7fc',
       elevation: 0
-    }
+    },
+    tabBarIcon: () => (
+      <Image
+        source={require('../../assets/donation.png')}
+        style={styles.icon}
+      />
+    )
   }
 
   handleFieldParamsChange = (valid, params) => {

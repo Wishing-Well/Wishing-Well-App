@@ -68,5 +68,9 @@ export default StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
     borderRadius: 5,
+  },
+  icon: {
+    width: 22,
+    height: 22
   }
 });

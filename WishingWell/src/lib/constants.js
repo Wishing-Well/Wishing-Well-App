@@ -10,6 +10,7 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const NAVIGATE = 'NAVIGATE';
 export const ADD_WELL = 'ADD_WELL';
 export const ALL_WELLS = 'ALL_WELLS';
+export const ALL_USERS = 'ALL_USERS';
 export const USER_WELL = 'USER_WELL';
 export const WELL_TITLE_ERROR = 'WELL_TITLE_ERROR';
 export const WELL_DESCRIPTION_ERROR = 'WELL_DESCRIPTION_ERROR';

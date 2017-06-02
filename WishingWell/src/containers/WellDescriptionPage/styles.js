@@ -11,10 +11,14 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: 'rgba(101, 208, 232, 0.3)',
-    backgroundColor: '#ccf3ff'
+    backgroundColor: '#ccf3ff',
+    justifyContent: 'center'
   },
   progressBar: {
-    height: 16,
-    backgroundColor: 'purple'
-  }
+    height: 22,
+    borderRadius: 5,
+    left: '1%',
+    right: '1%',
+    backgroundColor: 'rgba(19, 193, 112, 0.7)'
+  },
 });

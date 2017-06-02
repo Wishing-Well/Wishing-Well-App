@@ -42,16 +42,22 @@ class WellPage extends Component {
           onPress={()=> navigate('WellPage', {well: well})}
           color='#84DBEF'
           />
-        <Text>
-          Messages from past wellitors
-        </Text>
+        <Text>User Messages Who DOnated</Text>
+          {well.Messages.map(message => (
+            <View key={message.id}>
+              <Text>{message.message}</Text>
+              <Text>{this.props.allUsers.filter(user => user.id == message.UserId)[0].full_name}</Text>
+              <Text>{new Date(message.createdAt).toDateString()}</Text>
+            </View>
+            ))}
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  allUsers: state.users.allUsers
 })
 
 const mapDispatchToProps = (dispatch) => ({

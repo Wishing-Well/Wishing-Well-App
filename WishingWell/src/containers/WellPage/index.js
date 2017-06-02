@@ -6,7 +6,8 @@ import {
   Text,
   Button,
   Slider,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import {donate} from '../../actions';
@@ -85,7 +86,7 @@ class WellPage extends Component {
         <TextInput
           style={styles.messageInput}
           value={this.state.message}
-          placeholder="Attach Short Message With Donations of 5+"
+          placeholder="Post a note with your donation (max.50)"
           onChangeText={message => this.setState({message})}
           autoCorrect={false}
           maxLength={50}
@@ -97,12 +98,9 @@ class WellPage extends Component {
   renderStepThree = () => {
     return (
       <View style={styles.thirdStep}>
-        <Button
-          style={styles.submitButton}
-          title={`Donate ${this.state.amount}$`}
-          onPress={this.handleDonate}
-          color='#84DBEF'
-          />
+        <TouchableOpacity style={styles.submitButton} onPress={this.handleDonate}>
+          <Text style={styles.buttonText}>{`Donate $${this.state.amount}`}</Text>
+        </TouchableOpacity>
       </View>
     )
   }

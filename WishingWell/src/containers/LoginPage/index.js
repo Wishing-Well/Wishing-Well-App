@@ -30,15 +30,8 @@ class InitialPage extends Component {
     header: null,
   }
 
-  validateEmail = (email) => {
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-  };
-
   handleLogin = () => {
-    if(!this.validateEmail(this.state.email)) {
-      return this.setState({email: '', password: ''});
-    }
-    this.props.login(this.state.email, this.state.password);
+    this.props.login((this.state.email).toLowerCase(), this.state.password);
   };
 
   render() {

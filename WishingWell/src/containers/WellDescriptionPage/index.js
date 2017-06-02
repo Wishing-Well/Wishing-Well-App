@@ -5,7 +5,9 @@ import {
   View,
   Text,
   Button,
-  Slider
+  Slider,
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import {donate} from '../../actions';
@@ -29,27 +31,28 @@ class WellPage extends Component {
     const {navigate} = this.props.navigation;
     console.log(well);
     return (
+      <ScrollView>
       <View style={styles.wholePage}>
-      <View>
-
-      </View>
-        <Text style={styles.wellCurrent}>
-          Collected: {well.current_amount}
-        </Text>
-        <Text style={styles.wellTarget}>
-          Target: {well.funding_target}
-        </Text>
+        <View style={styles.wellAmounts}>
+          <Text style={styles.wellCurrent}>
+            Collected: ${(well.current_amount / 100).toFixed(2)}
+          </Text>
+          <Text style={styles.wellTarget}>
+            Target: ${(well.funding_target / 100).toFixed(2)}
+          </Text>
+        </View>
         <View style={styles.progressBarContainer}>
           <View style ={[styles.progressBar, {width: `${well.current_amount / well.funding_target * 100}%`}]} />
         </View>
+        <Text style={styles.descTitle}>
+          Well Story
+        </Text>
         <Text style={styles.wellDesc}>
           {well.description}
         </Text>
-        <Button
-          title="Wellit!"
-          onPress={()=> navigate('WellPage', {well: well})}
-          color='#84DBEF'
-          />
+        <TouchableOpacity style={styles.submitButton} onPress={()=> navigate('WellPage', {well: well})}>
+          <Text style={styles.buttonText}>Donate</Text>
+        </TouchableOpacity>
         <Text style={styles.messagesTitle}>User Messages Who Donated</Text>
           {well.Messages.map(message => (
             <View key={message.id} style={styles.messageContainer}>
@@ -59,6 +62,7 @@ class WellPage extends Component {
             </View>
             ))}
       </View>
+      </ScrollView>
     );
   }
 }

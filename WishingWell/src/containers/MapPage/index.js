@@ -53,6 +53,7 @@ class MapPage extends Component {
     return (
       <View style={styles.container}>
         <MapView
+          annotationsAreImmutable
           ref={map => { this._map = map; }}
           userTrackingMode={this.state.userTrackingMode}
           compassIsHidden={true}

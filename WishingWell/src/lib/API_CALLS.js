@@ -87,20 +87,6 @@ export const donate = (id, amount, token, message) => fetch(`${ip}/api/wells/don
   .then(res => res.json())
   .catch(error => error);
 
-export const makeCharge = (amount, token) => fetch(`${ip}/api/payments/create`,
-  {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({amount, token})
-  }
-)
-  .then(res => res.json())
-  .catch(error => error);
-
 export const getUserInfo = user_id => fetch(`${ip}/api/users/${user_id}`, {
   credentials: 'include',
 })

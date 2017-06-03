@@ -67,8 +67,8 @@ export const signup = userInfo => dispatch => {
     console.log(res);
     if (res.success) {
       dispatch({type: types.SIGNUP_SUCCESS, id: res.user.id, full_name: res.user.full_name});
-      dispatch(login(res.user.email, userInfo.password))
       dispatch({type: types.CLOSE_LOADING});
+      dispatch(login(res.user.email, userInfo.password))
       return true;
     } else {return failure(res, dispatch);}
   })

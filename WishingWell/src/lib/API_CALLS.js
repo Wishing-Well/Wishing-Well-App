@@ -1,8 +1,8 @@
 /*jshint esversion: 6*/
 const old_ip = '10.0.1.35:4000';
-const ip = 'wellitapp.com';
+const ip = 'https://wellitapp.com';
 
-export const login = (username, password) => fetch(`http://${ip}/api/users/login`,
+export const login = (username, password) => fetch(`${ip}/api/users/login`,
   {
     method: 'POST',
     credentials: 'include',
@@ -17,7 +17,7 @@ export const login = (username, password) => fetch(`http://${ip}/api/users/login
 .catch(error => err);
 
 
-export const signup = userInfo => fetch(`http://${ip}/api/users/create`,
+export const signup = userInfo => fetch(`${ip}/api/users/create`,
   {
     method: 'POST',
     credentials: 'include',
@@ -31,7 +31,7 @@ export const signup = userInfo => fetch(`http://${ip}/api/users/create`,
 .then(res => res.json())
 .catch(err => err);
 
-export const createWell = wellInfo => fetch(`http://${ip}/api/wells/create`,
+export const createWell = wellInfo => fetch(`${ip}/api/wells/create`,
   {
     method: 'POST',
     credentials: 'include',
@@ -48,32 +48,32 @@ export const createWell = wellInfo => fetch(`http://${ip}/api/wells/create`,
 })
 .catch(error => error);
 
-export const getAllWells = () => fetch(`http://${ip}/api/wells`, {
+export const getAllWells = () => fetch(`${ip}/api/wells`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const getAllUsers = () => fetch(`http://${ip}/api/users/names`, {
+export const getAllUsers = () => fetch(`${ip}/api/users/names`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
 
-export const getUserWell = user_id => fetch(`http://${ip}/api/users/${user_id}/wells`, {
+export const getUserWell = user_id => fetch(`${ip}/api/users/${user_id}/wells`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserDonations = user_id => fetch(`http://${ip}/api/users/${user_id}/donations`, {
+export const getUserDonations = user_id => fetch(`${ip}/api/users/${user_id}/donations`, {
   credentials: 'include'
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const donate = (id, amount, token, message) => fetch(`http://${ip}/api/wells/donate`,
+export const donate = (id, amount, token, message) => fetch(`${ip}/api/wells/donate`,
   {
     method: 'PUT',
     credentials: 'include',
@@ -87,7 +87,7 @@ export const donate = (id, amount, token, message) => fetch(`http://${ip}/api/we
   .then(res => res.json())
   .catch(error => error);
 
-export const makeCharge = (amount, token) => fetch(`http://${ip}/api/payments/create`,
+export const makeCharge = (amount, token) => fetch(`${ip}/api/payments/create`,
   {
     method: 'POST',
     credentials: 'include',
@@ -101,19 +101,19 @@ export const makeCharge = (amount, token) => fetch(`http://${ip}/api/payments/cr
   .then(res => res.json())
   .catch(error => error);
 
-export const getUserInfo = user_id => fetch(`http://${ip}/api/users/${user_id}`, {
+export const getUserInfo = user_id => fetch(`${ip}/api/users/${user_id}`, {
   credentials: 'include',
 })
   .then(res => res.json())
   .catch(error => error);
 
-export const logout = () => fetch(`http://${ip}/api/users/logout`, {
+export const logout = () => fetch(`${ip}/api/users/logout`, {
   credentials: 'include',
 })
   .then(res => res)
   .catch(error => error);
 
-export const reLogin = () => fetch(`http://${ip}/api/users/info`, {
+export const reLogin = () => fetch(`${ip}/api/users/info`, {
   credentials: 'include',
 })
   .then(res => {

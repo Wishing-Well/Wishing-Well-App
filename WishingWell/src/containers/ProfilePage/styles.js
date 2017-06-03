@@ -37,7 +37,8 @@ export default StyleSheet.create({
     paddingTop: '5%',
     paddingRight: '6%',
     color: 'rgba(0,75,91,0.4)',
-    fontSize: 12
+    fontSize: 12,
+    width: '30%'
   },
   pageTitle: {
     paddingTop: '10%',
@@ -94,7 +95,8 @@ export default StyleSheet.create({
     paddingTop: '4%',
     fontWeight: '700',
     fontSize: 18,
-    color: 'rgba(0,75,91,0.7)'
+    color: 'rgba(0,75,91,0.7)',
+    width: '70%'
   },
   allText: {
     paddingTop: '2%',

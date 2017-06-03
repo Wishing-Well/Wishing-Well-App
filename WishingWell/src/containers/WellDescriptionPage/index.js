@@ -33,6 +33,14 @@ class WellPage extends Component {
     )
   }
 
+  getWidth(current, target) {
+    let width = current / target;
+    if (width > 1) {
+      width = 0.98
+    }
+    return `${width * 100}%`
+  }
+
   render() {
     const {well} = this.props.navigation.state.params;
     const {navigate} = this.props.navigation;
@@ -46,7 +54,7 @@ class WellPage extends Component {
           </Text>
         </View>
         <View style={styles.progressBarContainer}>
-          <View style ={[styles.progressBar, {width: `${well.current_amount / well.funding_target * 100}%`}]} />
+          <View style={[styles.progressBar, {width: this.getWidth(well.current_amount, well.funding_target)}]}/>
         </View>
         <Text style={styles.descTitle}>
           Well Story

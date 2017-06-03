@@ -10,7 +10,6 @@ stripe.init({
 });
 
 export const createWell = (wellInfo, done) => dispatch => {
-  console.log
   dispatch({type: types.SHOW_LOADING});
   stripe.createTokenWithBankAccount({
       accountNumber: wellInfo.accountNumber,

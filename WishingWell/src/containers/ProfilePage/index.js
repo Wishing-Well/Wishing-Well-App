@@ -46,6 +46,14 @@ class ProfilePage extends Component {
     return `${width * 100}%`
   }
 
+  titleBreak(userWell) {
+    if (userWell.title.length < 22) {
+      return userWell.title
+    } else {
+      return `${userWell.title.slice(0,22)}...`
+    }
+  }
+
   renderWellInfo = () => {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props;
@@ -57,7 +65,7 @@ class ProfilePage extends Component {
             <View style={styles.wellContainer}>
               <View style={styles.wellHeader}>
                 <Text style={styles.wellTitle}>
-                  {userWell.title.slice(0, 15)}...
+                  {this.titleBreak(userWell)}
                 </Text>
                 <Text style={styles.daysText}>
                   {`${this.handleDaysLeft(userWell.expiration_date, userWell.createdAt)} days left`}
@@ -87,6 +95,7 @@ class ProfilePage extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props
+    console.log('props',this.props)
     return(
       <View style={styles.wholeContainer}>
         <View style={styles.infoContainer}>

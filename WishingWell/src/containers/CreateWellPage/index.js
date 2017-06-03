@@ -7,7 +7,8 @@ import {
   Picker,
   Button,
   Slider,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import {createWell, closeErrors} from '../../actions';
@@ -130,10 +131,9 @@ class CreateWellPage extends Component {
           {this.props.wellDescErr &&
             (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
-          <Button
-            title="Submit Your Well"
-            onPress={this.handleSubmit}
-          />
+          <TouchableOpacity style={styles.createWell} onPress={this.handleSubmit}>
+            <Text style={styles.buttonText}>Create a Well</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );

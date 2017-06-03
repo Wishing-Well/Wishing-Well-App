@@ -49,7 +49,6 @@ class MapPage extends Component {
   }
 
   setCenter = (location) => {
-    console.log(location)
     this.setState({latitude:location.latitude, longitude: location.longitude})
   }
 

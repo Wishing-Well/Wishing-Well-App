@@ -4,7 +4,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles'
@@ -31,6 +32,7 @@ class DonationsPage extends Component {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props
     return (
+     <ScrollView style={styles.scrollView}>
       <View style={styles.wholeContainer}>
         {userInfo.Donations.map(donation => (
           <TouchableOpacity style={styles.donation} key={donation.id} onPress={ ()=> navigate('WellDescription',
@@ -43,12 +45,13 @@ class DonationsPage extends Component {
                   ${(donation.amount / 100).toFixed(2)}
                 </Text>
                 <Text style={styles.titleText}>
-                  {this.props.allWells.filter(well => well.id == donation.WellId)[0].title}
+                  {this.props.allWells.filter(well => well.id == donation.WellId)[0].title.slice(0,20)}...
                 </Text>
           </TouchableOpacity>
         ))}
 
       </View>
+     </ScrollView>
     );
   }
 }

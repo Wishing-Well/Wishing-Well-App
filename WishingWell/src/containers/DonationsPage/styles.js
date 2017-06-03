@@ -43,5 +43,8 @@ export default StyleSheet.create({
   icon: {
     width: 22,
     height: 22
+  },
+  scrollView: {
+    backgroundColor: '#e5f7fc'
   }
 });

@@ -40,7 +40,7 @@ class ListPage extends Component {
               <TouchableOpacity onPress={()=> navigate('WellDescription', {well: well})} key={well.id}>
                 <View>
                   <Text style={styles.titleText}>
-                    {well.title}
+                    {well.title.slice(0,27)}...
                   </Text>
                   <Text style={styles.wellText}>
                     Funded: ${(well.current_amount / 100).toFixed(2)} / ${(well.funding_target / 100).toFixed(2)}

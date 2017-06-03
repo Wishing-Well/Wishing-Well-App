@@ -15,6 +15,7 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles.js';
 import {login, navigate, loginUser} from '../../actions';
+import LoadingScreen from '../LoadingScreen'
 
 class InitialPage extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class InitialPage extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
+    if(this.props.loading) return (<LoadingScreen/>);
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar backgroundColor="#65D0E8"/>
@@ -90,7 +92,8 @@ const mapStateToProps = state => ({
   userInfo: state.users.userInfo,
   globalErr: state.errors.globalErr,
   loginErr: state.errors.loginErr,
-  errMessage: state.errors.errMessage
+  errMessage: state.errors.errMessage,
+  loading: state.wells.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

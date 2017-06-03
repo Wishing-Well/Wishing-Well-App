@@ -16,6 +16,7 @@ import stripe from 'tipsi-stripe';
 import {STRIPE_KEY} from '../../keys';
 import { PaymentCardTextField } from 'tipsi-stripe';
 import styles from './styles';
+import LoadingScreen from '../LoadingScreen'
 
 stripe.init({
   publishableKey: STRIPE_KEY
@@ -113,6 +114,7 @@ class WellPage extends Component {
   }
 
   render() {
+    if(this.props.loading) return (<LoadingScreen/>);
     const {well} = this.props.navigation.state.params;
     return (
       <View style={styles.fullPage}>
@@ -139,7 +141,8 @@ class WellPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  loading: state.wells.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

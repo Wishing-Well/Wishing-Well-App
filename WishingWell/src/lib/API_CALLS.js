@@ -110,7 +110,7 @@ export const getUserInfo = user_id => fetch(`http://${ip}/api/users/${user_id}`,
 export const logout = () => fetch(`http://${ip}/api/users/logout`, {
   credentials: 'include',
 })
-  .then(res => res.json())
+  .then(res => res)
   .catch(error => error);
 
 export const reLogin = () => fetch(`http://${ip}/api/users/info`, {

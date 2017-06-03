@@ -56,7 +56,6 @@ class WellPage extends Component {
   handleDonate = () => {
     this.props.donate(this.state)
       .then(check => {
-        console.log(check);
         if(check) {
           this.setState({
             well_id: this.props.navigation.state.params.well.id,

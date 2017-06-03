@@ -87,7 +87,6 @@ class ProfilePage extends Component {
   render() {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props
-    console.log('props',this.props)
     return(
       <View style={styles.wholeContainer}>
         <View style={styles.infoContainer}>

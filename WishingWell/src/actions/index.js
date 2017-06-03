@@ -28,7 +28,6 @@ export const createWell = (wellInfo, done) => dispatch => {
         token: token
       })
       .then(res => {
-        console.log(res);
         if (res.success) {
           dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
           dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
@@ -70,8 +69,7 @@ export const login = (email, password) => dispatch => {
 export const signup = userInfo => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.signup(userInfo)
-  .then(res => {
-    console.log(res);
+  .then(res => 
     if (res.success) {
       dispatch({type: types.SIGNUP_SUCCESS, id: res.user.id, full_name: res.user.full_name});
       dispatch({type: types.CLOSE_LOADING});
@@ -89,8 +87,7 @@ export const signup = userInfo => dispatch => {
 export const loginUser = asyncArr => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.reLogin()
-  .then(res => {
-    console.log(res);
+  .then(res => 
     if(res.success) {
       dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
       dispatch({type: types.CLOSE_LOADING});
@@ -107,8 +104,7 @@ export const loginUser = asyncArr => dispatch => {
 export const logout = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.logout()
-  .then(res => {
-    console.log(res);
+  .then(res => 
     AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => dispatch({type: types.LOG_OUT}))
       .catch(error => dispatch({type: types.LOG_OUT, error}));
@@ -119,14 +115,12 @@ export const logout = () => dispatch => {
 export const loadApp = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.getAllWells()
-  .then((res) => {
-    console.log(res);
+  .then((res) => 
     if (res.success) {
       dispatch({type: types.ALL_WELLS, allWells: prepareWells(res.wells)});
     } else {failure(res, dispatch);}
     return API.getAllUsers()
     .then(res => {
-      console.log(res);
       if (res.success) {
         dispatch({type: types.ALL_USERS, allUsers: res.users});
         dispatch({type: types.CLOSE_LOADING});
@@ -143,12 +137,10 @@ export const loadApp = () => dispatch => {
 
 export const donate = info => dispatch => {
   dispatch({type: types.SHOW_LOADING});
-  console.log(info);
   return stripe.createTokenWithCard(info.params)
   .then(token => {
     return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
     .then(res => {
-      console.log(res);
       if (res.success) {
         dispatch(loadApp());
         dispatch({type: types.CLOSE_LOADING});

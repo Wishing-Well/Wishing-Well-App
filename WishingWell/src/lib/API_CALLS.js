@@ -42,10 +42,7 @@ export const createWell = wellInfo => fetch(`${ip}/api/wells/create`,
     body: JSON.stringify(wellInfo)
   }
 )
-.then(res => {
-  console.log(res);
-  return res.json();
-})
+.then(res => res.json())
 .catch(error => error);
 
 export const getAllWells = () => fetch(`${ip}/api/wells`, {
@@ -102,8 +99,5 @@ export const logout = () => fetch(`${ip}/api/users/logout`, {
 export const reLogin = () => fetch(`${ip}/api/users/info`, {
   credentials: 'include',
 })
-  .then(res => {
-    console.log(res);
-    return res.json();
-  })
+  .then(res => res.json())
   .catch(error => error);

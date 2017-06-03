@@ -44,7 +44,6 @@ class CreateWellPage extends Component {
   }
   handleSubmit = () => {
     this.props.createWell(this.state, (check) => {
-      console.log(check)
       if(check) {
         this.setState({
           title: '',

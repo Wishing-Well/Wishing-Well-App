@@ -71,16 +71,6 @@ class ProfilePage extends Component {
             <Text style={styles.createWellText}>+ CREATE A WELL</Text>
           </View>
         </TouchableOpacity>
-        // <View style={styles.wellContainer}>
-        //   <TouchableOpacity>
-        //     <Text style={styles.allText}>
-        //       {'It is free to create a well'}
-        //     </Text>
-        //     <Text style={styles.allText}>
-        //       {'Create a well below'}
-        //     </Text>
-        //   </TouchableOpacity>
-        // </View>
       )
     }
   }

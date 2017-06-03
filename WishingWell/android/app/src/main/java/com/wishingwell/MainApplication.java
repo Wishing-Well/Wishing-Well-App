@@ -3,6 +3,7 @@ package com.wishingwell;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeMapboxGLPackage(),
             new StripeReactPackage(),
             new StripeReactPackage(),
             new ReactNativeMapboxGLPackage()

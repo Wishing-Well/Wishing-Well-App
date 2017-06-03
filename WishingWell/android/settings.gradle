@@ -1,7 +1,3 @@
-rootProject.name = 'WishingWell'
-include ':tipsi-stripe'
-project(':tipsi-stripe').projectDir = new File(rootProject.projectDir, '../node_modules/tipsi-stripe/android')
-include ':react-native-mapbox-gl'
-project(':react-native-mapbox-gl').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mapbox-gl/android')
+rootProject.name = 'wellit'
 
 include ':app'

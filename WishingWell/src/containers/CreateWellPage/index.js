@@ -11,13 +11,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import {createWell, closeErrors} from '../../actions';
-import styles from './stylesheet';
-import stripe from 'tipsi-stripe';
-import {STRIPE_KEY} from '../../keys';
-
-stripe.init({
-  publishableKey: STRIPE_KEY
-});
+import styles from './styles';
+import LoadingScreen from '../LoadingScreen'
 
 class CreateWellPage extends Component {
   constructor(props) {
@@ -27,10 +22,8 @@ class CreateWellPage extends Component {
       time: 7,
       description: '',
       funding_target: 1,
-      readyToSubmit: false,
       accountNumber: '',
       routingNumber: '',
-      token: ''
     };
   }
 
@@ -48,39 +41,30 @@ class CreateWellPage extends Component {
       />
     )
   }
-
-  prepareWell = (done) => {
-    navigator.geolocation.getCurrentPosition( position => {
-      done({
-        title: this.state.title,
-        time: this.state.time,
-        description: this.state.description,
-        location: `${position.coords.latitude},${position.coords.longitude}`,
-        funding_target: Number(this.state.funding_target) * 100,
-        token: this.state.token
-      });
-    }, error => {
-      console.error(error);
-    });
-  }
-
-  handleBankInfo = () => {
-    stripe.createTokenWithBankAccount({
-      accountNumber: this.state.accountNumber,
-      routingNumber: this.state.routingNumber,
-      countryCode: 'us',
-      currency: 'usd'
+  handleSubmit = () => {
+    this.props.createWell(this.state, (check) => {
+      console.log(check)
+      if(check) {
+        this.setState({
+          title: '',
+          time: 7,
+          description: '',
+          funding_target: 1,
+          accountNumber: '',
+          routingNumber: '',
+        })
+        this.props.navigation.goBack()
+      } else {
+        this.setState({
+          accountNumber: '',
+          routingNumber: '',
+        })
+      }
     })
-      .then(token => {
-        console.log(token);
-        this.setState({readyToSubmit: true, token: token})
-      })
-      .catch(error => {
-        console.log(error)
-      })
   }
 
   render() {
+    if(this.props.loading) return (<LoadingScreen/>);
     return (
       <ScrollView style={styles.scrollView}>
         <View style={styles.fullPage}>
@@ -134,7 +118,7 @@ class CreateWellPage extends Component {
             value={this.state.accountNumber}
             placeholder="Bank Account Number"
             onChangeText={accountNumber => this.setState({accountNumber})}
-            />
+          />
           <TextInput
             style={styles.bankParent}
             placeholderTextColor="rgba(0, 75, 91, 0.7)"
@@ -143,23 +127,13 @@ class CreateWellPage extends Component {
             placeholder="Bank Routing Number"
             onChangeText={routingNumber => this.setState({routingNumber})}
             />
-          {
-            !this.state.readyToSubmit &&
-            <Button
-              title="Validate Information"
-              onPress={this.handleBankInfo}
-              />
+          {this.props.wellDescErr &&
+            (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
           }
-            {this.props.wellDescErr &&
-              (<Text style={{color: 'red'}}>{this.props.errMessage}</Text>)
-            }
-          {
-            this.state.readyToSubmit &&
-            <Button
-              title="Submit Your Well"
-              onPress={() => this.prepareWell(this.props.createWell)}
-              />
-          }
+          <Button
+            title="Submit Your Well"
+            onPress={this.handleSubmit}
+          />
         </View>
       </ScrollView>
     );
@@ -172,11 +146,12 @@ const mapStateToProps = state => ({
   wellTitleErr: state.errors.wellTitleErr,
   wellDescErr: state.errors.wellDescErr,
   wellFundErr: state.errors.wellFundErr,
-  errMessage: state.errors.errMessage
+  errMessage: state.errors.errMessage,
+  loading: state.wells.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createWell: wellInfo => dispatch(createWell(wellInfo)),
+  createWell: (wellInfo, done) => dispatch(createWell(wellInfo, done)),
   closeErrors: () => dispatch(closeErrors())
 })
 

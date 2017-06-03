@@ -3,6 +3,44 @@ import {AsyncStorage} from 'react-native';
 import * as types from '../lib/constants';
 import failure from './errorHelpers.js';
 import * as API from '../lib/API_CALLS.js';
+import stripe from 'tipsi-stripe';
+import {STRIPE_KEY} from '../keys';
+stripe.init({
+  publishableKey: STRIPE_KEY
+});
+
+export const createWell = (wellInfo, done) => dispatch => {
+  console.log
+  dispatch({type: types.SHOW_LOADING});
+  stripe.createTokenWithBankAccount({
+      accountNumber: wellInfo.accountNumber,
+      routingNumber: wellInfo.routingNumber,
+      countryCode: 'us',
+      currency: 'usd'
+    })
+  .then(token => {
+    navigator.geolocation.getCurrentPosition( position => {
+      API.createWell({
+        title: wellInfo.title,
+        time: wellInfo.time,
+        description: wellInfo.description,
+        location: `${position.coords.latitude},${position.coords.longitude}`,
+        funding_target: Number(wellInfo.funding_target) * 100,
+        token: token
+      })
+      .then(res => {
+        console.log(res);
+        if (res.success) {
+          dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
+          dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
+          dispatch({type: types.CLOSE_LOADING});
+        } else {failure(res, dispatch);}
+        done(res.success)
+      })
+    })
+  })
+  .catch(error => dispatch({type: types.BANK_FAIL, error}));
+}
 
 export const login = (email, password) => dispatch => {
   dispatch({type: types.SHOW_LOADING});
@@ -15,7 +53,8 @@ export const login = (email, password) => dispatch => {
           dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
         });
       });
-      return dispatch({type: types.CLOSE_LOADING, success: true});
+      dispatch({type: types.CLOSE_LOADING});
+      return true;
     } else {return failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
@@ -29,7 +68,8 @@ export const signup = userInfo => dispatch => {
     if (res.success) {
       dispatch({type: types.SIGNUP_SUCCESS, id: res.user.id, full_name: res.user.full_name});
       dispatch(login(res.user.email, userInfo.password))
-      return dispatch({type: types.CLOSE_LOADING, success: true});
+      dispatch({type: types.CLOSE_LOADING});
+      return true;
     } else {return failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
@@ -42,7 +82,8 @@ export const loginUser = asyncArr => dispatch => {
     console.log(res);
     if(res.success) {
       dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
-      return dispatch({type: types.CLOSE_LOADING, success: true});
+      dispatch({type: types.CLOSE_LOADING});
+      return true;
     } else {return failure(res, dispatch);}
   })
   .catch(error => dispatch({type: types.LOG_OUT, error}));
@@ -56,22 +97,8 @@ export const logout = () => dispatch => {
     AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => dispatch({type: types.LOG_OUT}))
       .catch(error => dispatch({type: types.LOG_OUT, error}));
-    return dispatch({type: types.CLOSE_LOADING, success: true});
+    dispatch({type: types.CLOSE_LOADING});
   });
-}
-
-export const createWell = wellInfo => dispatch => {
-  dispatch({type: types.SHOW_LOADING});
-  return API.createWell(wellInfo)
-  .then(res => {
-    console.log(res);
-    if (res.success) {
-      dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
-      dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
-      return dispatch({type: types.CLOSE_LOADING, success: true});
-    } else {return failure(res, dispatch);}
-  })
-  .catch(error => dispatch({type: types.CREATE_WELL_FAIL, error}));
 }
 
 export const loadApp = () => dispatch => {
@@ -87,24 +114,31 @@ export const loadApp = () => dispatch => {
       console.log(res)
       if (res.success) {
         dispatch({type: types.ALL_USERS, allUsers: res.users});
-        return dispatch({type: types.CLOSE_LOADING, success: true});
+        dispatch({type: types.CLOSE_LOADING});
+        return true;
       } else {return failure(res, dispatch);}
     })
   })
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 }
 
-export const donate = (well_id, amount, token, message) => dispatch => {
+export const donate = info => dispatch => {
   dispatch({type: types.SHOW_LOADING});
-  return API.donate(well_id, amount, token, message)
-  .then(res => {
-    console.log(res);
-    if (res.success) {
-      dispatch({type: types.MAKE_DONATION, userInfo: res.user});
-      return dispatch({type: types.CLOSE_LOADING, success: true});
-    } else {return failure(res, dispatch);}
-  })
-  .catch(error => dispatch({type: types.DONATION_FAIL, error}));
+  console.log(info)
+  return stripe.createTokenWithCard(info.params)
+  .then(token => {
+    console.log(token);
+    return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
+    .then(res => {
+      console.log(res);
+      if (res.success) {
+        dispatch({type: types.MAKE_DONATION, userInfo: res.user});
+        dispatch({type: types.CLOSE_LOADING});
+        return true;
+      } else {return failure(res, dispatch);}
+    })
+    .catch(error => dispatch({type: types.DONATION_FAIL, error}));
+  });
 }
 
 export const makeCharge = (amount, token) => dispatch => {
@@ -114,13 +148,15 @@ export const makeCharge = (amount, token) => dispatch => {
     console.log(res);
     if (res.success) {
       dispatch({type: types.PAYMENT_SUCCESS, userInfo: res.user});
-      return dispatch({type: types.CLOSE_LOADING, success: true});
+      dispatch({type: types.CLOSE_LOADING});
+      return true;
     } else {return failure(res, dispatch);}
   });
 }
 
+export const clearErrors = () => dispatch => dispatch({type: types.CLEAR_ERRORS});
+
 const prepareWells = wellsArray => {
-  console.log(wellsArray);
   return wellsArray.map(
     well => (
       {

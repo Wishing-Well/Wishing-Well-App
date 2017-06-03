@@ -23,6 +23,8 @@ class MapPage extends Component {
           userTrackingMode: Mapbox.userTrackingMode.follow,
           zoom: 17,
           annotations: [],
+          latitude: null,
+          longitude: null
         };
     };
 
@@ -43,17 +45,22 @@ class MapPage extends Component {
   };
 
   handleCenter = () => {
-    navigator.geolocation.getCurrentPosition( position => {
-      this._map.setCenterCoordinate(position.coords.latitude, position.coords.longitude);
-    })
+    this._map.setCenterCoordinate(this.state.latitude, this.state.longitude)
   }
+
+  setCenter = (location) => {
+    console.log(location)
+    this.setState({latitude:location.latitude, longitude: location.longitude})
+  }
+
 
   render() {
     const {navigate} = this.props.navigation;
+    if(this.state.recenter) return (<LoadingScreen/>);
     return (
       <View style={styles.container}>
         <MapView
-          annotationsAreImmutable
+          annotationsAreImmutable={true}
           ref={map => { this._map = map; }}
           userTrackingMode={this.state.userTrackingMode}
           compassIsHidden={true}
@@ -69,6 +76,7 @@ class MapPage extends Component {
           onRegionWillChange={this.onRegionWillChange}
           onOpenAnnotation={(event)=> navigate('WellDescription', {well: this.props.allWells.filter(well => well.id === event.id)[0]})}
           logoIsHidden={true}
+          onUpdateUserLocation={this.setCenter}
           attributionButtonIsHidden={true}
           annotations={this.props.allWells}
         />

@@ -19,10 +19,10 @@ class ProfilePage extends Component {
   }
 
 
-  handleDaysLeft = () => {
-    let expirationDate = new Date(this.props.userInfo.Wells[0].expiration_date)
-    let createdDate = new Date(this.props.userInfo.Wells[0].createdAt)
-    let timeDiff = Math.abs(this.expirationDate.getTime() - this.createdDate.getTime());
+  handleDaysLeft = (expiration, creation) => {
+    let expirationDate = new Date(expiration)
+    let createdDate = new Date(creation)
+    let timeDiff = Math.abs(expirationDate.getTime() - createdDate.getTime());
     let daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return daysLeft
   }
@@ -38,6 +38,14 @@ class ProfilePage extends Component {
     )
   }
 
+  getWidth(current, target) {
+    let width = current / target;
+    if (width > 1) {
+      width = 0.98
+    }
+    return `${width * 100}%`
+  }
+
   renderWellInfo = () => {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props;
@@ -48,17 +56,17 @@ class ProfilePage extends Component {
             <View style={styles.wellContainer}>
               <View style={styles.wellHeader}>
                 <Text style={styles.wellTitle}>
-                  {userInfo.Wells[0].title}
+                  {userInfo.Wells[0].title.slice(0, 15)}...
                 </Text>
                 <Text style={styles.daysText}>
-                  {`${5} days left`}
+                  {`${this.handleDaysLeft(userInfo.Wells[0].expiration_date, userInfo.Wells[0].createdAt)} days left`}
                 </Text>
               </View>
               <Text style={styles.allText}>
                   Funded: ${(userInfo.Wells[0].current_amount / 100).toFixed(2)} / ${(userInfo.Wells[0].funding_target / 100).toFixed(2)}
               </Text>
               <View style={styles.progressBarContainer}>
-                  <View style ={[styles.progressBar, {width: `${userInfo.Wells[0].current_amount / userInfo.Wells[0].funding_target * 100}%`}]} />
+                  <View style ={[styles.progressBar, {width: this.getWidth(userInfo.Wells[0].current_amount, userInfo.Wells[0].funding_target)}]} />
               </View>
             </View>
            </View>

@@ -29,6 +29,14 @@ class ListPage extends Component {
     return `${width * 100}%`
   }
 
+  titleBreak(well) {
+    if (well.title.length < 29) {
+      return well.title
+    } else {
+      return `${well.title.slice(0,25)}...`
+    }
+  }
+
   render() {
     const {navigate} = this.props.navigation;
     return (
@@ -39,7 +47,7 @@ class ListPage extends Component {
               <TouchableOpacity onPress={()=> navigate('WellDescription', {well: well})} key={well.id}>
                 <View>
                   <Text style={styles.titleText}>
-                    {well.title.slice(0,27)}...
+                    {this.titleBreak(well)}
                   </Text>
                   <Text style={styles.wellText}>
                     Funded: ${(well.current_amount / 100).toFixed(2)} / ${(well.funding_target / 100).toFixed(2)}

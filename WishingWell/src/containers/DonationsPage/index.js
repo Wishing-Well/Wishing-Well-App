@@ -28,6 +28,7 @@ class DonationsPage extends Component {
     )
   }
 
+
   render() {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props

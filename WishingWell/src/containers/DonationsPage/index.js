@@ -28,6 +28,13 @@ class DonationsPage extends Component {
     )
   }
 
+  titleBreak(userWell) {
+    if (userWell.title.length < 22) {
+      return userWell.title
+    } else {
+      return `${userWell.title.slice(0,22)}...`
+    }
+  }
 
   render() {
     const {navigate} = this.props.navigation;
@@ -46,7 +53,7 @@ class DonationsPage extends Component {
                   ${(donation.amount / 100).toFixed(2)}
                 </Text>
                 <Text style={styles.titleText}>
-                  {this.props.allWells.filter(well => well.id == donation.WellId)[0].title.slice(0,20)}...
+                  {this.titleBreak(this.props.allWells.filter(well => well.id == donation.WellId)[0])}
                 </Text>
           </TouchableOpacity>
         ))}

@@ -40,7 +40,6 @@ export const createWell = (wellInfo, done) => dispatch => {
     })
   })
   .catch(error => dispatch({type: types.BANK_FAIL, error}));
-
 }
 
 export const login = (email, password) => dispatch => {
@@ -123,18 +122,23 @@ export const loadApp = () => dispatch => {
   .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
 }
 
-export const donate = (well_id, amount, token, message) => dispatch => {
+export const donate = info => dispatch => {
   dispatch({type: types.SHOW_LOADING});
-  return API.donate(well_id, amount, token, message)
-  .then(res => {
-    console.log(res);
-    if (res.success) {
-      dispatch({type: types.MAKE_DONATION, userInfo: res.user});
-      dispatch({type: types.CLOSE_LOADING});
-      return true;
-    } else {return failure(res, dispatch);}
-  })
-  .catch(error => dispatch({type: types.DONATION_FAIL, error}));
+  console.log(info)
+  return stripe.createTokenWithCard(info.params)
+  .then(token => {
+    console.log(token);
+    return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
+    .then(res => {
+      console.log(res);
+      if (res.success) {
+        dispatch({type: types.MAKE_DONATION, userInfo: res.user});
+        dispatch({type: types.CLOSE_LOADING});
+        return true;
+      } else {return failure(res, dispatch);}
+    })
+    .catch(error => dispatch({type: types.DONATION_FAIL, error}));
+  });
 }
 
 export const makeCharge = (amount, token) => dispatch => {
@@ -149,6 +153,8 @@ export const makeCharge = (amount, token) => dispatch => {
     } else {return failure(res, dispatch);}
   });
 }
+
+export const clearErrors = () => dispatch => dispatch({type: types.CLEAR_ERRORS});
 
 const prepareWells = wellsArray => {
   return wellsArray.map(

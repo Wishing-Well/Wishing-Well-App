@@ -62,6 +62,13 @@ const ErrorReducers = (state = initialState, action) => {
         donationErr: true,
         errMessage: action.message
       });
+    case types.BANK_FAIL:
+      return Object.assign({}, state, {
+        bankErr: true,
+        errMessage: action.message
+      });
+    case types.CLEAR_ERRORS:
+      return Object.assign({}, state, initialState);
 
     default:
       return state;

@@ -26,6 +26,7 @@ class WellPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      well_id: props.navigation.state.params.well.id,
       amount: 1,
       message: '',
       valid: false,
@@ -53,11 +54,25 @@ class WellPage extends Component {
   }
 
   handleDonate = () => {
-    stripe.createTokenWithCard(this.state.params)
-      .then(token => {
-        console.log(token);
-        this.props.donate(this.props.navigation.state.params.well.id, this.state.amount * 100, token, this.state.message)
-      });
+    this.props.donate(this.state)
+      .then(check => {
+        console.log(check);
+        if(check) {
+          this.setState({
+            well_id: this.props.navigation.state.params.well.id,
+            amount: 1,
+            message: '',
+            valid: false,
+            params: {}
+          })
+          this.props.navigation.goBack()
+        } else {
+          this.setState({
+            valid: false,
+            params: {}
+          })
+        }
+      })
   };
 
   renderStepOne = () => {
@@ -146,7 +161,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  donate: (well_id, amount, token, message) => dispatch(donate(well_id, amount, token, message))
+  donate: (info) => dispatch(donate(info))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WellPage)

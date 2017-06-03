@@ -1,3 +1,5 @@
+android/gradle.properties
+
 # OSX
 #
 .DS_Store
@@ -29,6 +31,7 @@ build/
 .gradle
 local.properties
 *.iml
+gradle.properties
 
 # node.js
 #
@@ -51,3 +54,5 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+

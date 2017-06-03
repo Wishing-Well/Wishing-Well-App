@@ -32,8 +32,12 @@ export const createWell = (wellInfo, done) => dispatch => {
           dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
           dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
           dispatch({type: types.CLOSE_LOADING});
-        } else {failure(res, dispatch);}
-        done(res.success);
+          done(res.success);
+        } else {
+          failure(res, dispatch);
+          done(res.success);
+        }
+        dispatch({type: types.CLOSE_LOADING});
       });
     });
   })

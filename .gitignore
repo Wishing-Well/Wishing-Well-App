@@ -58,6 +58,8 @@ typings/
 # dotenv environment variables file
 .env
 
-node_module
-android/.gradle
-android/local.properties
+node_modules
+/WishingWell/android/.gradle
+/WishingWell/android/local.properties
+/WishingWell/android/gradle.properties
+/WishingWell/android/app/build.gradle

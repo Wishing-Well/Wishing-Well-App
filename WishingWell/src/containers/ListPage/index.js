@@ -31,7 +31,6 @@ class ListPage extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
-    console.log('allwells',this.props.allWells)
     return (
       <ScrollView style={{backgroundColor: '#e5f7fc'}}>
         <View style={styles.wholeContainer}>

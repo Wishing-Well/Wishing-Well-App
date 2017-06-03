@@ -44,7 +44,6 @@ class WellPage extends Component {
   render() {
     const {well} = this.props.navigation.state.params;
     const {navigate} = this.props.navigation;
-    console.log(well);
     return (
       <ScrollView style={styles.masterPage}>
       <View style={styles.wholePage}>

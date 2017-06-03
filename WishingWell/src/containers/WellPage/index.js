@@ -16,6 +16,7 @@ import stripe from 'tipsi-stripe';
 import {STRIPE_KEY} from '../../keys';
 import { PaymentCardTextField } from 'tipsi-stripe';
 import styles from './styles';
+import LoadingScreen from '../LoadingScreen'
 
 stripe.init({
   publishableKey: STRIPE_KEY
@@ -25,6 +26,7 @@ class WellPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      well_id: props.navigation.state.params.well.id,
       amount: 1,
       message: '',
       valid: false,
@@ -52,11 +54,25 @@ class WellPage extends Component {
   }
 
   handleDonate = () => {
-    stripe.createTokenWithCard(this.state.params)
-      .then(token => {
-        console.log(token);
-        this.props.donate(this.props.navigation.state.params.well.id, this.state.amount * 100, token, this.state.message)
-      });
+    this.props.donate(this.state)
+      .then(check => {
+        console.log(check);
+        if(check) {
+          this.setState({
+            well_id: this.props.navigation.state.params.well.id,
+            amount: 1,
+            message: '',
+            valid: false,
+            params: {}
+          })
+          this.props.navigation.goBack()
+        } else {
+          this.setState({
+            valid: false,
+            params: {}
+          })
+        }
+      })
   };
 
   renderStepOne = () => {
@@ -113,6 +129,7 @@ class WellPage extends Component {
   }
 
   render() {
+    if(this.props.loading) return (<LoadingScreen/>);
     const {well} = this.props.navigation.state.params;
     return (
       <View style={styles.fullPage}>
@@ -139,11 +156,12 @@ class WellPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  globalErr: state.errors.globalErr
+  globalErr: state.errors.globalErr,
+  loading: state.wells.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  donate: (well_id, amount, token, message) => dispatch(donate(well_id, amount, token, message))
+  donate: (info) => dispatch(donate(info))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WellPage)

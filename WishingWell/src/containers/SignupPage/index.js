@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles.js';
 import {signup} from '../../actions';
+import LoadingScreen from '../LoadingScreen'
 
 class SignupPage extends Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class SignupPage extends Component {
   };
 
   render() {
+    if(this.props.loading) return (<LoadingScreen/>);
     return(
       <KeyboardAvoidingView
         behavior="padding"
@@ -122,7 +124,8 @@ const mapStateToProps = state => ({
   signNameErr: state.errors.signNameErr,
   signPwErr: state.errors.signPwErr,
   globalErr: state.errors.globalErr,
-  errMessage: state.errors.errMessage
+  errMessage: state.errors.errMessage,
+  loading: state.wells.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

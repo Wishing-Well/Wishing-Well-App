@@ -12,7 +12,8 @@ export default (res, dispatch) => {
           message: 'You must be authorized'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.SERVER_UNKNOWN_ERROR:
       dispatch(
         {
@@ -20,7 +21,8 @@ export default (res, dispatch) => {
           message: 'Sorry, something may have gone wrong'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.UNKNOWN_ERROR:
       dispatch(
         {
@@ -28,7 +30,8 @@ export default (res, dispatch) => {
           message: 'Sorry, something may have gone wrong'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.TITLE_FORBIDDEN_WORD:
       dispatch(
         {
@@ -36,7 +39,8 @@ export default (res, dispatch) => {
           message: 'Please keep your title clean'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.TITLE_INVALID_LENGTH:
       dispatch(
         {
@@ -44,7 +48,8 @@ export default (res, dispatch) => {
           message: 'Title is of invalid length, please check'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.DESCRIPTION_FORBIDDEN_WORD:
       dispatch(
         {
@@ -52,7 +57,8 @@ export default (res, dispatch) => {
           message: 'Please keep description clean'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.DESCRIPTION_INVALID_LENGTH:
       dispatch(
         {
@@ -60,7 +66,8 @@ export default (res, dispatch) => {
           message: 'Sorry, description may not be more than 1000 characters'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.REGISTRATION_USER_ALREADY_EXISTS:
       dispatch(
         {
@@ -68,7 +75,8 @@ export default (res, dispatch) => {
           message: 'User already exists, please login'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.EMAIL_FORBIDDEN_WORD:
       dispatch(
         {
@@ -76,7 +84,8 @@ export default (res, dispatch) => {
           message: 'Please keep email name clean'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.EMAIL_INVALID_STRING_FORMAT:
       dispatch(
         {
@@ -84,7 +93,8 @@ export default (res, dispatch) => {
           message: 'Please check email input'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.EMAIL_INVALID_LENGTH:
       dispatch(
         {
@@ -92,7 +102,8 @@ export default (res, dispatch) => {
           message: 'Please check email input'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.FULL_NAME_FORBIDDEN_WORD:
       dispatch(
         {
@@ -100,7 +111,8 @@ export default (res, dispatch) => {
           message: 'Please keep full name input clean'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.FULL_NAME_INVALID_STRING_FORMAT:
       dispatch(
         {
@@ -108,7 +120,8 @@ export default (res, dispatch) => {
           message: 'No special characters in full name'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.FULL_NAME_INVALID_LENGTH:
       dispatch(
         {
@@ -116,7 +129,8 @@ export default (res, dispatch) => {
           message: 'Full name cannot be longer than 50 Characters'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.PASSWORD_INVALID_LENGTH:
       dispatch(
         {
@@ -124,7 +138,8 @@ export default (res, dispatch) => {
           message: 'Password length must be between 6 and 500 characters'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.LOGIN_INVALID:
       dispatch(
         {
@@ -132,7 +147,8 @@ export default (res, dispatch) => {
           message: 'Sorry, that is an invalid username or password'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.USER_DONATED_NEGATIVE_OR_ZERO_MONEY:
       dispatch(
         {
@@ -140,7 +156,8 @@ export default (res, dispatch) => {
           message: 'Sorry, you must donate at least $1 USD'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.WELL_DOES_NOT_EXIST:
       dispatch(
         {
@@ -148,7 +165,8 @@ export default (res, dispatch) => {
           message: 'Sorry, the well you are donating to does not exist'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     case error.USER_NOT_ENOUGH_MONEY:
       dispatch(
         {
@@ -156,7 +174,8 @@ export default (res, dispatch) => {
           message: 'Sorry, you have insufficient funds'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
     default:
       dispatch(
         {
@@ -164,6 +183,7 @@ export default (res, dispatch) => {
           message: 'Sorry, something may have gone wrong'
         }
       );
-      return dispatch({type: types.CLOSE_LOADING, success: false});
+      dispatch({type: types.CLOSE_LOADING});
+      return false;
   }
 };

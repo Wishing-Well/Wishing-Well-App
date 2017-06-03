@@ -34,12 +34,16 @@ export const createWell = (wellInfo, done) => dispatch => {
           dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
           dispatch({type: types.CLOSE_LOADING});
         } else {failure(res, dispatch);}
-        done(res.success)
-      })
-    })
+        done(res.success);
+      });
+    });
   })
-  .catch(error => dispatch({type: types.BANK_FAIL, error}));
-}
+  .catch(error => {
+    dispatch({type: types.CLOSE_LOADING});
+    dispatch({type: types.BANK_FAIL, error});
+    return false;
+  });
+};
 
 export const login = (email, password) => dispatch => {
   dispatch({type: types.SHOW_LOADING});
@@ -56,8 +60,12 @@ export const login = (email, password) => dispatch => {
       return true;
     } else {return failure(res, dispatch);}
   })
-  .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
-}
+  .catch(error => {
+    dispatch({type: types.CLOSE_LOADING});
+    dispatch({type: types.LOGIN_FAIL, error});
+    return false;
+  });
+};
 
 export const signup = userInfo => dispatch => {
   dispatch({type: types.SHOW_LOADING});
@@ -67,12 +75,16 @@ export const signup = userInfo => dispatch => {
     if (res.success) {
       dispatch({type: types.SIGNUP_SUCCESS, id: res.user.id, full_name: res.user.full_name});
       dispatch({type: types.CLOSE_LOADING});
-      dispatch(login(res.user.email, userInfo.password))
+      dispatch(login(res.user.email, userInfo.password));
       return true;
     } else {return failure(res, dispatch);}
   })
-  .catch(error => dispatch({type: types.LOGIN_FAIL, error}));
-}
+  .catch(error => {
+    dispatch({type: types.CLOSE_LOADING});
+    dispatch({type: types.LOGIN_FAIL, error});
+    return false;
+  });
+};
 
 export const loginUser = asyncArr => dispatch => {
   dispatch({type: types.SHOW_LOADING});
@@ -85,8 +97,12 @@ export const loginUser = asyncArr => dispatch => {
       return true;
     } else {return failure(res, dispatch);}
   })
-  .catch(error => dispatch({type: types.LOG_OUT, error}));
-}
+  .catch(error => {
+    dispatch({type: types.CLOSE_LOADING});
+    dispatch({type: types.LOG_OUT, error});
+    return false;
+  });
+};
 
 export const logout = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
@@ -98,7 +114,7 @@ export const logout = () => dispatch => {
       .catch(error => dispatch({type: types.LOG_OUT, error}));
     dispatch({type: types.CLOSE_LOADING});
   });
-}
+};
 
 export const loadApp = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
@@ -110,20 +126,24 @@ export const loadApp = () => dispatch => {
     } else {failure(res, dispatch);}
     return API.getAllUsers()
     .then(res => {
-      console.log(res)
+      console.log(res);
       if (res.success) {
         dispatch({type: types.ALL_USERS, allUsers: res.users});
         dispatch({type: types.CLOSE_LOADING});
         return true;
       } else {return failure(res, dispatch);}
-    })
+    });
   })
-  .catch(error => dispatch({type: types.LOAD_APP_DATA_FAIL, error}));
-}
+  .catch(error => {
+    dispatch({type: types.CLOSE_LOADING});
+    dispatch({type: types.LOAD_APP_DATA_FAIL, error});
+    return false;
+  });
+};
 
 export const donate = info => dispatch => {
   dispatch({type: types.SHOW_LOADING});
-  console.log(info)
+  console.log(info);
   return stripe.createTokenWithCard(info.params)
   .then(token => {
     return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
@@ -134,10 +154,14 @@ export const donate = info => dispatch => {
         dispatch({type: types.CLOSE_LOADING});
         return true;
       } else {return failure(res, dispatch);}
-    })
+    });
   })
-  .catch(error => dispatch({type: types.DONATION_FAIL, error}));
-}
+  .catch(error => {
+    dispatch({type: types.CLOSE_LOADING});
+    dispatch({type: types.DONATION_FAIL, error});
+    return false;
+  });
+};
 
 export const clearErrors = () => dispatch => dispatch({type: types.CLEAR_ERRORS});
 

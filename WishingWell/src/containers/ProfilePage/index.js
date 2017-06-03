@@ -50,23 +50,24 @@ class ProfilePage extends Component {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props;
     if(this.props.userInfo.Wells.length > 0) {
+      const userWell = this.props.allWells.filter(well => well.id == userInfo.Wells.filter(activeWell => activeWell.expired === false)[0].id)[0]
       return (
-          <TouchableOpacity onPress={()=>navigate('WellDescription', {well: this.props.allWells.filter(well => well.id == userInfo.Wells[0].id)[0]} )}>
+          <TouchableOpacity onPress={()=>navigate('WellDescription', {well: userWell})}>
           <View style={styles.wellCard}>
             <View style={styles.wellContainer}>
               <View style={styles.wellHeader}>
                 <Text style={styles.wellTitle}>
-                  {userInfo.Wells[0].title.slice(0, 15)}...
+                  {userWell.title.slice(0, 15)}...
                 </Text>
                 <Text style={styles.daysText}>
-                  {`${this.handleDaysLeft(userInfo.Wells[0].expiration_date, userInfo.Wells[0].createdAt)} days left`}
+                  {`${this.handleDaysLeft(userWell.expiration_date, userWell.createdAt)} days left`}
                 </Text>
               </View>
               <Text style={styles.allText}>
-                  Funded: ${(userInfo.Wells[0].current_amount / 100).toFixed(2)} / ${(userInfo.Wells[0].funding_target / 100).toFixed(2)}
+                  Funded: ${(userWell.current_amount / 100).toFixed(2)} / ${(userWell.funding_target / 100).toFixed(2)}
               </Text>
               <View style={styles.progressBarContainer}>
-                  <View style ={[styles.progressBar, {width: this.getWidth(userInfo.Wells[0].current_amount, userInfo.Wells[0].funding_target)}]} />
+                  <View style ={[styles.progressBar, {width: this.getWidth(userWell.current_amount, userWell.funding_target)}]} />
               </View>
             </View>
            </View>

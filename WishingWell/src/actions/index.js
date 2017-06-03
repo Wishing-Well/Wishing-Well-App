@@ -126,31 +126,17 @@ export const donate = info => dispatch => {
   console.log(info)
   return stripe.createTokenWithCard(info.params)
   .then(token => {
-    console.log(token);
     return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
     .then(res => {
       console.log(res);
       if (res.success) {
-        dispatch({type: types.MAKE_DONATION, userInfo: res.user});
+        dispatch(loadApp());
         dispatch({type: types.CLOSE_LOADING});
         return true;
       } else {return failure(res, dispatch);}
     })
-    .catch(error => dispatch({type: types.DONATION_FAIL, error}));
-  });
-}
-
-export const makeCharge = (amount, token) => dispatch => {
-  dispatch({type: types.SHOW_LOADING});
-  return API.makeCharge(amount, token)
-  .then(res => {
-    console.log(res);
-    if (res.success) {
-      dispatch({type: types.PAYMENT_SUCCESS, userInfo: res.user});
-      dispatch({type: types.CLOSE_LOADING});
-      return true;
-    } else {return failure(res, dispatch);}
-  });
+  })
+  .catch(error => dispatch({type: types.DONATION_FAIL, error}));
 }
 
 export const clearErrors = () => dispatch => dispatch({type: types.CLEAR_ERRORS});

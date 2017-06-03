@@ -18,7 +18,7 @@ class App extends Component {
           this.props.loadApp();
         }
       })
-      .catch(err => err));
+      .catch(err => err);
   }
 
   render() {

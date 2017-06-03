@@ -69,7 +69,7 @@ export const login = (email, password) => dispatch => {
 export const signup = userInfo => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.signup(userInfo)
-  .then(res => 
+  .then(res => {
     if (res.success) {
       dispatch({type: types.SIGNUP_SUCCESS, id: res.user.id, full_name: res.user.full_name});
       dispatch({type: types.CLOSE_LOADING});
@@ -87,7 +87,7 @@ export const signup = userInfo => dispatch => {
 export const loginUser = asyncArr => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.reLogin()
-  .then(res => 
+  .then(res => {
     if(res.success) {
       dispatch({type: types.LOGIN_SUCCESS, userInfo: res.user});
       dispatch({type: types.CLOSE_LOADING});
@@ -104,7 +104,7 @@ export const loginUser = asyncArr => dispatch => {
 export const logout = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.logout()
-  .then(res => 
+  .then(res => {
     AsyncStorage.multiRemove(['email', 'user_id', 'loggedIn'])
       .then(() => dispatch({type: types.LOG_OUT}))
       .catch(error => dispatch({type: types.LOG_OUT, error}));
@@ -115,7 +115,7 @@ export const logout = () => dispatch => {
 export const loadApp = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.getAllWells()
-  .then((res) => 
+  .then((res) => {
     if (res.success) {
       dispatch({type: types.ALL_WELLS, allWells: prepareWells(res.wells)});
     } else {failure(res, dispatch);}

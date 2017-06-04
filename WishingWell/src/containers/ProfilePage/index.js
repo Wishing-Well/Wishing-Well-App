@@ -57,8 +57,9 @@ class ProfilePage extends Component {
   renderWellInfo = () => {
     const {navigate} = this.props.navigation;
     const {userInfo} = this.props;
-    if(this.props.userInfo.Wells.length > 0) {
+    if(this.props.userInfo.Wells.length > 0 && this.props.allWells.filter(well => well.id == userInfo.Wells.filter(activeWell => activeWell.expired === false)[0].id)[0] !== undefined) {
       const userWell = this.props.allWells.filter(well => well.id == userInfo.Wells.filter(activeWell => activeWell.expired === false)[0].id)[0]
+      console.log(userWell)
       return (
           <TouchableOpacity onPress={()=>navigate('WellDescription', {well: userWell})}>
           <View style={styles.wellCard}>

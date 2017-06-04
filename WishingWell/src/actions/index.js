@@ -28,6 +28,7 @@ export const createWell = (wellInfo, done) => dispatch => {
         token: token
       })
       .then(res => {
+        console.log(res)
         if (res.success) {
           dispatch({type: types.ADD_USER_WELL, userInfo: res.user});
           dispatch({type: types.ADD_WELL, well: prepareWells(res.user.Wells)});
@@ -145,6 +146,7 @@ export const donate = info => dispatch => {
   .then(token => {
     return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
     .then(res => {
+      console.log(res);
       if (res.success) {
         dispatch(loadApp());
         dispatch({type: types.CLOSE_LOADING});

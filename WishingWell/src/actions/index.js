@@ -89,7 +89,7 @@ export const signup = userInfo => dispatch => {
   });
 };
 
-export const loginUser = asyncArr => dispatch => {
+export const loginUser = () => dispatch => {
   dispatch({type: types.SHOW_LOADING});
   return API.reLogin()
   .then(res => {
@@ -146,9 +146,9 @@ export const donate = info => dispatch => {
   .then(token => {
     return API.donate(info.well_id, Number(info.amount) * 100, token, info.message)
     .then(res => {
-      console.log(res);
       if (res.success) {
         dispatch(loadApp());
+        dispatch(loginUser())
         dispatch({type: types.CLOSE_LOADING});
         return true;
       } else {return failure(res, dispatch);}
